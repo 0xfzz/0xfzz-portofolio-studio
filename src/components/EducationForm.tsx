@@ -1,7 +1,5 @@
-'use client'
-
 import React, { useState } from 'react'
-import { Field, Label, Input } from '@headlessui/react'
+import { InputField } from './ui/InputField'
 
 export function EducationForm() {
     const [institution, setInstitution] = useState('Universitas Teknologi Yogyakarta')
@@ -26,57 +24,47 @@ export function EducationForm() {
 
       {/* Form Fields - Horizontal Layout */}
       <div className="space-y-10">
-        <Field className="flex items-center gap-4">
-          <Label className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#a0a0a0] w-48 shrink-0">
-            Institution
-          </Label>
-          <Input
-            value={institution}
-            onChange={(e) => setInstitution(e.target.value)}
-            className="w-full border border-[#999] px-4 py-3 text-[13px] font-medium focus:outline-none focus:border-black transition-all"
-          />
-        </Field>
+        <InputField 
+          label="Institution"
+          value={institution}
+          onChange={setInstitution}
+          horizontal
+        />
         
-        <Field className="flex items-center gap-4">
-          <Label className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#a0a0a0] w-48 shrink-0">
-            Degree
-          </Label>
-          <Input
-            value={degree}
-            onChange={(e) => setDegree(e.target.value)}
-            className="w-full border border-[#999] px-4 py-3 text-[13px] font-medium focus:outline-none focus:border-black transition-all"
-          />
-        </Field>
+        <InputField 
+          label="Degree"
+          value={degree}
+          onChange={setDegree}
+          horizontal
+        />
 
-        <Field className="flex items-center gap-4">
-          <Label className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#a0a0a0] w-48 shrink-0">
+        <div className="flex items-center gap-4">
+          <label className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#a0a0a0] w-48 shrink-0 px-1">
             Period
-          </Label>
+          </label>
           <div className="flex items-center gap-4 w-full">
-            <Input
+            <InputField 
+              label="Start Year"
               value={startYear}
-              onChange={(e) => setStartYear(e.target.value)}
-              className="flex-1 border border-[#999] px-4 py-3 text-[13px] font-medium focus:outline-none focus:border-black transition-all"
+              onChange={setStartYear}
+              className="flex-1"
             />
-            <span className="text-[10px] font-bold text-[#a0a0a0] uppercase tracking-widest px-8">To</span>
-            <Input
+            <span className="text-[10px] font-bold text-[#a0a0a0] uppercase tracking-widest px-8 shrink-0">To</span>
+            <InputField 
+              label="End Year"
               value={endYear}
-              onChange={(e) => setEndYear(e.target.value)}
-              className="flex-1 border border-[#999] px-4 py-3 text-[13px] font-medium focus:outline-none focus:border-black transition-all"
+              onChange={setEndYear}
+              className="flex-1"
             />
           </div>
-        </Field>
+        </div>
 
-        <Field className="flex items-center gap-4">
-          <Label className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#a0a0a0] w-48 shrink-0">
-            Location
-          </Label>
-          <Input
-            value={location}
-            onChange={(e) => setLocation(e.target.value)}
-            className="w-full border border-[#999] px-4 py-3 text-[13px] font-medium focus:outline-none focus:border-black transition-all"
-          />
-        </Field>
+        <InputField 
+          label="Location"
+          value={location}
+          onChange={setLocation}
+          horizontal
+        />
       </div>
     </div>
   )

@@ -1,8 +1,8 @@
-'use client'
-
 import React, { useState } from 'react'
 import { Trash2, Plus } from 'lucide-react'
-import { Input, Field, Label } from '@headlessui/react'
+import { InputField } from './ui/InputField'
+import { Badge } from './ui/Badge'
+import { Button } from './ui/Button'
 
 export function ExperienceForm() {
   const [position, setPosition] = useState('Senior Systems Architect')
@@ -26,34 +26,24 @@ export function ExperienceForm() {
             2021 — PRESENT [ACTIVE]
           </span>
         </div>
-        <span className="bg-[#e6f4ea] text-[#1e7e34] text-[10px] font-bold px-2 py-0.5 rounded-sm uppercase tracking-tighter">
-          Latest
-        </span>
+        <Badge variant="success">Latest</Badge>
       </div>
 
       {/* Form Fields - Horizontal Layout */}
       <div className="space-y-10 mb-16">
-        <Field className="flex items-center gap-4">
-          <Label className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#a0a0a0] w-48 shrink-0">
-            Company Name
-          </Label>
-          <Input
-            value={company}
-            onChange={(e) => setCompany(e.target.value)}
-            className="w-full border border-[#999] px-4 py-3 text-[13px] font-medium focus:outline-none focus:border-black transition-all"
-          />
-        </Field>
+        <InputField 
+          label="Company Name"
+          value={company}
+          onChange={setCompany}
+          horizontal
+        />
         
-        <Field className="flex items-center gap-4">
-          <Label className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#a0a0a0] w-48 shrink-0">
-            Position
-          </Label>
-          <Input
-            value={position}
-            onChange={(e) => setPosition(e.target.value)}
-            className="w-full border border-[#999] px-4 py-3 text-[13px] font-medium focus:outline-none focus:border-black transition-all"
-          />
-        </Field>
+        <InputField 
+          label="Position"
+          value={position}
+          onChange={setPosition}
+          horizontal
+        />
       </div>
 
       {/* Responsibilities Section */}
@@ -63,7 +53,7 @@ export function ExperienceForm() {
                 Responsibilities Entries
             </span>
             <span className="text-[10px] font-bold text-[#a0a0a0] opacity-40">
-                [3_items_loaded]
+                [{responsibilities.length}_items_loaded]
             </span>
         </div>
         
@@ -82,10 +72,10 @@ export function ExperienceForm() {
           ))}
         </div>
 
-        <button className="w-full border border-dashed border-[#e5e5e5] py-4.5 text-[10px] font-bold uppercase tracking-[0.2em] text-[#a0a0a0] hover:bg-[#fafafa] transition-all flex items-center justify-center gap-2">
+        <Button variant="outline" className="w-full border-dashed text-[#a0a0a0] py-4.5">
           <Plus className="w-3.5 h-3.5" />
           Add New Entries
-        </button>
+        </Button>
       </div>
     </div>
   )

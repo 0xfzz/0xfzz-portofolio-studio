@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Fira_Code } from "next/font/google";
+import { Fira_Code, Inter } from "next/font/google";
 import "./globals.css";
 
 const firaCode = Fira_Code({
@@ -7,9 +7,14 @@ const firaCode = Fira_Code({
   subsets: ["latin"],
 });
 
+const inter = Inter({
+  variable: "--font-inter",
+  subsets: ["latin"],
+});
+
 export const metadata: Metadata = {
-  title: "Login - 0xfzz",
-  description: "Secure login for 0xfzz",
+  title: "CMS Dashboard - 0xfzz",
+  description: "Secure CMS for 0xfzz portfolio",
 };
 
 export default function RootLayout({
@@ -20,9 +25,11 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${firaCode.variable} h-full antialiased`}
+      className={`${firaCode.variable} ${inter.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col font-mono">{children}</body>
+      <body className="min-h-full flex flex-col font-mono selection:bg-[#1a1a1a] selection:text-white">
+        {children}
+      </body>
     </html>
   );
 }

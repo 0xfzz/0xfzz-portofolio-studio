@@ -7,7 +7,7 @@ export function DashboardHeader() {
   const { setIsDiffOpen } = useDashboard()
 
   return (
-    <header className="flex justify-end p-6 bg-white">
+    <header className="flex justify-end p-4 px-10 bg-white border-b border-[#f0f0f0]">
       <div className="flex items-center gap-2">
         <button 
           onClick={() => setIsDiffOpen(true)}
