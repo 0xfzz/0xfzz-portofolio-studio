@@ -19,7 +19,7 @@ const awardItems = [
 export function AwardList() {
   return (
     <div className="w-full">
-      <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#a0a0a0] block mb-6 px-4">
+      <span className="text-[12px] font-bold uppercase tracking-wider text-[#1a1a1a] opacity-60 block mb-6 px-4">
         Award List
       </span>
       
@@ -30,10 +30,10 @@ export function AwardList() {
               <Award className="w-6 h-6 text-[#a0a0a0]" strokeWidth={1.5} />
               <div>
                 <h3 className="text-[14px] font-bold text-[#1a1a1a] tracking-tight">{item.title}</h3>
-                <span className="text-[10px] font-bold text-[#a0a0a0] uppercase tracking-[0.1em] mt-0.5 block">{item.subtitle}</span>
+                <span className="text-[12px] font-bold text-[#a0a0a0] uppercase tracking-wider mt-0.5 block">{item.subtitle}</span>
               </div>
             </div>
-            <button className="text-[10px] font-bold uppercase tracking-[0.1em] text-[#a0a0a0] hover:text-[#1a1a1a] transition-colors">
+            <button className="text-[12px] font-bold uppercase tracking-wider text-[#a0a0a0] hover:text-[#1a1a1a] transition-colors">
               Edit
             </button>
           </div>

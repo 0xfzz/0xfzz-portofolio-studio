@@ -29,8 +29,8 @@ export function BlogEditor({ data, onChange }: BlogEditorProps) {
   return (
     <div className="flex-1 overflow-y-auto p-12 space-y-12 font-mono scrollbar-hide border-r border-[#f0f0f0] bg-white">
       <div>
-        <span className="text-[10px] font-bold text-[#a0a0a0] uppercase tracking-[0.2em] block mb-2">Entry Metadata</span>
-        <h2 className="text-[28px] font-bold text-[#1a1a1a] tracking-tight leading-tight">{data.title || 'Untitled Entry'}</h2>
+        <span className="text-[12px] font-mono font-bold text-[#1a1a1a] opacity-60 uppercase tracking-wider block mb-2">Entry Metadata</span>
+        <h2 className="text-[32px] font-sans font-bold text-[#1a1a1a] tracking-tight leading-none uppercase">{data.title || 'Untitled Entry'}</h2>
       </div>
 
       <div className="space-y-10">
@@ -63,14 +63,14 @@ export function BlogEditor({ data, onChange }: BlogEditorProps) {
         />
 
         <div className="space-y-4">
-          <label className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#a0a0a0]">Tags</label>
+          <label className="text-[12px] font-bold uppercase tracking-wider text-[#1a1a1a] opacity-60">Tags</label>
           <div className="flex flex-wrap gap-2">
             {data.tags.map((tag) => (
               <Badge key={tag} variant="tag" className="px-3 py-1.5">{tag}</Badge>
             ))}
-            <Button variant="outline" size="sm" className="px-3 py-1.5 border-dashed text-[#a0a0a0]">
+            <button className="h-8 border border-[#e5e5e5] border-dashed px-4 py-1.5 text-[12px] font-bold uppercase tracking-wider text-[#1a1a1a] opacity-60 hover:border-[#1a1a1a] hover:text-[#1a1a1a] transition-all flex items-center gap-2">
               <Plus className="w-3 h-3" /> Add
-            </Button>
+            </button>
           </div>
         </div>
 

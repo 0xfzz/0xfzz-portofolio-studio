@@ -23,8 +23,8 @@ export function DiffViewer() {
       {/* Diff Header */}
       <div className="flex items-center justify-between p-4 border-b border-[#f0f0f0]">
         <div className="flex items-center gap-2">
-            <span className="text-[11px] font-bold text-[#1a1a1a] uppercase tracking-widest">Diff</span>
-            <span className="bg-[#333] text-white text-[10px] w-5 h-5 flex items-center justify-center rounded-full font-bold">12</span>
+            <span className="text-[12px] font-bold text-[#1a1a1a] uppercase tracking-wider">Diff</span>
+            <span className="bg-[#333] text-white text-[11px] w-5.5 h-5.5 flex items-center justify-center rounded-full font-bold">12</span>
         </div>
         <button 
             onClick={() => setIsDiffOpen(false)}
@@ -36,14 +36,14 @@ export function DiffViewer() {
 
       {/* Tabs */}
       <div className="flex border-b border-[#f0f0f0]">
-        <div className="bg-[#f0f0f0] px-6 py-3 text-[11px] font-bold text-[#1a1a1a] border-r border-[#f0f0f0]">
+        <div className="bg-[#f0f0f0] px-6 py-3 text-[13px] font-bold text-[#1a1a1a] border-r border-[#f0f0f0]">
             site-config.json
         </div>
         <div className="flex-1 bg-white"></div>
       </div>
 
       {/* Diff Content Header */}
-      <div className="grid grid-cols-2 text-[10px] font-bold uppercase tracking-widest text-[#a0a0a0] border-b border-[#f0f0f0]">
+      <div className="grid grid-cols-2 text-[12px] font-bold uppercase tracking-wider text-[#1a1a1a] opacity-60 border-b border-[#f0f0f0]">
         <div className="p-3 px-6 border-r border-[#f0f0f0]">Local Environment</div>
         <div className="p-3 px-6">Production (Live)</div>
       </div>
@@ -81,14 +81,14 @@ export function DiffViewer() {
       <div className="p-8 flex justify-center gap-4">
         <button 
             onClick={() => setIsDiffOpen(false)}
-            className="border border-black px-10 py-3 text-[11px] font-bold uppercase tracking-widest hover:bg-gray-50 transition-all cursor-pointer"
+            className="border border-black px-10 py-3 text-[12px] font-bold uppercase tracking-wider hover:bg-gray-50 transition-all cursor-pointer"
         >
             Cancel
         </button>
-        <button className="border border-[#cb2431] text-[#cb2431] px-10 py-3 text-[11px] font-bold uppercase tracking-widest hover:bg-[#fff5f5] transition-all cursor-pointer">
+        <button className="border border-[#cb2431] text-[#cb2431] px-10 py-3 text-[12px] font-bold uppercase tracking-wider hover:bg-[#fff5f5] transition-all cursor-pointer">
             Discard Changes
         </button>
-        <button className="bg-[#6f7c5d] text-white px-10 py-3 text-[11px] font-bold uppercase tracking-widest hover:bg-[#5a664c] transition-all cursor-pointer">
+        <button className="bg-[#6f7c5d] text-white px-10 py-3 text-[12px] font-bold uppercase tracking-wider hover:bg-[#5a664c] transition-all cursor-pointer">
             Push Changes
         </button>
       </div>

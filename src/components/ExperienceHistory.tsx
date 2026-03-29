@@ -21,7 +21,7 @@ const historyNodes = [
 export function ExperienceHistory() {
   return (
     <div className="w-full">
-      <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#a0a0a0] block mb-6 px-4">
+      <span className="text-[12px] font-bold uppercase tracking-wider text-[#1a1a1a] opacity-60 block mb-6 px-4">
         History_Nodes
       </span>
       
@@ -32,10 +32,10 @@ export function ExperienceHistory() {
               <node.icon className="w-5 h-5 text-[#a0a0a0]" strokeWidth={1.5} />
               <div>
                 <h3 className="text-[13px] font-bold text-[#1a1a1a] tracking-tight">{node.role}</h3>
-                <span className="text-[10px] font-bold text-[#a0a0a0] uppercase tracking-[0.1em] mt-0.5 block">{node.period}</span>
+                <span className="text-[12px] font-bold text-[#a0a0a0] uppercase tracking-wider mt-0.5 block">{node.period}</span>
               </div>
             </div>
-            <button className="text-[10px] font-bold uppercase tracking-[0.1em] text-[#a0a0a0] hover:text-[#1a1a1a] transition-colors">
+            <button className="text-[12px] font-bold uppercase tracking-wider text-[#a0a0a0] hover:text-[#1a1a1a] transition-colors">
               Edit
             </button>
           </div>

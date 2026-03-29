@@ -29,7 +29,7 @@ export function Table<T extends { id: string | number }>({
             {columns.map((col, idx) => (
               <th 
                 key={idx} 
-                className={`px-8 py-5 text-[10px] font-mono font-bold text-[#a0a0a0] uppercase tracking-[0.2em] ${col.className || ''}`}
+                className={`px-8 py-5 text-[12px] font-mono font-bold text-[#1a1a1a] opacity-60 uppercase tracking-wider ${col.className || ''}`}
                 style={{ width: col.width }}
               >
                 {col.header}

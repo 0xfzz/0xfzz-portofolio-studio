@@ -23,7 +23,7 @@ export function ProjectPreview({ data }: ProjectPreviewProps) {
     <div className="flex-1 overflow-y-auto bg-[#fafafa] flex flex-col scrollbar-hide">
       {/* Preview Header */}
       <div className="h-[60px] border-b border-[#f0f0f0] px-10 flex items-center justify-between bg-white shrink-0">
-        <span className="text-[10px] font-bold text-[#a0a0a0] uppercase tracking-[0.2em]">Preview</span>
+        <span className="text-[12px] font-bold text-[#a0a0a0] uppercase tracking-wider">Preview</span>
         <div className="flex items-center gap-4 text-[#a0a0a0]">
           <Monitor className="w-4 h-4 cursor-pointer hover:text-[#1a1a1a]" />
           <Tablet className="w-4 h-4 cursor-pointer hover:text-[#1a1a1a]" />
@@ -34,11 +34,11 @@ export function ProjectPreview({ data }: ProjectPreviewProps) {
       {/* Preview Content */}
       <div className="p-16 max-w-[800px] mx-auto w-full space-y-12 flex-1 pb-32">
         {/* Project Hero */}
-        <div className="aspect-video bg-[#1a1a1a] rounded-sm overflow-hidden flex items-center justify-center relative shadow-2xl">
+        <div className="aspect-video bg-[#1a1a1a] rounded-sm overflow-hidden flex items-center justify-center relative border border-[#f0f0f0]">
           {data.imageUrl ? (
             <img src={data.imageUrl} className="w-full h-full object-cover" alt="Preview" />
           ) : (
-             <div className="text-[#333] font-mono text-[10px] uppercase tracking-widest">Image Preview Area</div>
+             <div className="text-[#1a1a1a] opacity-20 font-mono text-[12px] uppercase tracking-wider">Image Preview Area</div>
           )}
           <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
         </div>

@@ -8,14 +8,14 @@ export function AwardForm() {
   const [description, setDescription] = useState('Membangun situs web penyaji data IMDb menggunakan scraping JavaScript. Tech stack: Nest.js (Backend) dan Nuxt.js (Frontend).')
 
   return (
-    <div className="bg-white p-14 border border-[#f0f0f0] w-full max-w-[860px] shadow-sm font-mono">
+    <div className="bg-white p-14 border border-[#f0f0f0] w-full max-w-[860px] font-mono">
       {/* Card Header */}
       <div className="flex items-start justify-between mb-16 px-1">
         <div>
           <h2 className="text-[22px] font-bold text-[#1a1a1a] tracking-tight leading-tight max-w-[500px]">
             {title || 'Untiled Award'}
           </h2>
-          <span className="text-[11px] font-bold text-[#a0a0a0] uppercase tracking-[0.2em] block mt-2">
+          <span className="text-[12px] font-bold text-[#1a1a1a] opacity-60 uppercase tracking-wider block mt-2">
             {date || 'No Date'} — {issuer || 'No Issuer'}
           </span>
         </div>

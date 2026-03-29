@@ -31,7 +31,7 @@ export function ProjectEditor({ data, onChange }: ProjectEditorProps) {
   return (
     <div className="flex-1 overflow-y-auto p-12 space-y-12 font-mono scrollbar-hide border-r border-[#f0f0f0] bg-white">
       <div>
-        <span className="text-[10px] font-bold text-[#a0a0a0] uppercase tracking-[0.2em] block mb-2">Project Metadata</span>
+        <span className="text-[12px] font-bold text-[#1a1a1a] opacity-60 uppercase tracking-wider block mb-2">Project Metadata</span>
         <h2 className="text-[28px] font-bold text-[#1a1a1a] tracking-tight leading-tight">{data.title || 'Untitled Project'}</h2>
       </div>
 
@@ -70,12 +70,12 @@ export function ProjectEditor({ data, onChange }: ProjectEditorProps) {
         </div>
 
         <div className="space-y-4">
-          <label className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#a0a0a0]">Technologies</label>
+          <label className="text-[12px] font-bold uppercase tracking-wider text-[#1a1a1a] opacity-60">Technologies</label>
           <div className="flex flex-wrap gap-2">
             {data.technologies.map((tech) => (
               <Badge key={tech} variant="tag" className="px-3 py-1.5">{tech}</Badge>
             ))}
-            <Button variant="outline" size="sm" className="px-3 py-1.5 border-dashed text-[#a0a0a0]">
+            <Button variant="outline" size="sm" className="px-3 py-1.5 border-dashed text-[#1a1a1a] opacity-60 hover:opacity-100">
               <Plus className="w-3 h-3" /> Add
             </Button>
           </div>

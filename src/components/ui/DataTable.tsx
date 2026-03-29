@@ -95,7 +95,7 @@ export function DataTable<T extends { id: string | number }>({
              placeholder={searchPlaceholder}
              value={searchQuery}
              onChange={handleSearchChange}
-             className="w-full bg-transparent border-none outline-none text-[11px] font-mono font-bold tracking-[0.1em] text-[#1a1a1a] placeholder:text-[#ccc]"
+             className="w-full bg-transparent border-none outline-none text-[13px] font-mono font-bold tracking-wider text-[#1a1a1a] placeholder:text-[#ccc]"
            />
         </div>
 
@@ -105,7 +105,7 @@ export function DataTable<T extends { id: string | number }>({
             <select
               value={activeFilters[filter.key] || 'ALL'}
               onChange={(e) => handleFilterChange(filter.key, e.target.value)}
-              className="w-full appearance-none bg-transparent border-none outline-none text-[10px] font-mono font-bold uppercase tracking-widest text-[#a0a0a0] focus:text-[#1a1a1a] transition-all cursor-pointer pr-8"
+              className="w-full appearance-none bg-transparent border-none outline-none text-[12px] font-mono font-bold uppercase tracking-wider text-[#a0a0a0] focus:text-[#1a1a1a] transition-all cursor-pointer pr-8"
             >
               <option value="ALL">ALL {filter.label}</option>
               {filter.options.map(opt => (
@@ -122,7 +122,7 @@ export function DataTable<T extends { id: string | number }>({
 
       {/* Pagination Footer */}
       <div className="flex items-center justify-between pt-6">
-        <div className="text-[10px] font-mono font-bold text-[#a0a0a0] uppercase tracking-[0.1em]">
+        <div className="text-[12px] font-mono font-bold text-[#1a1a1a] opacity-60 uppercase tracking-wider">
           SHOWING {(currentPage - 1) * pageSize + 1}-{Math.min(currentPage * pageSize, filteredData.length)} OF {filteredData.length} ENTRIES | SYS_LOG: OK
         </div>
         
@@ -141,7 +141,7 @@ export function DataTable<T extends { id: string | number }>({
                  <button
                    key={i}
                    onClick={() => setCurrentPage(i + 1)}
-                   className={`w-9 h-9 border text-[11px] font-mono font-bold flex items-center justify-center transition-all ${
+                   className={`w-9 h-9 border text-[13px] font-mono font-bold flex items-center justify-center transition-all ${
                      currentPage === i + 1 
                        ? 'bg-[#1a1a1a] text-white border-[#1a1a1a] z-10' 
                        : 'bg-white text-[#1a1a1a] border-[#f0f0f0] hover:bg-[#fafafa]'

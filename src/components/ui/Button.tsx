@@ -14,7 +14,7 @@ export function Button({
   className = '', 
   ...props 
 }: ButtonProps) {
-  const baseStyles = 'font-sans font-bold uppercase tracking-widest transition-all transition-colors flex items-center justify-center gap-2'
+  const baseStyles = 'font-sans font-bold uppercase tracking-wider transition-all transition-colors flex items-center justify-center gap-2'
   
   const variants = {
     primary: 'bg-[#1a1a1a] text-white hover:bg-black',
@@ -25,9 +25,9 @@ export function Button({
   }
 
   const sizes = {
-    sm: 'px-3 py-1.5 text-[10px]',
-    md: 'px-6 py-3 text-[11px]',
-    lg: 'px-8 py-4 text-[12px]'
+    sm: 'px-3 py-1.5 text-[12px]',
+    md: 'px-6 py-3 text-[13px]',
+    lg: 'px-8 py-4 text-[14px]'
   }
 
   const variantStyles = variants[variant]

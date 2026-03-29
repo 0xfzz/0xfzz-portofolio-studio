@@ -28,7 +28,7 @@ export function MarkdownRenderer({ content, placeholder = '*Start writing to see
         ),
         h3: ({ children }) => (
           <div className="pt-12 border-t border-[#eee] space-y-8 mt-12 first:mt-0 first:pt-0 first:border-0">
-            <h3 className="text-[12px] font-extrabold text-[#1a1a1a] uppercase tracking-[0.3em]">
+            <h3 className="text-[12px] font-extrabold text-[#1a1a1a] uppercase tracking-wider">
               {children}
             </h3>
           </div>
@@ -44,22 +44,29 @@ export function MarkdownRenderer({ content, placeholder = '*Start writing to see
           const fullText = extractText(children)
           if (!hasAppliedDropCap && fullText.trim().length > 5) {
             hasAppliedDropCap = true
-            const firstChar = fullText.trim().charAt(0)
+            const trimmedText = fullText.trim()
+            const firstChar = trimmedText.charAt(0)
             return (
-              <div className="flex gap-4 items-start relative pl-14 min-h-[60px] mb-8">
-                <span className="absolute left-0 top-0 text-[56px] font-bold text-[#1a1a1a] leading-none mt-1 uppercase">
+              <div className="flex gap-6 items-start relative pl-16 min-h-[70px] mb-8">
+                <span className="absolute left-0 top-0 text-[64px] font-sans font-bold text-[#1a1a1a] leading-[0.8] mt-2 uppercase">
                   {firstChar}
                 </span>
-                <div className="text-[16px] text-[#444] leading-relaxed font-mono">
+                <div className="text-[18px] text-[#444] leading-relaxed font-sans font-medium text-justify tracking-tight opacity-90">
                    {React.Children.map(children, (child, i) => {
-                     if (i === 0 && typeof child === 'string') return child.slice(1)
+                     if (i === 0 && typeof child === 'string') {
+                       // Find the first occurrence of the character and remove it
+                       const charIndex = child.indexOf(firstChar)
+                       if (charIndex !== -1) {
+                         return child.slice(0, charIndex) + child.slice(charIndex + 1)
+                       }
+                     }
                      return child
                    })}
                 </div>
               </div>
             )
           }
-          return <p className="text-[16px] text-[#444] leading-relaxed font-mono mb-8 last:mb-0">{children}</p>
+          return <p className="text-[18px] text-[#444] leading-relaxed font-sans font-medium text-justify tracking-tight opacity-90 mb-8 last:mb-0">{children}</p>
         },
         ul: ({ children }) => <ul className="space-y-6 list-none p-0 my-10">{children}</ul>,
         li: ({ children }) => (
@@ -71,9 +78,9 @@ export function MarkdownRenderer({ content, placeholder = '*Start writing to see
         code: ({ node, inline, className, children, ...props }: any) => {
           const match = /language-(\w+)/.exec(className || '')
           return !inline && match ? (
-            <div className="my-8 rounded-md overflow-hidden shadow-lg border border-[#333]">
+            <div className="my-8 rounded-md overflow-hidden border border-[#333]">
               <div className="bg-[#2d2d2d] px-4 py-2 flex items-center justify-between border-b border-[#3d3d3d]">
-                <span className="text-[10px] font-bold text-[#888] uppercase tracking-widest">{match[1]}</span>
+                <span className="text-[11px] font-bold text-[#888] uppercase tracking-wider">{match[1]}</span>
                 <div className="flex gap-1.5">
                   <div className="w-2 h-2 rounded-full bg-[#ff5f56]" /><div className="w-2 h-2 rounded-full bg-[#ffbd2e]" /><div className="w-2 h-2 rounded-full bg-[#27c93f]" />
                 </div>

@@ -34,7 +34,7 @@ export function PageLayout({
           {/* Page Header */}
           <div className="flex items-center justify-between mt-4 mb-16">
             <div>
-              <span className="text-[10px] font-mono font-bold uppercase tracking-[0.3em] text-[#a0a0a0] block mb-1">
+              <span className="text-[12px] font-mono font-bold uppercase tracking-wider text-[#1a1a1a] opacity-60 block mb-1">
                 {subtitle}
               </span>
               <h1 className="text-[32px] font-sans font-bold text-[#1a1a1a] tracking-tight uppercase leading-none">
@@ -44,7 +44,7 @@ export function PageLayout({
             {newEntryHref && (
               <Link 
                 href={newEntryHref}
-                className="bg-white border border-[#e5e5e5] px-6 py-2.5 text-[10px] font-sans font-bold uppercase tracking-widest hover:bg-gray-50 transition-all flex items-center gap-2"
+                className="bg-white border border-[#e5e5e5] px-6 py-2.5 text-[12px] font-sans font-bold uppercase tracking-wider hover:bg-gray-50 transition-all flex items-center gap-2"
               >
                 <Plus className="w-3.5 h-3.5" />
                 {newEntryLabel}

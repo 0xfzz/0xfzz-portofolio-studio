@@ -9,14 +9,14 @@ export function EducationForm() {
     const [location, setLocation] = useState('Mlati, Sleman')
 
   return (
-    <div className="bg-white p-14 border border-[#f0f0f0] w-full max-w-[860px] shadow-sm font-mono">
+    <div className="bg-white p-14 border border-[#f0f0f0] w-full max-w-[860px] font-mono">
       {/* Card Header */}
       <div className="flex items-start justify-between mb-16 px-1">
         <div>
           <h2 className="text-[22px] font-bold text-[#1a1a1a] tracking-tight leading-tight">
             {institution || 'Untitled Institution'}
           </h2>
-          <span className="text-[11px] font-bold text-[#a0a0a0] uppercase tracking-[0.2em] block mt-2">
+          <span className="text-[12px] font-bold text-[#1a1a1a] opacity-60 uppercase tracking-wider block mt-2">
             {degree || 'Degree'} | {startYear || 'Start'} — {endYear || 'End'}
           </span>
         </div>
@@ -39,7 +39,7 @@ export function EducationForm() {
         />
 
         <div className="flex items-center gap-4">
-          <label className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#a0a0a0] w-48 shrink-0 px-1">
+          <label className="text-[12px] font-bold uppercase tracking-wider text-[#1a1a1a] opacity-60 w-48 shrink-0 px-1">
             Period
           </label>
           <div className="flex items-center gap-4 w-full">
@@ -49,7 +49,7 @@ export function EducationForm() {
               onChange={setStartYear}
               className="flex-1"
             />
-            <span className="text-[10px] font-bold text-[#a0a0a0] uppercase tracking-widest px-8 shrink-0">To</span>
+            <span className="text-[12px] font-bold text-[#1a1a1a] opacity-60 uppercase tracking-wider px-8 shrink-0">To</span>
             <InputField 
               label="End Year"
               value={endYear}

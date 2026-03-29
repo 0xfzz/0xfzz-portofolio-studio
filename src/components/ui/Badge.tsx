@@ -9,7 +9,7 @@ interface BadgeProps {
 }
 
 export function Badge({ children, variant = 'tag', className = '' }: BadgeProps) {
-  const baseStyles = 'px-2.5 py-1 text-[9px] font-mono font-bold uppercase tracking-widest'
+  const baseStyles = 'px-3 py-1 text-[11px] font-mono font-bold uppercase tracking-wider rounded-sm border'
   
   const variants = {
     success: 'bg-[#7a7a5a] text-white border-none',
