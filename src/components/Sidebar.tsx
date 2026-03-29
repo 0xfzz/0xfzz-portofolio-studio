@@ -43,7 +43,11 @@ export function Sidebar() {
 
       <nav className="flex-1 px-4 space-y-1">
         {navItems.map((item) => {
-          const isActive = pathname === item.href || (item.href !== '/dashboard' && pathname?.startsWith(item.href || ''))
+          const isActive = item.href ? (pathname === item.href || (item.href !== '/dashboard' && pathname?.startsWith(item.href))) : false
+
+          // Special case for parents: active if any sub-page is active
+          const isParentActive = item.hasSubItems && pathname?.startsWith('/dashboard/experiences')
+          const finalActive = isActive || isParentActive
 
           return (
             <div key={item.id} className="group">
@@ -51,7 +55,7 @@ export function Sidebar() {
                 href={item.href || '#'}
                 className={`
                   w-full flex items-center justify-between px-4 py-3 text-sm font-medium transition-colors
-                  ${isActive 
+                  ${finalActive 
                     ? 'bg-[#f5f5f5] text-[#1a1a1a]' 
                     : 'text-[#888] hover:bg-[#fafafa] hover:text-[#1a1a1a]'}
                   ${item.isSubItem ? 'pl-10' : ''}

@@ -44,23 +44,16 @@ export function SiteConfigManager() {
 
   return (
     <div className="space-y-12 pb-32">
-      {/* Top Header Actions */}
-      <div className="flex justify-end">
-        <button className="flex items-center gap-2 text-[12px] font-bold text-[#1a1a1a] opacity-60 uppercase tracking-wider hover:opacity-100 transition-opacity">
-          <History className="w-4 h-4" />
-          RESTORE_BACKUP
-        </button>
-      </div>
 
       {/* Top Row: Global Metadata & Visibility */}
       <div className="grid grid-cols-12 gap-10">
         {/* Global Metadata */}
         <div className="col-span-7 bg-white border border-[#f0f0f0] p-10 space-y-10 rounded-sm">
           <div className="flex items-center gap-3">
-             <Box className="w-4 h-4 text-[#1a1a1a] opacity-40" />
-             <span className="text-[12px] font-bold text-[#1a1a1a] opacity-40 uppercase tracking-wider">
-               GLOBAL METADATA
-             </span>
+            <Box className="w-4 h-4 text-[#1a1a1a] opacity-40" />
+            <span className="text-[12px] font-bold text-[#1a1a1a] opacity-40 uppercase tracking-wider">
+              GLOBAL METADATA
+            </span>
           </div>
           <InputField label="TITLE" value={siteTitle} onChange={setSiteTitle} />
           <InputField label="DESCRIPTION" value={siteDesc} onChange={setSiteDesc} type="textarea" rows={3} />
@@ -69,17 +62,17 @@ export function SiteConfigManager() {
         {/* Visibility Toggles */}
         <div className="col-span-5 bg-white border border-[#f0f0f0] p-10 space-y-10 rounded-sm">
           <div className="flex items-center gap-3">
-             <Eye className="w-4 h-4 text-[#1a1a1a] opacity-40" />
-             <span className="text-[12px] font-bold text-[#1a1a1a] opacity-40 uppercase tracking-wider">
-               VISIBILITY TOGGLES
-             </span>
+            <Eye className="w-4 h-4 text-[#1a1a1a] opacity-40" />
+            <span className="text-[12px] font-bold text-[#1a1a1a] opacity-40 uppercase tracking-wider">
+              VISIBILITY TOGGLES
+            </span>
           </div>
           <div className="space-y-6">
-            <Switch label="PROJECTS" enabled={visibility.projects} onChange={(v) => setVisibility({...visibility, projects: v})} />
-            <Switch label="EXPERIENCES" enabled={visibility.experiences} onChange={(v) => setVisibility({...visibility, experiences: v})} />
-            <Switch label="BLOG" enabled={visibility.blog} onChange={(v) => setVisibility({...visibility, blog: v})} />
-            <Switch label="CONTACT" enabled={visibility.contact} onChange={(v) => setVisibility({...visibility, contact: v})} />
-            <Switch label="TECH STACK" enabled={visibility.techStack} onChange={(v) => setVisibility({...visibility, techStack: v})} />
+            <Switch label="PROJECTS" enabled={visibility.projects} onChange={(v) => setVisibility({ ...visibility, projects: v })} />
+            <Switch label="EXPERIENCES" enabled={visibility.experiences} onChange={(v) => setVisibility({ ...visibility, experiences: v })} />
+            <Switch label="BLOG" enabled={visibility.blog} onChange={(v) => setVisibility({ ...visibility, blog: v })} />
+            <Switch label="CONTACT" enabled={visibility.contact} onChange={(v) => setVisibility({ ...visibility, contact: v })} />
+            <Switch label="TECH STACK" enabled={visibility.techStack} onChange={(v) => setVisibility({ ...visibility, techStack: v })} />
           </div>
         </div>
       </div>
@@ -93,23 +86,23 @@ export function SiteConfigManager() {
       ].map((sec) => (
         <div key={sec.id} className="bg-white border border-[#f0f0f0] p-10 space-y-8 rounded-sm group hover:border-[#e5e5e5] transition-all">
           <div className="flex items-center gap-3">
-             <sec.icon className="w-4 h-4 text-[#1a1a1a] opacity-40" />
-             <span className="text-[12px] font-bold text-[#1a1a1a] opacity-40 uppercase tracking-wider">
-               {sec.label}
-             </span>
+            <sec.icon className="w-4 h-4 text-[#1a1a1a] opacity-40" />
+            <span className="text-[12px] font-bold text-[#1a1a1a] opacity-40 uppercase tracking-wider">
+              {sec.label}
+            </span>
           </div>
           <div className="space-y-8">
-             <InputField 
-               label="TITLE" 
-               value={(sections as any)[sec.id].title} 
-               onChange={(v) => updateSection(sec.id as any, 'title', v)} 
-             />
-             <InputField 
-               label="SUBTITLE" 
-               value={(sections as any)[sec.id].subtitle} 
-               onChange={(v) => updateSection(sec.id as any, 'subtitle', v)} 
-               className="bg-white"
-             />
+            <InputField
+              label="TITLE"
+              value={(sections as any)[sec.id].title}
+              onChange={(v) => updateSection(sec.id as any, 'title', v)}
+            />
+            <InputField
+              label="SUBTITLE"
+              value={(sections as any)[sec.id].subtitle}
+              onChange={(v) => updateSection(sec.id as any, 'subtitle', v)}
+              className="bg-white"
+            />
           </div>
         </div>
       ))}
@@ -117,15 +110,15 @@ export function SiteConfigManager() {
       {/* Sub-sections Labels */}
       <div className="bg-white border border-[#f0f0f0] p-10 space-y-8 rounded-sm">
         <div className="flex items-center gap-3">
-           <Layers className="w-4 h-4 text-[#1a1a1a] opacity-40" />
-           <span className="text-[12px] font-bold text-[#1a1a1a] opacity-40 uppercase tracking-wider">
-             SECTIONS
-           </span>
+          <Layers className="w-4 h-4 text-[#1a1a1a] opacity-40" />
+          <span className="text-[12px] font-bold text-[#1a1a1a] opacity-40 uppercase tracking-wider">
+            SECTIONS
+          </span>
         </div>
         <div className="grid grid-cols-3 gap-8">
-           <InputField label="WORK EXPERIENCE" value={sections.subSections.work} onChange={(v) => updateSubSection('work', v)} />
-           <InputField label="EDUCATION" value={sections.subSections.education} onChange={(v) => updateSubSection('education', v)} />
-           <InputField label="AWARDS" value={sections.subSections.awards} onChange={(v) => updateSubSection('awards', v)} />
+          <InputField label="WORK EXPERIENCE" value={sections.subSections.work} onChange={(v) => updateSubSection('work', v)} />
+          <InputField label="EDUCATION" value={sections.subSections.education} onChange={(v) => updateSubSection('education', v)} />
+          <InputField label="AWARDS" value={sections.subSections.awards} onChange={(v) => updateSubSection('awards', v)} />
         </div>
       </div>
 

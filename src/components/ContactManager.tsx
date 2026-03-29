@@ -33,15 +33,15 @@ interface ContactMethod {
 }
 
 // Presentational component for the method row
-const MethodItem = ({ 
-  method, 
-  onUpdate, 
+const MethodItem = ({
+  method,
+  onUpdate,
   onRemove,
   isDragging,
   dragHandleProps,
   style
-}: { 
-  method: ContactMethod, 
+}: {
+  method: ContactMethod,
   onUpdate?: (id: string, field: keyof ContactMethod, value: string) => void,
   onRemove?: (id: string) => void,
   isDragging?: boolean,
@@ -49,12 +49,12 @@ const MethodItem = ({
   style?: React.CSSProperties
 }) => {
   return (
-    <div 
+    <div
       style={style}
       className={`flex bg-white border ${isDragging ? 'border-black scale-[1.02] z-50' : 'border-[#f0f0f0]'} group hover:border-[#e5e5e5] transition-all overflow-hidden rounded-sm`}
     >
       {/* Drag Handle Area */}
-      <div 
+      <div
         {...dragHandleProps}
         className="w-14 bg-[#fafafa] border-r border-[#f0f0f0] flex items-center justify-center cursor-grab active:cursor-grabbing hover:bg-[#f0f0f0] transition-colors"
       >
@@ -64,33 +64,33 @@ const MethodItem = ({
       {/* Form Area */}
       <div className="flex-1 p-6 px-10 grid grid-cols-12 gap-8 items-end">
         <div className="col-span-3">
-           <InputField 
-             label="PLATFORM"
-             value={method.platform}
-             onChange={(val) => onUpdate?.(method.id, 'platform', val)}
-             className="bg-[#fcfcfc]"
-           />
+          <InputField
+            label="PLATFORM"
+            value={method.platform}
+            onChange={(val) => onUpdate?.(method.id, 'platform', val)}
+            className="bg-[#fcfcfc]"
+          />
         </div>
         <div className="col-span-4">
-           <InputField 
-             label="LABEL"
-             value={method.label}
-             onChange={(val) => onUpdate?.(method.id, 'label', val)}
-             className="bg-[#fcfcfc]"
-           />
+          <InputField
+            label="LABEL"
+            value={method.label}
+            onChange={(val) => onUpdate?.(method.id, 'label', val)}
+            className="bg-[#fcfcfc]"
+          />
         </div>
         <div className="col-span-5">
-           <InputField 
-             label="URL / HREF"
-             value={method.href}
-             onChange={(val) => onUpdate?.(method.id, 'href', val)}
-             className="bg-[#fcfcfc]"
-           />
+          <InputField
+            label="URL / HREF"
+            value={method.href}
+            onChange={(val) => onUpdate?.(method.id, 'href', val)}
+            className="bg-[#fcfcfc]"
+          />
         </div>
       </div>
 
       {/* Action Area */}
-      <div 
+      <div
         className="w-16 border-l border-[#f0f0f0] flex items-center justify-center bg-white hover:bg-[#fff5f5] group/trash cursor-pointer transition-colors"
         onClick={() => onRemove?.(method.id)}
       >
@@ -100,12 +100,12 @@ const MethodItem = ({
   )
 }
 
-function SortableMethodItem({ 
-  method, 
-  onUpdate, 
-  onRemove 
-}: { 
-  method: ContactMethod, 
+function SortableMethodItem({
+  method,
+  onUpdate,
+  onRemove
+}: {
+  method: ContactMethod,
   onUpdate: (id: string, field: keyof ContactMethod, value: string) => void,
   onRemove: (id: string) => void
 }) {
@@ -126,11 +126,11 @@ function SortableMethodItem({
 
   return (
     <div ref={setNodeRef} style={style}>
-      <MethodItem 
-        method={method} 
-        onUpdate={onUpdate} 
-        onRemove={onRemove} 
-        dragHandleProps={{...attributes, ...listeners}}
+      <MethodItem
+        method={method}
+        onUpdate={onUpdate}
+        onRemove={onRemove}
+        dragHandleProps={{ ...attributes, ...listeners }}
       />
     </div>
   )
@@ -199,19 +199,12 @@ export function ContactManager() {
 
   return (
     <div className="space-y-16 pb-32">
-      <div className="flex justify-end">
-        <button className="flex items-center gap-2 text-[12px] font-bold text-[#1a1a1a] opacity-60 uppercase tracking-wider hover:opacity-100 transition-opacity">
-          <History className="w-4 h-4" />
-          RESTORE_BACKUP
-        </button>
-      </div>
-
       <div className="bg-white border border-[#f0f0f0] p-12 space-y-10 relative group hover:border-[#e5e5e5] transition-all">
         <div className="flex items-center gap-3 mb-4">
-           <Box className="w-4 h-4 text-[#1a1a1a] opacity-40" />
-           <span className="text-[12px] font-mono font-bold text-[#1a1a1a] opacity-40 uppercase tracking-wider">
-             COMPONENT: HERO_SECTION
-           </span>
+          <Box className="w-4 h-4 text-[#1a1a1a] opacity-40" />
+          <span className="text-[12px] font-mono font-bold text-[#1a1a1a] opacity-40 uppercase tracking-wider">
+            Edit Contact Display
+          </span>
         </div>
 
         <InputField label="Display Title" value={heroTitle} onChange={setHeroTitle} />
@@ -220,16 +213,16 @@ export function ContactManager() {
 
       <div className="space-y-8">
         <div className="flex items-center justify-between">
-           <span className="text-[12px] font-bold text-[#1a1a1a] opacity-60 uppercase tracking-wider">
-             ACTIVE_METHODS ({methods.length})
-           </span>
-           <button onClick={addMethod} className="bg-[#1a1a1a] text-white px-6 py-2.5 text-[12px] font-bold uppercase tracking-wider hover:bg-black transition-all flex items-center gap-2 rounded-sm">
-             <Plus className="w-4 h-4" /> [+ ADD METHOD]
-           </button>
+          <span className="text-[12px] font-bold text-[#1a1a1a] opacity-60 uppercase tracking-wider">
+            ACTIVE_METHODS ({methods.length})
+          </span>
+          <button onClick={addMethod} className="bg-[#1a1a1a] text-white px-6 py-2.5 text-[12px] font-bold uppercase tracking-wider hover:bg-black transition-all flex items-center gap-2 rounded-sm">
+            <Plus className="w-4 h-4" /> [+ ADD METHOD]
+          </button>
         </div>
 
         <div className="space-y-4">
-          <DndContext 
+          <DndContext
             sensors={sensors}
             collisionDetection={closestCenter}
             onDragStart={handleDragStart}
@@ -238,15 +231,15 @@ export function ContactManager() {
           >
             <SortableContext items={methods.map(m => m.id)} strategy={verticalListSortingStrategy}>
               {methods.map((method) => (
-                <SortableMethodItem 
-                  key={method.id} 
-                  method={method} 
+                <SortableMethodItem
+                  key={method.id}
+                  method={method}
                   onUpdate={updateMethod}
                   onRemove={removeMethod}
                 />
               ))}
             </SortableContext>
-            
+
             <DragOverlay dropAnimation={{
               sideEffects: defaultDropAnimationSideEffects({
                 styles: {
