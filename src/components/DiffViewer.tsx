@@ -19,7 +19,7 @@ export function DiffViewer() {
   const { setIsDiffOpen } = useDashboard()
   
   return (
-    <div className="bg-white border border-[#f0f0f0] w-full shadow-2xl mb-0">
+    <div className="bg-white border border-[#f0f0f0] w-full mb-0">
       {/* Diff Header */}
       <div className="flex items-center justify-between p-4 border-b border-[#f0f0f0]">
         <div className="flex items-center gap-2">

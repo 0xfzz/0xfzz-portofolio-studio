@@ -51,7 +51,7 @@ const MethodItem = ({
   return (
     <div 
       style={style}
-      className={`flex bg-white border ${isDragging ? 'border-black shadow-2xl scale-[1.02] z-50' : 'border-[#f0f0f0]'} group hover:border-[#e5e5e5] transition-all overflow-hidden rounded-sm`}
+      className={`flex bg-white border ${isDragging ? 'border-black scale-[1.02] z-50' : 'border-[#f0f0f0]'} group hover:border-[#e5e5e5] transition-all overflow-hidden rounded-sm`}
     >
       {/* Drag Handle Area */}
       <div 
@@ -271,10 +271,10 @@ export function ContactManager() {
       </div>
 
       <div className="fixed bottom-12 right-24 flex items-center gap-4 z-[100]">
-        <button className="h-[52px] bg-white border border-[#e5e5e5] px-10 rounded-sm text-[12px] font-bold uppercase tracking-wider text-[#1a1a1a] hover:border-black transition-all shadow-xl bg-white/80 backdrop-blur-md">
+        <button className="h-[52px] bg-white border border-[#e5e5e5] px-10 rounded-sm text-[12px] font-bold uppercase tracking-wider text-[#1a1a1a] hover:border-black transition-all bg-white/80 backdrop-blur-md">
           RESET
         </button>
-        <button className="h-[52px] bg-[#1a1a1a] text-white px-12 rounded-sm text-[12px] font-bold uppercase tracking-wider hover:bg-black transition-all shadow-2xl active:scale-95">
+        <button className="h-[52px] bg-[#1a1a1a] text-white px-12 rounded-sm text-[12px] font-bold uppercase tracking-wider hover:bg-black transition-all active:scale-95">
           COMMIT CHANGES
         </button>
       </div>

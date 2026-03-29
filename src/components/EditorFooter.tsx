@@ -22,7 +22,7 @@ export function EditorFooter() {
           <span className="text-[12px] font-bold text-[#1a1a1a] uppercase tracking-wider">Draft</span>
           <ChevronDown className="w-4 h-4 text-[#a0a0a0] group-hover:text-black" />
         </button>
-        <button className="h-[44px] bg-[#1a1a1a] text-white px-10 rounded-sm text-[11px] font-bold uppercase tracking-wider hover:bg-black transition-all shadow-lg active:scale-95">
+        <button className="h-[44px] bg-[#1a1a1a] text-white px-10 rounded-sm text-[11px] font-bold uppercase tracking-wider hover:bg-black transition-all active:scale-95">
           Commit
         </button>
       </div>

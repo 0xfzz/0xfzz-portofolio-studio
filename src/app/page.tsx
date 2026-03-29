@@ -5,7 +5,7 @@ import { Field, Label, Input, Button } from '@headlessui/react'
 export default function LoginPage() {
   return (
     <main className="min-h-screen flex items-center justify-center bg-[#fbfbfb] p-4">
-      <div className="bg-white p-10 md:p-14 border border-[#f0f0f0] w-full max-w-[460px] shadow-sm">
+      <div className="bg-white p-10 md:p-14 border border-[#f0f0f0] w-full max-w-[460px]">
         {/* Logo/Title Section */}
         <div className="mb-12">
           <h1 className="font-mono text-4xl font-bold text-[#1a1a1a] tracking-tight">
