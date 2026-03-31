@@ -2,11 +2,11 @@
 
 import React, { useState, useEffect } from 'react'
 import { ExperienceLayout } from '@/components/ExperienceLayout'
-import { EducationForm } from '@/components/EducationForm'
-import { EducationList } from '@/components/EducationList'
+import { ExperienceForm } from '@/components/ExperienceForm'
+import { ExperienceHistory } from '@/components/ExperienceHistory'
 import { RefreshCw } from 'lucide-react'
 
-export default function EducationsPage() {
+export default function OtherExperiencePage() {
   const [loading, setLoading] = useState(true)
   const [saving, setSaving] = useState(false)
   const [status, setStatus] = useState<'idle' | 'success' | 'error'>('idle')
@@ -20,11 +20,11 @@ export default function EducationsPage() {
   const fetchData = async () => {
     try {
       setLoading(true)
-      const res = await fetch('/api/content/experiences/education')
+      const res = await fetch('/api/content/experiences/other-experiences')
       const data = await res.json()
       setItems(Array.isArray(data) ? data : [])
     } catch (err) {
-      console.error('Failed to fetch educations', err)
+      console.error('Failed to fetch other experiences', err)
     } finally {
       setLoading(false)
     }
@@ -34,7 +34,7 @@ export default function EducationsPage() {
     try {
       setSaving(true)
       setStatus('idle')
-      const res = await fetch('/api/content/experiences/education', {
+      const res = await fetch('/api/content/experiences/other-experiences', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(items)
@@ -56,10 +56,11 @@ export default function EducationsPage() {
 
   const addItem = () => {
     const newItem = {
-      institution: '',
-      degree: '',
+      company: '',
+      role: '',
       period: '',
-      location: ''
+      description: [''],
+      tags: []
     }
     setItems([newItem, ...items])
     setActiveIndex(0)
@@ -85,19 +86,35 @@ export default function EducationsPage() {
   )
 
   const activeItem = items[activeIndex] || {
-    institution: '',
-    degree: '',
+    company: '',
+    role: '',
     period: '',
-    location: ''
+    description: [],
+    tags: []
   }
 
   return (
     <>
       <ExperienceLayout
-        title="Educations"
-        subtitle="Manage your academic background"
-        form={<EducationForm data={activeItem} onChange={updateItem} />}
-        list={<EducationList items={items} activeIndex={activeIndex} onEdit={setActiveIndex} onDelete={deleteItem} onAdd={addItem} onReorder={reorderItems} />}
+        title="Other Experience"
+        subtitle="Manage your community, voluntary, and academic achievements"
+        form={
+          <ExperienceForm 
+            key={activeIndex}
+            data={activeItem} 
+            onChange={updateItem} 
+          />
+        }
+        list={
+          <ExperienceHistory 
+            items={items} 
+            activeIndex={activeIndex} 
+            onEdit={setActiveIndex}
+            onDelete={deleteItem}
+            onAdd={addItem}
+            onReorder={reorderItems}
+          />
+        }
       />
 
       {/* Floating Action Bar */}

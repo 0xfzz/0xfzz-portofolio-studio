@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Plus, Trash2, GripVertical, History, Box } from 'lucide-react'
 import { InputField } from './ui/InputField'
 import { Button } from './ui/Button'
@@ -30,6 +30,7 @@ interface ContactMethod {
   platform: string
   label: string
   href: string
+  icon: string
 }
 
 // Presentational component for the method row
@@ -51,50 +52,58 @@ const MethodItem = ({
   return (
     <div
       style={style}
-      className={`flex bg-white border ${isDragging ? 'border-black scale-[1.02] z-50' : 'border-[#f0f0f0]'} group hover:border-[#e5e5e5] transition-all overflow-hidden rounded-sm`}
+      className={`flex bg-[#fafafa] border ${isDragging ? 'border-gray-400 z-50 shadow-md' : 'border-gray-300'} group transition-all mb-4 rounded-none h-auto`}
     >
-      {/* Drag Handle Area */}
+      {/* Drag Handle */}
       <div
         {...dragHandleProps}
-        className="w-14 bg-[#fafafa] border-r border-[#f0f0f0] flex items-center justify-center cursor-grab active:cursor-grabbing hover:bg-[#f0f0f0] transition-colors"
+        className="w-[48px] border-r border-gray-300 flex items-center justify-center cursor-grab active:cursor-grabbing hover:bg-gray-100 transition-colors shrink-0"
       >
-        <GripVertical className="w-4 h-4 text-[#ccc] group-hover:text-[#a0a0a0]" />
+        <GripVertical className="w-3.5 h-3.5 text-gray-500" />
       </div>
 
       {/* Form Area */}
-      <div className="flex-1 p-6 px-10 grid grid-cols-12 gap-8 items-end">
+      <div className="flex-1 p-5 px-6 grid grid-cols-12 gap-6 items-end">
         <div className="col-span-3">
           <InputField
             label="PLATFORM"
             value={method.platform}
+            placeholder="e.g. GitHub"
             onChange={(val) => onUpdate?.(method.id, 'platform', val)}
-            className="bg-[#fcfcfc]"
           />
         </div>
-        <div className="col-span-4">
+        <div className="col-span-3">
+          <InputField
+            label="ICON NAME"
+            value={method.icon}
+            placeholder="e.g. Github"
+            onChange={(val) => onUpdate?.(method.id, 'icon', val)}
+          />
+        </div>
+        <div className="col-span-3">
           <InputField
             label="LABEL"
             value={method.label}
+            placeholder="e.g. View Repositories"
             onChange={(val) => onUpdate?.(method.id, 'label', val)}
-            className="bg-[#fcfcfc]"
           />
         </div>
-        <div className="col-span-5">
+        <div className="col-span-3">
           <InputField
             label="URL / HREF"
             value={method.href}
+            placeholder="https://"
             onChange={(val) => onUpdate?.(method.id, 'href', val)}
-            className="bg-[#fcfcfc]"
           />
         </div>
       </div>
 
-      {/* Action Area */}
+      {/* Delete Area */}
       <div
-        className="w-16 border-l border-[#f0f0f0] flex items-center justify-center bg-white hover:bg-[#fff5f5] group/trash cursor-pointer transition-colors"
+        className="w-[48px] border-l border-gray-300 flex items-center justify-center hover:bg-red-50 hover:text-red-500 text-gray-500 cursor-pointer transition-colors shrink-0"
         onClick={() => onRemove?.(method.id)}
       >
-        <Trash2 className="w-4 h-4 text-[#ccc] group-hover/trash:text-[#ff4d4f] transition-colors" />
+        <Trash2 className="w-3.5 h-3.5" />
       </div>
     </div>
   )
@@ -136,17 +145,57 @@ function SortableMethodItem({
   )
 }
 
-const initialMethods: ContactMethod[] = [
-  { id: '1', platform: 'GitHub', label: 'View Repositories', href: 'https://github.com/0xfzz' },
-  { id: '2', platform: 'LinkedIn', label: 'Professional Network', href: 'https://linkedin.com/in/0xfzz' },
-  { id: '3', platform: 'Email', label: 'faiz@0xfzz.my.id', href: 'mailto:faiz@0xfzz.my.id' }
-]
-
 export function ContactManager() {
-  const [heroTitle, setHeroTitle] = useState("Let's Connect")
-  const [heroSubtitle, setHeroSubtitle] = useState("I'm currently open to new opportunities and technical collaborations. Reach out using the digital outposts below.")
-  const [methods, setMethods] = useState<ContactMethod[]>(initialMethods)
+  const [loading, setLoading] = useState(true)
+  const [saving, setSaving] = useState(false)
+  const [status, setStatus] = useState<'idle' | 'success' | 'error'>('idle')
+
+  const [heroTitle, setHeroTitle] = useState("")
+  const [heroSubtitle, setHeroSubtitle] = useState("")
+  const [methods, setMethods] = useState<ContactMethod[]>([])
   const [activeId, setActiveId] = useState<string | null>(null)
+
+  useEffect(() => {
+    fetchContact()
+  }, [])
+
+  const fetchContact = async () => {
+    try {
+      setLoading(true)
+      const res = await fetch('/api/content/contact')
+      const data = await res.json()
+      setHeroTitle(data.title || "")
+      setHeroSubtitle(data.subtitle || "")
+      setMethods(data.methods?.map((m: any) => ({ ...m, id: m.id || Math.random().toString(36).substr(2, 9) })) || [])
+    } catch (err) {
+      console.error('Failed to fetch contact', err)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  const handleSave = async () => {
+    try {
+      setSaving(true)
+      setStatus('idle')
+      const contactData = {
+        title: heroTitle,
+        subtitle: heroSubtitle,
+        methods: methods.map(({ id, ...m }) => m) // Remove internal IDs before saving
+      }
+      const res = await fetch('/api/content/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(contactData)
+      })
+      if (res.ok) setStatus('success')
+      else setStatus('error')
+    } catch (err) {
+      setStatus('error')
+    } finally {
+      setSaving(false)
+    }
+  }
 
   const sensors = useSensors(
     useSensor(PointerSensor, {
@@ -182,7 +231,8 @@ export function ContactManager() {
       id: newId,
       platform: '',
       label: '',
-      href: ''
+      href: '',
+      icon: ''
     }
     setMethods([...methods, newMethod])
   }
@@ -197,31 +247,61 @@ export function ContactManager() {
 
   const activeMethod = methods.find(m => m.id === activeId)
 
+  if (loading) return (
+    <div className="flex items-center justify-center h-64 border border-dashed border-[#e5e5e5]">
+      <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900"></div>
+    </div>
+  )
+
   return (
     <div className="space-y-16 pb-32">
-      <div className="bg-white border border-[#f0f0f0] p-12 space-y-10 relative group hover:border-[#e5e5e5] transition-all">
-        <div className="flex items-center gap-3 mb-4">
-          <Box className="w-4 h-4 text-[#1a1a1a] opacity-40" />
-          <span className="text-[12px] font-mono font-bold text-[#1a1a1a] opacity-40 uppercase tracking-wider">
-            Edit Contact Display
+      <div className="bg-[#fafafa] border border-gray-300 p-8 lg:p-10 relative rounded-none space-y-8">
+        <div className="flex items-center gap-3">
+          <svg className="w-4 h-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+          </svg>
+          <span className="text-[14px] font-sans font-semibold text-gray-900 uppercase tracking-widest">
+            EDIT CONTACT DISPLAY
           </span>
         </div>
 
-        <InputField label="Display Title" value={heroTitle} onChange={setHeroTitle} />
-        <InputField label="Display Subtitle" value={heroSubtitle} onChange={setHeroSubtitle} type="textarea" rows={3} />
+        <div className="space-y-6">
+          <InputField 
+            label="DISPLAY TITLE" 
+            value={heroTitle} 
+            onChange={setHeroTitle}
+            className="font-semibold text-[18px] text-gray-900 tracking-tight"
+          />
+          <InputField 
+            label="DISPLAY SUBTITLE" 
+            value={heroSubtitle} 
+            onChange={setHeroSubtitle} 
+            type="textarea" 
+            rows={3} 
+          />
+        </div>
       </div>
 
-      <div className="space-y-8">
-        <div className="flex items-center justify-between">
-          <span className="text-[12px] font-bold text-[#1a1a1a] opacity-60 uppercase tracking-wider">
-            ACTIVE_METHODS ({methods.length})
-          </span>
-          <button onClick={addMethod} className="bg-[#1a1a1a] text-white px-6 py-2.5 text-[12px] font-bold uppercase tracking-wider hover:bg-black transition-all flex items-center gap-2 rounded-sm">
-            <Plus className="w-4 h-4" /> [+ ADD METHOD]
+      <div className="bg-[#fafafa] border border-gray-300 p-8 lg:p-10 space-y-8">
+        <div className="flex items-center justify-between mb-8">
+          <div className="flex items-center gap-3">
+            <svg className="w-4 h-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 10h16M4 14h16M4 18h16" />
+            </svg>
+            <span className="text-[14px] font-sans font-semibold text-gray-900 uppercase tracking-widest">
+              2. METHODS LIST
+            </span>
+          </div>
+          <button 
+            onClick={addMethod} 
+            className="w-[150.14px] h-[32px] bg-[#333235] text-white px-4 py-2 text-[12px] font-mono font-normal flex items-center justify-center gap-2 hover:bg-gray-800 transition-colors rounded-none shadow-none"
+          >
+            <Plus className="w-3.5 h-3.5 text-white" />
+            Add Method
           </button>
         </div>
 
-        <div className="space-y-4">
+        <div className="space-y-2">
           <DndContext
             sensors={sensors}
             collisionDetection={closestCenter}
@@ -256,19 +336,31 @@ export function ContactManager() {
           </DndContext>
 
           {methods.length === 0 && (
-            <div className="p-16 border-2 border-dashed border-[#f0f0f0] text-center rounded-sm">
-              <span className="text-[12px] font-bold text-[#ccc] uppercase tracking-wider">No contact methods configured.</span>
+            <div className="p-16 border border-dashed border-gray-300 text-center bg-gray-50/50">
+              <span className="text-[11px] font-mono font-semibold text-gray-400 uppercase tracking-[0.2em]">No contact methods configured.</span>
             </div>
           )}
         </div>
       </div>
 
-      <div className="fixed bottom-12 right-24 flex items-center gap-4 z-[100]">
-        <button className="h-[52px] bg-white border border-[#e5e5e5] px-10 rounded-sm text-[12px] font-bold uppercase tracking-wider text-[#1a1a1a] hover:border-black transition-all bg-white/80 backdrop-blur-md">
+      <div className="fixed bottom-12 right-12 flex items-center gap-4 z-[100]">
+        {status === 'success' && (
+          <div className="bg-gray-900 text-white px-6 py-3 border border-gray-800 text-[11px] font-mono font-bold uppercase tracking-[0.2em] shadow-lg rounded-[2px] animate-in fade-in slide-in-from-bottom-2">
+            CHANGES SAVED LOCALLY
+          </div>
+        )}
+        <button 
+          onClick={fetchContact}
+          className="w-[92px] h-[42px] bg-[#FCF8F9] border border-[#333235] text-[#333235] rounded-none text-[12px] font-mono font-bold tracking-widest hover:bg-gray-100 transition-colors shadow-none flex items-center justify-center"
+        >
           RESET
         </button>
-        <button className="h-[52px] bg-[#1a1a1a] text-white px-12 rounded-sm text-[12px] font-bold uppercase tracking-wider hover:bg-black transition-all active:scale-95">
-          COMMIT CHANGES
+        <button 
+          onClick={handleSave}
+          disabled={saving}
+          className="w-[207px] h-[42px] bg-[#333235] text-[#FCF8F9] rounded-none text-[12px] font-mono font-bold tracking-widest hover:bg-gray-800 transition-all flex items-center justify-center shadow-none disabled:opacity-50"
+        >
+          {saving ? 'SAVING...' : 'COMMIT CHANGES'}
         </button>
       </div>
     </div>

@@ -14,20 +14,20 @@ export function Button({
   className = '', 
   ...props 
 }: ButtonProps) {
-  const baseStyles = 'font-sans font-bold uppercase tracking-wider transition-all transition-colors flex items-center justify-center gap-2'
+  const baseStyles = 'font-sans font-medium uppercase tracking-wider transition-all flex items-center justify-center gap-2 rounded-sm'
   
   const variants = {
-    primary: 'bg-[#1a1a1a] text-white hover:bg-black',
-    secondary: 'bg-[#f5f5f5] text-[#1a1a1a] hover:bg-[#ebebeb]',
-    destructive: 'text-[#ff4d4f] hover:underline',
-    ghost: 'text-[#a0a0a0] hover:text-[#1a1a1a]',
-    outline: 'border border-[#e5e5e5] text-[#1a1a1a] hover:border-black bg-white'
+    primary: 'bg-[#2d2d2d] text-white hover:bg-[#1a1a1a] border border-[#2d2d2d]',
+    secondary: 'bg-white text-[#1a1a1a] border border-gray-200 hover:bg-gray-50',
+    destructive: 'bg-red-600 text-white border border-red-600 hover:bg-red-700',
+    ghost: 'text-gray-500 hover:text-[#1a1a1a] border border-transparent hover:bg-gray-50',
+    outline: 'border border-gray-200 text-[#1a1a1a] hover:bg-gray-50 bg-white'
   }
 
   const sizes = {
-    sm: 'px-3 py-1.5 text-[12px]',
-    md: 'px-6 py-3 text-[13px]',
-    lg: 'px-8 py-4 text-[14px]'
+    sm: 'px-4 py-2 text-[11px]',
+    md: 'px-6 py-2.5 text-[12px]',
+    lg: 'px-10 py-3.5 text-[13px]'
   }
 
   const variantStyles = variants[variant]

@@ -1,69 +1,88 @@
 import React, { useState } from 'react'
 import { InputField } from './ui/InputField'
 
-export function EducationForm() {
-    const [institution, setInstitution] = useState('Universitas Teknologi Yogyakarta')
-    const [degree, setDegree] = useState('Bachelor of Informatics')
-    const [startYear, setStartYear] = useState('JUN 2023')
-    const [endYear, setEndYear] = useState('PRESENT')
-    const [location, setLocation] = useState('Mlati, Sleman')
+interface EducationData {
+  institution: string
+  degree: string
+  period: string
+  location: string
+}
+
+interface EducationFormProps {
+  data: EducationData
+  onChange: (newData: EducationData) => void
+}
+
+export function EducationForm({ data, onChange }: EducationFormProps) {
+  const updateField = (field: keyof EducationData, value: string) => {
+    onChange({ ...data, [field]: value })
+  }
 
   return (
-    <div className="bg-white p-14 border border-[#f0f0f0] w-full max-w-[860px] font-mono">
+    <div className="bg-white border border-gray-200 p-10 w-full animate-in fade-in slide-in-from-bottom-4 duration-500">
       {/* Card Header */}
-      <div className="flex items-start justify-between mb-16 px-1">
-        <div>
-          <h2 className="text-[22px] font-bold text-[#1a1a1a] tracking-tight leading-tight">
-            {institution || 'Untitled Institution'}
-          </h2>
-          <span className="text-[12px] font-bold text-[#1a1a1a] opacity-60 uppercase tracking-wider block mt-2">
-            {degree || 'Degree'} | {startYear || 'Start'} — {endYear || 'End'}
-          </span>
-        </div>
+      <div className="mb-12">
+        <h2 className="text-[20px] font-sans font-bold text-gray-900 tracking-tight leading-none mb-3">
+          {data.institution || 'Untitled Institution'}
+        </h2>
+        <span className="text-[12px] font-mono font-medium text-gray-500 tracking-wider block uppercase">
+          {data.degree || 'N/A'} | {data.period || 'N/A'}
+        </span>
       </div>
 
       {/* Form Fields - Horizontal Layout */}
-      <div className="space-y-10">
+      <div className="space-y-8">
         <InputField 
-          label="Institution"
-          value={institution}
-          onChange={setInstitution}
+          label="INSTITUTION"
+          value={data.institution}
+          onChange={(v) => updateField('institution', v)}
           horizontal
+          placeholder="e.g. Universitas Teknologi Yogyakarta"
         />
         
         <InputField 
-          label="Degree"
-          value={degree}
-          onChange={setDegree}
+          label="DEGREE / CERTIFICATE"
+          value={data.degree}
+          onChange={(v) => updateField('degree', v)}
           horizontal
+          placeholder="e.g. Bachelor of Informatics"
         />
 
         <div className="flex items-center gap-4">
-          <label className="text-[12px] font-bold uppercase tracking-wider text-[#1a1a1a] opacity-60 w-48 shrink-0 px-1">
-            Period
+          <label className="text-[11px] font-mono font-normal uppercase tracking-[0.05em] text-gray-500 w-48 shrink-0">
+            PERIOD
           </label>
           <div className="flex items-center gap-4 w-full">
             <InputField 
-              label="Start Year"
-              value={startYear}
-              onChange={setStartYear}
+              label=""
+              value={(data.period || '').split(' - ')[0] || ''}
+              onChange={(v) => {
+                const parts = (data.period || '').split(' - ')
+                updateField('period', `${v || ''} - ${parts[1] || ''}`)
+              }}
               className="flex-1"
+              placeholder="START (e.g. 2023)"
             />
-            <span className="text-[12px] font-bold text-[#1a1a1a] opacity-60 uppercase tracking-wider px-8 shrink-0">To</span>
+            <span className="text-[11px] font-mono font-normal tracking-[0.05em] text-gray-500 px-2 shrink-0 uppercase">TO</span>
             <InputField 
-              label="End Year"
-              value={endYear}
-              onChange={setEndYear}
+              label=""
+              value={(data.period || '').split(' - ')[1] || ''}
+              onChange={(v) => {
+                const parts = (data.period || '').split(' - ')
+                updateField('period', `${parts[0] || ''} - ${v || ''}`)
+              }}
               className="flex-1"
+              placeholder="END (e.g. 2025)"
             />
           </div>
         </div>
 
         <InputField 
-          label="Location"
-          value={location}
-          onChange={setLocation}
+          label="LOCATION"
+          value={data.location}
+          onChange={(v) => updateField('location', v)}
           horizontal
+          placeholder="e.g. Yogyakarta, Indonesia"
         />
       </div>
     </div>

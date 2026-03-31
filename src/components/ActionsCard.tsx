@@ -4,12 +4,12 @@ import React from 'react'
 
 export function ActionsCard() {
   return (
-    <div className="bg-white p-10 border border-[#f0f0f0] mb-12">
-      <span className="text-[12px] uppercase tracking-wider text-[#1a1a1a] opacity-60 font-bold block mb-4">
-        Actions
+    <div className="bg-white border border-gray-200 p-8 rounded-[2px]">
+      <span className="text-[11px] font-mono uppercase tracking-[0.2em] text-gray-400 font-semibold block mb-6">
+        ACTIONS
       </span>
-      <button className="w-full bg-[#2d2d2d] text-white py-4.5 px-6 font-bold text-[13px] tracking-[0.15em] uppercase hover:bg-black transition-colors cursor-pointer">
-        Commit Changes
+      <button className="w-full bg-[#333] text-white py-3 px-6 font-sans font-medium text-[11px] tracking-wider uppercase hover:bg-[#1a1a1a] transition-colors rounded-[2px]">
+        COMMIT CHANGES
       </button>
     </div>
   )

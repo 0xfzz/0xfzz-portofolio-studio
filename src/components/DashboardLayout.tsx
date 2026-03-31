@@ -24,7 +24,7 @@ function DiffModal() {
 export function DashboardLayout({ children }: { children: React.ReactNode }) {
   return (
     <DashboardProvider>
-      <div className="flex min-h-screen bg-[#fbfbfb] font-mono">
+      <div className="flex min-h-screen bg-white font-sans text-[#1a1a1a]">
         <Sidebar />
         <div className="flex-1 flex flex-col">
           {children}

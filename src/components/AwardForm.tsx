@@ -1,56 +1,69 @@
 import React, { useState } from 'react'
 import { InputField } from './ui/InputField'
 
-export function AwardForm() {
-  const [title, setTitle] = useState('3rd Winner of LKS Web Technology 2022')
-  const [date, setDate] = useState('MAY 2022')
-  const [issuer, setIssuer] = useState('Daerah Istimewa Yogyakarta')
-  const [description, setDescription] = useState('Membangun situs web penyaji data IMDb menggunakan scraping JavaScript. Tech stack: Nest.js (Backend) dan Nuxt.js (Frontend).')
+interface AwardData {
+  title: string
+  issuer: string
+  date: string
+  description: string
+}
+
+interface AwardFormProps {
+  data: AwardData
+  onChange: (newData: AwardData) => void
+}
+
+export function AwardForm({ data, onChange }: AwardFormProps) {
+  const updateField = (field: keyof AwardData, value: string) => {
+    onChange({ ...data, [field]: value })
+  }
 
   return (
-    <div className="bg-white p-14 border border-[#f0f0f0] w-full max-w-[860px] font-mono">
+    <div className="bg-white border border-gray-200 p-10 w-full animate-in fade-in slide-in-from-bottom-4 duration-500">
       {/* Card Header */}
-      <div className="flex items-start justify-between mb-16 px-1">
-        <div>
-          <h2 className="text-[22px] font-bold text-[#1a1a1a] tracking-tight leading-tight max-w-[500px]">
-            {title || 'Untiled Award'}
-          </h2>
-          <span className="text-[12px] font-bold text-[#1a1a1a] opacity-60 uppercase tracking-wider block mt-2">
-            {date || 'No Date'} — {issuer || 'No Issuer'}
-          </span>
-        </div>
+      <div className="mb-12">
+        <h2 className="text-[20px] font-sans font-bold text-gray-900 tracking-tight leading-none mb-3">
+          {data.title || 'Untitled Award'}
+        </h2>
+        <span className="text-[12px] font-mono font-medium text-gray-500 tracking-wider block uppercase">
+          {data.date || 'No Date'} — {data.issuer || 'No Issuer'}
+        </span>
       </div>
 
       {/* Form Fields - Horizontal Layout */}
-      <div className="space-y-10">
+      <div className="space-y-8">
         <InputField 
-          label="Title"
-          value={title}
-          onChange={setTitle}
+          label="AWARD TITLE"
+          value={data.title}
+          onChange={(v) => updateField('title', v)}
           horizontal
+          placeholder="e.g. 1st Winner of Bug Bounty 2023"
         />
         
         <InputField 
-          label="Date"
-          value={date}
-          onChange={setDate}
+          label="DATE"
+          value={data.date}
+          onChange={(v) => updateField('date', v)}
           horizontal
+          placeholder="e.g. AUG 2023"
         />
 
         <InputField 
-          label="Issuer"
-          value={issuer}
-          onChange={setIssuer}
+          label="ISSUER"
+          value={data.issuer}
+          onChange={(v) => updateField('issuer', v)}
           horizontal
+          placeholder="e.g. Kemdikbud"
         />
 
         <InputField 
-          label="Description"
-          value={description}
-          onChange={setDescription}
+          label="AWARD DESCRIPTION"
+          value={data.description}
+          onChange={(v) => updateField('description', v)}
           type="textarea"
-          rows={6}
-          className="border-[#999] px-5 py-5 text-[14px] bg-white"
+          rows={4}
+          horizontal
+          placeholder="Briefly describe the achievement..."
         />
       </div>
     </div>

@@ -5,25 +5,25 @@ import { ChevronDown } from 'lucide-react'
 
 export function EditorFooter() {
   return (
-    <div className="h-[80px] bg-white border-t border-[#f0f0f0] px-12 flex items-center justify-between shrink-0 font-mono">
-      <div className="flex items-center gap-12">
-        <div>
-          <span className="text-[11px] font-bold text-[#1a1a1a] opacity-60 uppercase tracking-wider block mb-1">Last Saved</span>
-          <span className="text-[13px] font-medium text-[#1a1a1a]">2024-05-24 14:22:01 UTC</span>
+    <div className="h-[60px] bg-[#fafafa] border-t border-gray-200 px-10 flex items-center justify-between shrink-0 text-gray-500">
+      <div className="flex items-center gap-12 text-[11px] font-mono tracking-widest uppercase">
+        <div className="flex items-center gap-2">
+          <span className="text-gray-400">LAST SAVED:</span>
+          <span className="font-semibold text-gray-600">2024-05-24 14:22:01<br/>UTC</span>
         </div>
-        <div>
-          <span className="text-[11px] font-bold text-[#1a1a1a] opacity-60 uppercase tracking-wider block mb-1">Words</span>
-          <span className="text-[13px] font-medium text-[#1a1a1a]">482</span>
+        <div className="flex items-center gap-2">
+          <span className="text-gray-400">WORDS:</span>
+          <span className="font-semibold text-gray-600">482</span>
         </div>
       </div>
 
       <div className="flex items-center gap-4">
-        <button className="h-[44px] border border-[#e5e5e5] px-6 rounded-sm flex items-center justify-between gap-4 group hover:border-black transition-all min-w-[140px]">
-          <span className="text-[12px] font-bold text-[#1a1a1a] uppercase tracking-wider">Draft</span>
-          <ChevronDown className="w-4 h-4 text-[#a0a0a0] group-hover:text-black" />
+        <button className="h-[32px] bg-white border border-gray-300 px-4 flex items-center justify-between gap-6 group hover:border-gray-400 transition-colors shadow-sm rounded-[2px] min-w-[120px]">
+          <span className="text-[11px] font-sans font-semibold text-gray-600 uppercase tracking-widest">DRAFT</span>
+          <ChevronDown className="w-3.5 h-3.5 text-gray-400 group-hover:text-gray-600 transition-colors" />
         </button>
-        <button className="h-[44px] bg-[#1a1a1a] text-white px-10 rounded-sm text-[11px] font-bold uppercase tracking-wider hover:bg-black transition-all active:scale-95">
-          Commit
+        <button className="h-[32px] bg-[#2d2d2d] text-white px-8 text-[11px] font-sans font-medium uppercase tracking-wider hover:bg-[#1a1a1a] transition-colors shadow-sm rounded-[2px]">
+          COMMIT
         </button>
       </div>
     </div>

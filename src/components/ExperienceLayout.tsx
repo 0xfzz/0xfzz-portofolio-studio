@@ -23,8 +23,8 @@ export function ExperienceLayout({ title, subtitle, form, list }: ExperienceLayo
       newEntryHref="#"
     >
       {/* Form and Actions */}
-      <div className="flex gap-16 items-start mb-24">
-        <div className="flex-1">
+      <div className="flex gap-10 items-start mb-16">
+        <div className="flex-1 min-w-0">
           {form}
         </div>
         <div className="w-[320px] sticky top-8 shrink-0">

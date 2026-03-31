@@ -1,24 +1,25 @@
 'use client'
 
 import React from 'react'
+import { RefreshCw, GitBranch, AlertCircle, CheckCircle } from 'lucide-react'
 import { useDashboard } from '@/context/DashboardContext'
 
 export function DashboardHeader() {
-  const { setIsDiffOpen } = useDashboard()
+  const { gitStatus, refreshStatus, isDiffOpen, setIsDiffOpen } = useDashboard()
 
   return (
-    <header className="flex justify-end p-4 px-10 bg-white border-b border-[#f0f0f0]">
-      <div className="flex items-center gap-2">
-        <button 
-          onClick={() => setIsDiffOpen(true)}
-          className="bg-[#f0f0f0] px-3 py-1 rounded-sm border border-[#e5e5e5] flex items-center gap-2 hover:bg-[#e8e8e8] transition-colors cursor-pointer group"
-        >
-            <span className="text-[12px] font-bold text-[#1a1a1a] tracking-tight uppercase">Diff</span>
-            <span className="bg-[#333] text-white text-[11px] w-5.5 h-5.5 flex items-center justify-center rounded-full font-bold group-hover:bg-black">
-                12
-            </span>
-        </button>
-      </div>
+    <header className="flex justify-end items-center px-6 h-[52px] bg-white border-b border-gray-300 shrink-0">
+      <button 
+        onClick={() => setIsDiffOpen(!isDiffOpen)}
+        className="w-[98px] h-[27px] px-3 rounded-[2px] border border-gray-900 flex items-center justify-between hover:bg-gray-50 transition-colors bg-white shadow-none"
+      >
+        <span className="text-[11px] font-mono font-normal text-gray-900 leading-none">
+          DIFF
+        </span>
+        <span className="bg-gray-900 text-white text-[11px] font-mono font-normal px-2 rounded-[19px] h-[17px] min-w-[30px] flex items-center justify-center leading-none">
+          12
+        </span>
+      </button>
     </header>
   )
 }

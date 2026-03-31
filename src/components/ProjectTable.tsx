@@ -1,87 +1,77 @@
-import React from 'react'
-import { Edit2, Trash2 } from 'lucide-react'
+import React, { useState, useEffect } from 'react'
+import { Edit2, Trash2, RefreshCw } from 'lucide-react'
 import Link from 'next/link'
 import { DataTable } from './ui/DataTable'
 import { Badge } from './ui/Badge'
 import { Button } from './ui/Button'
 
-const projects = [
-  {
-    id: 1,
-    title: 'Lumina Core Engine',
-    technologies: ['C++', 'Vulkan', 'Rust'],
-    date: '2023.10.14',
-    status: 'PUBLISHED',
-  },
-  {
-    id: 2,
-    title: 'Zenith Cloud Platform',
-    technologies: ['Go', 'Kubernetes', 'AWS'],
-    date: '2023.09.28',
-    status: 'PUBLISHED',
-  },
-  {
-    id: 3,
-    title: 'Aether UI Framework',
-    technologies: ['TypeScript', 'React', 'WASM'],
-    date: '2023.08.12',
-    status: 'PUBLISHED',
-  },
-  {
-    id: 4,
-    title: 'Nova Neural Network',
-    technologies: ['Python', 'PyTorch', 'Cuda'],
-    date: '2023.07.05',
-    status: 'DRAFT',
-  },
-]
-
 export function ProjectTable() {
+  const [projects, setProjects] = useState<any[]>([])
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    fetchProjects()
+  }, [])
+
+  const fetchProjects = async () => {
+    try {
+      setLoading(true)
+      const res = await fetch('/api/content/projects')
+      const data = await res.json()
+      setProjects(Array.isArray(data) ? data : [])
+    } catch (err) {
+      console.error('Failed to fetch projects', err)
+      setProjects([])
+    } finally {
+      setLoading(false)
+    }
+  }
+
   const columns = [
     {
-      header: 'Project Title',
+      header: 'PROJECT TITLE',
       key: 'title',
       width: '40%',
       render: (project: any) => (
-        <div className="flex items-center gap-4">
-          <div className="w-2 h-2 rounded-full bg-[#8b8b6a]" />
-          <span className="text-[14px] font-bold text-[#1a1a1a] tracking-tight">{project.title}</span>
+        <div className="flex items-center gap-3">
+          <div className="w-1.5 h-1.5 rounded-full bg-gray-500" />
+          <span className="text-[14px] font-bold text-gray-900 tracking-tight truncate">{project.title || 'Untitled'}</span>
         </div>
       )
     },
     {
-      header: 'Technologies',
+      header: 'TECHNOLOGIES',
       key: 'technologies',
       render: (project: any) => (
         <div className="flex flex-wrap gap-1.5">
-          {project.technologies.map((tech: string) => (
+          {(Array.isArray(project.technologies) ? project.technologies : []).map((tech: string) => (
             <Badge key={tech} variant="tag">{tech}</Badge>
           ))}
         </div>
       )
     },
     {
-      header: 'Date',
-      key: 'date',
-      render: (project: any) => <span className="text-[12px] font-medium text-[#a0a0a0] font-mono opacity-80">{project.date}</span>
+      header: 'DATE / TIMELINE',
+      key: 'timeline',
+      render: (project: any) => <span className="text-[11px] font-medium text-gray-400 font-mono tracking-widest uppercase">{project.timeline || 'No Date'}</span>
     },
     {
-      header: 'Status',
-      key: 'status',
+      header: 'STATUS',
+      key: 'published',
       render: (project: any) => (
-        <Badge variant={project.status === 'PUBLISHED' ? 'success' : 'neutral'} className="rounded-none px-3 py-1">
-          {project.status}
+        <Badge variant={project.published === 'true' || project.published === true ? 'success' : 'neutral'}>
+          {project.published === 'true' || project.published === true ? 'PUBLISHED' : 'DRAFT'}
         </Badge>
       )
     },
     {
-      header: 'Actions',
+      header: 'ACTIONS',
       key: 'actions',
       className: 'text-right',
-      render: () => (
-        <div className="flex items-center justify-end gap-3 font-bold text-[11px] tracking-widest">
-          <button className="text-[#1a1a1a] hover:opacity-70 transition-opacity">[EDIT]</button>
-          <button className="text-[#8b2d2d] hover:opacity-70 transition-opacity">[DELETE]</button>
+      render: (project: any) => (
+        <div className="flex items-center justify-end gap-2.5 font-mono text-[11px] tracking-widest text-gray-600">
+          <Link href={`/dashboard/projects/edit/${project._slug}`} className="hover:text-gray-900 transition-colors uppercase">[EDIT]</Link>
+          <button className="text-[#991b1b] hover:text-[#7f1d1d] transition-colors uppercase">[DELETE]</button>
         </div>
       )
     }
@@ -89,25 +79,28 @@ export function ProjectTable() {
 
   const filterOptions = [
     {
-      label: 'TECH',
-      key: 'technologies',
-      options: ['C++', 'Vulkan', 'Rust', 'Go', 'Kubernetes', 'AWS', 'TypeScript', 'React', 'WASM', 'Python', 'PyTorch', 'Cuda']
-    },
-    {
       label: 'STATUS',
-      key: 'status',
+      key: 'published',
       options: ['PUBLISHED', 'DRAFT']
     }
   ]
 
+  if (loading) return (
+    <div className="flex items-center justify-center h-64 border border-dashed border-[#e5e5e5]">
+      <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-900"></div>
+    </div>
+  )
+
   return (
-    <DataTable 
-      data={projects} 
-      columns={columns} 
-      searchPlaceholder="SEARCH_PROJECTS..."
-      searchKeys={['title', 'technologies']}
-      filters={filterOptions}
-      pageSize={10}
-    />
+    <div className="w-full">
+      <DataTable 
+        data={projects} 
+        columns={columns} 
+        searchPlaceholder="Search projects..."
+        searchKeys={['title', 'technologies']}
+        filters={filterOptions}
+        pageSize={10}
+      />
+    </div>
   )
 }

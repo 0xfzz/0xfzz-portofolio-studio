@@ -20,12 +20,12 @@ export function BlogPreview({ data }: BlogPreviewProps) {
   return (
     <div className="flex-1 overflow-y-auto bg-[#fafafa] flex flex-col scrollbar-hide">
       {/* Preview Header */}
-      <div className="h-[60px] border-b border-[#f0f0f0] px-10 flex items-center justify-between bg-white shrink-0">
-        <span className="text-[12px] font-bold text-[#a0a0a0] uppercase tracking-wider">Preview</span>
-        <div className="flex items-center gap-4 text-[#a0a0a0]">
-          <Monitor className="w-4 h-4 cursor-pointer hover:text-[#1a1a1a]" />
-          <Tablet className="w-4 h-4 cursor-pointer hover:text-[#1a1a1a]" />
-          <Smartphone className="w-4 h-4 cursor-pointer hover:text-[#1a1a1a]" />
+      <div className="h-[60px] border-b border-gray-200 px-10 flex items-center justify-between bg-white shrink-0">
+        <span className="text-[11px] font-mono font-semibold text-gray-400 uppercase tracking-[0.2em]">PREVIEW</span>
+        <div className="flex items-center gap-4 text-gray-400">
+          <Monitor className="w-4 h-4 cursor-pointer hover:text-gray-900 transition-colors" />
+          <Tablet className="w-4 h-4 cursor-pointer hover:text-gray-900 transition-colors" />
+          <Smartphone className="w-4 h-4 cursor-pointer hover:text-gray-900 transition-colors" />
         </div>
       </div>
 

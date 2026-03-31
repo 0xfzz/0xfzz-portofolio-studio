@@ -29,25 +29,24 @@ export function PageLayout({
     <DashboardLayout>
       <DashboardHeader />
       
-      <main className="flex-1 p-16 pt-2 overflow-y-auto font-mono scrollbar-hide">
+      <main className="flex-1 p-10 lg:p-12 overflow-y-auto font-sans scrollbar-hide bg-white">
         <div className="w-full">
           {/* Page Header */}
-          <div className="flex items-center justify-between mt-4 mb-16">
+          <div className="flex items-end justify-between mb-10 pb-8 border-b border-gray-200">
             <div>
-              <span className="text-[12px] font-mono font-bold uppercase tracking-wider text-[#1a1a1a] opacity-60 block mb-1">
+              <span className="text-[11px] font-mono font-normal uppercase tracking-[0.05em] text-gray-500 mb-2 block">
                 {subtitle}
               </span>
-              <h1 className="text-[32px] font-sans font-bold text-[#1a1a1a] tracking-tight uppercase leading-none">
+              <h1 className="text-[30px] font-sans font-semibold text-gray-900 tracking-[-0.6px] leading-[36px]">
                 {title}
               </h1>
             </div>
             {newEntryHref && (
               <Link 
                 href={newEntryHref}
-                className="bg-white border border-[#e5e5e5] px-6 py-2.5 text-[12px] font-sans font-bold uppercase tracking-wider hover:bg-gray-50 transition-all flex items-center gap-2"
+                className="bg-[#2d2d2d] text-white px-5 py-2.5 text-[12px] font-mono font-normal uppercase tracking-widest hover:bg-[#1a1a1a] transition-colors rounded-none flex items-center gap-2"
               >
-                <Plus className="w-3.5 h-3.5" />
-                {newEntryLabel}
+                [+ {newEntryLabel.replace('_', ' ')}]
               </Link>
             )}
           </div>

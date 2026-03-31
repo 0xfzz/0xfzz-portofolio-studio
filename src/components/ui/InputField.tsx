@@ -7,7 +7,7 @@ interface InputFieldProps {
   label: string
   value: string
   onChange: (value: string) => void
-  type?: 'text' | 'textarea'
+  type?: 'text' | 'textarea' | 'password'
   rows?: number
   className?: string
   placeholder?: string
@@ -24,9 +24,9 @@ export function InputField({
   placeholder = '',
   horizontal = false
 }: InputFieldProps) {
-  const containerClasses = horizontal ? 'flex items-center gap-4' : 'space-y-2'
-  const labelClasses = `text-[12px] font-sans font-extrabold uppercase tracking-wider text-[#1a1a1a] opacity-60 ${horizontal ? 'w-48 shrink-0' : ''}`
-  const inputClasses = `w-full border border-[#e5e5e5] px-6 py-4 text-[14px] font-mono focus:outline-none focus:border-black transition-all bg-white rounded-sm ${className}`
+  const containerClasses = horizontal ? 'flex items-center gap-4' : 'space-y-1.5'
+  const labelClasses = `text-[11px] font-mono font-normal uppercase tracking-[0.05em] text-gray-500 ${horizontal ? 'w-48 shrink-0' : ''}`
+  const inputClasses = `w-full border border-gray-300 px-4 py-3 text-[13px] font-sans focus:outline-none focus:border-gray-400 focus:ring-0 transition-all bg-white rounded-[2px] ${className}`
 
   return (
     <Field className={containerClasses}>
@@ -41,6 +41,7 @@ export function InputField({
         />
       ) : (
         <HeadlessInput
+          type={type}
           value={value}
           onChange={(e) => onChange(e.target.value)}
           placeholder={placeholder}
