@@ -12,8 +12,9 @@ export function SiteConfigManager() {
 
   const EMPTY_CONFIG = {
     metadata: { title: '', name: '', description: '' },
+    summary: '',
     visibility: { projects: true, experiences: true, blog: true, contact: true, techStack: true },
-    hero: { title: '', subtitle: '', description: '' },
+    hero: { title: '', subtitle: '' },
     pages: {
       projects: { title: '', subtitle: '' },
       blog: { title: '', subtitle: '' },
@@ -172,6 +173,24 @@ export function SiteConfigManager() {
         </div>
       </div>
 
+      {/* Professional Summary */}
+      <div className="bg-[#fafafa] border border-gray-200 p-8 lg:p-10 space-y-8">
+        <div className="flex items-center gap-3">
+           <FileText className="w-4 h-4 text-gray-400" />
+           <span className="text-[14px] font-sans font-semibold text-gray-900 uppercase tracking-widest">
+             PROFESSIONAL SUMMARY
+           </span>
+        </div>
+        <InputField 
+          label="BIOGRAPHY" 
+          value={config.summary || ''} 
+          onChange={(v) => setConfig((prev: any) => ({ ...prev, summary: v }))} 
+          type="textarea" 
+          rows={5} 
+          placeholder="This will be used for the About Me section and your CV summary..."
+        />
+      </div>
+
       {/* Hero Section */}
       <div className="bg-[#fafafa] border border-gray-200 p-8 lg:p-10 space-y-8">
         <div className="flex items-center gap-3">
@@ -187,9 +206,6 @@ export function SiteConfigManager() {
           <InputField label="SUBTITLE (Tagline)" value={config.hero?.subtitle || ''} onChange={(v) => {
             setConfig((prev: any) => ({ ...prev, hero: { ...prev.hero, subtitle: v } }))
           }} />
-          <InputField label="DESCRIPTION (Long Summary)" value={config.hero?.description || ''} onChange={(v) => {
-            setConfig((prev: any) => ({ ...prev, hero: { ...prev.hero, description: v } }))
-          }} type="textarea" rows={4} />
         </div>
       </div>
 
