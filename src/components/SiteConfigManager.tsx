@@ -13,7 +13,7 @@ export function SiteConfigManager() {
   const EMPTY_CONFIG = {
     metadata: { title: '', name: '', description: '' },
     visibility: { projects: true, experiences: true, blog: true, contact: true, techStack: true },
-    hero: { title: '', subtitle: '' },
+    hero: { title: '', subtitle: '', description: '' },
     pages: {
       projects: { title: '', subtitle: '' },
       blog: { title: '', subtitle: '' },
@@ -184,9 +184,12 @@ export function SiteConfigManager() {
           <InputField label="TITLE" value={config.hero?.title || ''} onChange={(v) => {
             setConfig((prev: any) => ({ ...prev, hero: { ...prev.hero, title: v } }))
           }} className="font-semibold text-[18px] text-gray-900 tracking-tight" />
-          <InputField label="SUBTITLE" value={config.hero?.subtitle || ''} onChange={(v) => {
+          <InputField label="SUBTITLE (Tagline)" value={config.hero?.subtitle || ''} onChange={(v) => {
             setConfig((prev: any) => ({ ...prev, hero: { ...prev.hero, subtitle: v } }))
           }} />
+          <InputField label="DESCRIPTION (Long Summary)" value={config.hero?.description || ''} onChange={(v) => {
+            setConfig((prev: any) => ({ ...prev, hero: { ...prev.hero, description: v } }))
+          }} type="textarea" rows={4} />
         </div>
       </div>
 
