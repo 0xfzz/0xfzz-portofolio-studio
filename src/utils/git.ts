@@ -2,7 +2,12 @@ import { execa } from 'execa';
 import * as path from 'path';
 import * as fs from 'fs';
 
-const CONTENT_ROOT = path.resolve(process.cwd(), 'content');
+// Consistent absolute path resolution for Git operations
+const CONTENT_ROOT = (function() {
+  const root = path.resolve(process.cwd(), 'content');
+  console.log(`[GitService] Initialized CONTENT_ROOT: ${root}`);
+  return root;
+})();
 
 export interface DiffEntry {
   file: string;

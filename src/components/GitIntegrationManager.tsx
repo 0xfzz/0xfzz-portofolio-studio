@@ -4,9 +4,11 @@ import React, { useState, useEffect } from 'react'
 import { GitBranch, MonitorPlay, Eye, EyeOff, Info, Layers, User, AlertCircle, RefreshCw } from 'lucide-react'
 import { InputField } from './ui/InputField'
 import { useDashboard } from '@/context/DashboardContext'
+import { useNotification } from '@/context/NotificationContext'
 
 export function GitIntegrationManager() {
   const { isDiffOpen } = useDashboard()
+  const { showToast, confirm } = useNotification()
   const [repoUrl, setRepoUrl] = useState('')
   const [branch, setBranch] = useState('main')
   const [pat, setPat] = useState('')
@@ -72,19 +74,27 @@ export function GitIntegrationManager() {
       const res = await fetch('/api/git/sync', { method: 'POST' })
       if (res.ok) {
         const data = await res.json()
-        alert(`Sync Successful: ${data.result}`)
+        showToast(`Sync Successful: ${data.result}`, 'success')
       } else {
-        alert('Sync Failed')
+        showToast('Sync Failed', 'error')
       }
     } catch (err) {
-      alert('Sync error')
+      showToast('Sync error', 'error')
     } finally {
       setSyncing(false)
     }
   }
 
   const handleDisconnect = async () => {
-    if (!confirm('Are you sure you want to disconnect? This clears local configuration.')) return
+    const confirmed = await confirm({
+      title: 'Disconnect Repository',
+      message: 'Are you sure you want to disconnect? This clears local configuration.',
+      variant: 'destructive',
+      confirmText: 'Disconnect'
+    })
+    
+    if (!confirmed) return
+    
     try {
       await fetch('/api/git/config', { method: 'DELETE' })
       setRepoUrl('')
@@ -93,8 +103,9 @@ export function GitIntegrationManager() {
       setName('')
       setEmail('')
       setStatus('idle')
+      showToast('Repository disconnected', 'success')
     } catch (err) {
-      alert('Disconnect error')
+      showToast('Disconnect error', 'error')
     }
   }
 

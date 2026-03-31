@@ -7,15 +7,17 @@ import { BlogEditor } from '@/components/BlogEditor'
 import { BlogPreview } from '@/components/BlogPreview'
 import { EditorFooter } from '@/components/EditorFooter'
 import { useRouter } from 'next/navigation'
+import { useNotification } from '@/context/NotificationContext'
 
 export default function BlogNewPage() {
   const router = useRouter()
+  const { showToast } = useNotification()
   const [blogData, setBlogData] = useState({
     title: '',
     slug: '',
-    excerpt: '',
-    image: '',
-    tags: [],
+    description: '',
+    imageUrl: '',
+    tags: [] as string[],
     date: new Date().toLocaleDateString('en-US', { 
       month: 'long', 
       day: 'numeric', 
@@ -33,8 +35,8 @@ export default function BlogNewPage() {
         '---',
         `title: "${blogData.title}"`,
         `date: "${blogData.date}"`,
-        `excerpt: "${blogData.excerpt}"`,
-        `image: "${blogData.image}"`,
+        `description: "${blogData.description}"`,
+        `image: "${blogData.imageUrl}"`,
         `tags: [${blogData.tags.map(t => `"${t}"`).join(', ')}]`,
         `featured: ${blogData.featured}`,
         `published: ${blogData.published}`,
@@ -50,7 +52,7 @@ export default function BlogNewPage() {
       })
 
       if (res.ok) {
-        alert('BLOG CREATED SUCCESSFULLY')
+        showToast('Blog post created successfully', 'success')
         router.push(`/dashboard/blog/edit/${blogData.slug}`)
       }
     } catch (err) {

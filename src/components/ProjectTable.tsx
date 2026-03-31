@@ -4,8 +4,10 @@ import Link from 'next/link'
 import { DataTable } from './ui/DataTable'
 import { Badge } from './ui/Badge'
 import { Button } from './ui/Button'
+import { useNotification } from '@/context/NotificationContext'
 
 export function ProjectTable() {
+  const { showToast, confirm } = useNotification()
   const [projects, setProjects] = useState<any[]>([])
   const [loading, setLoading] = useState(true)
 
@@ -24,6 +26,31 @@ export function ProjectTable() {
       setProjects([])
     } finally {
       setLoading(false)
+    }
+  }
+
+  const handleDelete = async (project: any) => {
+    const confirmed = await confirm({
+      title: 'Delete Project',
+      message: `Are you sure you want to delete "${project.title}"? This will permanently remove the file "${project._slug}.md".`,
+      variant: 'destructive',
+      confirmText: 'Delete'
+    })
+
+    if (!confirmed) return
+
+    try {
+      const res = await fetch(`/api/content/projects/${project._slug}.md`, {
+        method: 'DELETE'
+      })
+      if (res.ok) {
+        showToast('Project deleted successfully', 'success')
+        fetchProjects()
+      } else {
+        showToast('Failed to delete project', 'error')
+      }
+    } catch (err) {
+      showToast('Error deleting project', 'error')
     }
   }
 
@@ -71,7 +98,12 @@ export function ProjectTable() {
       render: (project: any) => (
         <div className="flex items-center justify-end gap-2.5 font-mono text-[11px] tracking-widest text-gray-600">
           <Link href={`/dashboard/projects/edit/${project._slug}`} className="hover:text-gray-900 transition-colors uppercase">[EDIT]</Link>
-          <button className="text-[#991b1b] hover:text-[#7f1d1d] transition-colors uppercase">[DELETE]</button>
+          <button 
+            onClick={() => handleDelete(project)}
+            className="text-[#991b1b] hover:text-[#7f1d1d] transition-colors uppercase"
+          >
+            [DELETE]
+          </button>
         </div>
       )
     }

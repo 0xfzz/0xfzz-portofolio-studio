@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from 'react'
 import { X, RefreshCw, FileText, AlertCircle, GitCommit, Cloud, Terminal, Trash2, ChevronDown, RotateCcw } from 'lucide-react'
 import { useDashboard } from '@/context/DashboardContext'
+import { useNotification } from '@/context/NotificationContext'
 
 interface DiffFile {
   file: string
@@ -13,6 +14,7 @@ interface DiffFile {
 }
 
 export function DiffViewer() {
+  const { showToast, confirm } = useNotification()
   const { setIsDiffOpen, refreshStatus } = useDashboard()
   const [loading, setLoading] = useState(true)
   const [localFiles, setLocalFiles] = useState<DiffFile[]>([])
@@ -68,14 +70,17 @@ export function DiffViewer() {
       })
       
       if (res.ok) {
+        showToast('Changes committed & pushed', 'success')
         await refreshStatus()
         setIsDiffOpen(false)
       } else {
         const data = await res.json()
         setError(data.error || 'Push failed')
+        showToast('Push failed', 'error')
       }
     } catch (err) {
       setError('Network error occurred during push')
+      showToast('Network error during push', 'error')
     } finally {
       setPushing(false)
     }
@@ -86,7 +91,14 @@ export function DiffViewer() {
       ? "This will delete your local commits but KEEP your draft edits. Proceed?" 
       : "CRITICAL: This will DELETE BOTH your local commits and ALL your draft edits. This cannot be undone. Proceed?";
     
-    if (!confirm(confirmMsg)) return;
+    const confirmed = await confirm({
+      title: mode === 'soft' ? 'Soft Reset' : 'Hard Reset',
+      message: confirmMsg,
+      variant: mode === 'hard' ? 'destructive' : 'primary',
+      confirmText: 'Reset Now'
+    })
+
+    if (!confirmed) return;
 
     try {
       setResetting(true)
@@ -99,14 +111,17 @@ export function DiffViewer() {
       })
       
       if (res.ok) {
+        showToast(`Repository reset (${mode}) successful`, 'success')
         await refreshStatus()
         await fetchDiffs() // Refresh view
       } else {
         const data = await res.json()
         setError(data.error || 'Reset failed')
+        showToast('Reset failed', 'error')
       }
     } catch (err) {
       setError('Network error occurred during reset')
+      showToast('Network error during reset', 'error')
     } finally {
       setResetting(false)
     }

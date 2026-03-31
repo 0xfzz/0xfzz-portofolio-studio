@@ -5,8 +5,10 @@ import { ExperienceLayout } from '@/components/ExperienceLayout'
 import { ExperienceForm } from '@/components/ExperienceForm'
 import { ExperienceHistory } from '@/components/ExperienceHistory'
 import { RefreshCw } from 'lucide-react'
+import { useNotification } from '@/context/NotificationContext'
 
 export default function OtherExperiencePage() {
+  const { showToast } = useNotification()
   const [loading, setLoading] = useState(true)
   const [saving, setSaving] = useState(false)
   const [status, setStatus] = useState<'idle' | 'success' | 'error'>('idle')
@@ -39,10 +41,16 @@ export default function OtherExperiencePage() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(items)
       })
-      if (res.ok) setStatus('success')
-      else setStatus('error')
+      if (res.ok) {
+        setStatus('success')
+        showToast('Other experiences saved successfully', 'success')
+      } else {
+        setStatus('error')
+        showToast('Failed to save other experiences', 'error')
+      }
     } catch (err) {
       setStatus('error')
+      showToast('Error saving other experiences', 'error')
     } finally {
       setSaving(false)
     }
@@ -117,6 +125,7 @@ export default function OtherExperiencePage() {
         }
         onSave={handleSave}
         onReset={fetchData}
+        onAdd={addItem}
         saving={saving}
         status={status}
       />

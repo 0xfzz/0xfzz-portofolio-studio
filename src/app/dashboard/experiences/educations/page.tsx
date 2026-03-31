@@ -5,8 +5,10 @@ import { ExperienceLayout } from '@/components/ExperienceLayout'
 import { EducationForm } from '@/components/EducationForm'
 import { EducationList } from '@/components/EducationList'
 import { RefreshCw } from 'lucide-react'
+import { useNotification } from '@/context/NotificationContext'
 
 export default function EducationsPage() {
+  const { showToast } = useNotification()
   const [loading, setLoading] = useState(true)
   const [saving, setSaving] = useState(false)
   const [status, setStatus] = useState<'idle' | 'success' | 'error'>('idle')
@@ -39,10 +41,16 @@ export default function EducationsPage() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(items)
       })
-      if (res.ok) setStatus('success')
-      else setStatus('error')
+      if (res.ok) {
+        setStatus('success')
+        showToast('Education history saved successfully', 'success')
+      } else {
+        setStatus('error')
+        showToast('Failed to save education history', 'error')
+      }
     } catch (err) {
       setStatus('error')
+      showToast('Error saving education history', 'error')
     } finally {
       setSaving(false)
     }
@@ -100,6 +108,7 @@ export default function EducationsPage() {
         list={<EducationList items={items} activeIndex={activeIndex} onEdit={setActiveIndex} onDelete={deleteItem} onAdd={addItem} onReorder={reorderItems} />}
         onSave={handleSave}
         onReset={fetchData}
+        onAdd={addItem}
         saving={saving}
         status={status}
       />

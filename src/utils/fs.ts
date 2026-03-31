@@ -3,23 +3,31 @@ import * as path from 'path';
 
 // Use __dirname to get an absolute path relative to THIS file's location,
 // rather than relying on process.cwd() which may differ in Next.js/Turbopack.
-const CONTENT_ROOT = process.env.CONTENT_PATH
-  ? path.resolve(process.env.CONTENT_PATH)
-  : (function() {
-      // In development, process.cwd() is reliable in Next.js/Turbopack.
-      const localContent = path.resolve(process.cwd(), 'content');
-      const frontendContent = path.resolve(process.cwd(), '../frontend/content');
-      
-      // We'll prefer backend/content if it exists
-      return localContent; 
-    })();
+const CONTENT_ROOT = (function() {
+  if (process.env.CONTENT_PATH) {
+    return path.resolve(process.env.CONTENT_PATH);
+  }
+  
+  // In development, process.cwd() should point to the Next.js project root.
+  // We normalize this path to handle Windows drive letter inconsistencies.
+  const root = path.resolve(process.cwd(), 'content');
+  console.log(`[FSService] Initialized CONTENT_ROOT: ${root}`);
+  return root;
+})();
 
 function resolvePath(relativePath: string): string {
+  // 1. Resolve to an absolute path first
   const resolved = path.resolve(CONTENT_ROOT, relativePath);
-  const normalizedResolved = resolved.toLowerCase();
-  const normalizedRoot = CONTENT_ROOT.toLowerCase();
+  
+  // 2. Normalize both for the security check (lowercase + consistent separators)
+  const normalizedResolved = path.normalize(resolved).toLowerCase();
+  const normalizedRoot = path.normalize(CONTENT_ROOT).toLowerCase();
 
-  if (!normalizedResolved.startsWith(normalizedRoot)) {
+  // 3. Ensure the root check has a trailing separator to prevent "content-secret" matches
+  const rootWithTrailing = normalizedRoot.endsWith(path.sep) ? normalizedRoot : normalizedRoot + path.sep;
+
+  if (!normalizedResolved.startsWith(rootWithTrailing) && normalizedResolved !== normalizedRoot) {
+    console.error(`[FSService] Security violation: "${normalizedResolved}" is outside "${rootWithTrailing}"`);
     throw new Error(`Security violation: Path traversal detected for "${relativePath}"`);
   }
   return resolved;
@@ -114,6 +122,11 @@ async function readDirectory(relativePath: string): Promise<unknown[]> {
   return results;
 }
 
+async function deleteFile(relativePath: string): Promise<void> {
+  const filePath = resolvePath(relativePath);
+  await fsPromises.unlink(filePath);
+}
+
 export const FSService = {
   contentRoot: CONTENT_ROOT,
   resolvePath,
@@ -123,4 +136,5 @@ export const FSService = {
   readMarkdown,
   writeMarkdown,
   readDirectory,
+  deleteFile,
 };

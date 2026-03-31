@@ -14,6 +14,7 @@ interface ExperienceLayoutProps {
   list: ReactNode
   onSave?: () => void
   onReset?: () => void
+  onAdd?: () => void
   saving?: boolean
   status?: 'idle' | 'success' | 'error'
 }
@@ -25,6 +26,7 @@ export function ExperienceLayout({
   list,
   onSave,
   onReset,
+  onAdd,
   saving = false,
   status = 'idle'
 }: ExperienceLayoutProps) {
@@ -32,7 +34,8 @@ export function ExperienceLayout({
     <PageLayout
       title={title}
       subtitle={subtitle}
-      newEntryHref="#"
+      onNewEntry={onAdd}
+      newEntryLabel="Add Entry"
     >
       {/* Form and Actions Row */}
       <div className="flex gap-16 items-start mb-16">

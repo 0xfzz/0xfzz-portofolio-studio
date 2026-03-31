@@ -19,7 +19,7 @@ export function Button({
   const variants = {
     primary: 'bg-[#2d2d2d] text-white hover:bg-[#1a1a1a] border border-[#2d2d2d]',
     secondary: 'bg-white text-[#1a1a1a] border border-gray-200 hover:bg-gray-50',
-    destructive: 'bg-red-600 text-white border border-red-600 hover:bg-red-700',
+    destructive: 'bg-[#991b1b] text-white border border-[#991b1b] hover:bg-[#7f1d1d]',
     ghost: 'text-gray-500 hover:text-[#1a1a1a] border border-transparent hover:bg-gray-50',
     outline: 'border border-gray-200 text-[#1a1a1a] hover:bg-gray-50 bg-white'
   }

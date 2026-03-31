@@ -2,9 +2,11 @@ import React, { useState, useEffect } from 'react'
 import { DataTable } from './ui/DataTable'
 import { Badge } from './ui/Badge'
 import { Button } from './ui/Button'
+import { useNotification } from '@/context/NotificationContext'
 import Link from 'next/link'
 
 export function BlogTable() {
+  const { showToast, confirm } = useNotification()
   const [blogs, setBlogs] = useState<any[]>([])
   const [loading, setLoading] = useState(true)
 
@@ -23,6 +25,31 @@ export function BlogTable() {
       setBlogs([])
     } finally {
       setLoading(false)
+    }
+  }
+
+  const handleDelete = async (blog: any) => {
+    const confirmed = await confirm({
+      title: 'Delete Blog Post',
+      message: `Are you sure you want to delete "${blog.title}"? This will permanently remove the file "${blog._slug}.md".`,
+      variant: 'destructive',
+      confirmText: 'Delete'
+    })
+
+    if (!confirmed) return
+
+    try {
+      const res = await fetch(`/api/content/blog/${blog._slug}.md`, {
+        method: 'DELETE'
+      })
+      if (res.ok) {
+        showToast('Blog post deleted successfully', 'success')
+        fetchBlogs()
+      } else {
+        showToast('Failed to delete blog post', 'error')
+      }
+    } catch (err) {
+      showToast('Error deleting blog post', 'error')
     }
   }
 
@@ -74,7 +101,12 @@ export function BlogTable() {
       render: (blog: any) => (
         <div className="flex items-center justify-end gap-2.5 font-mono text-[11px] tracking-widest text-gray-600">
           <Link href={`/dashboard/blog/edit/${blog._slug}`} className="hover:text-gray-900 transition-colors uppercase">[EDIT]</Link>
-          <button className="text-[#991b1b] hover:text-[#7f1d1d] transition-colors uppercase">[DELETE]</button>
+          <button 
+            onClick={() => handleDelete(blog)}
+            className="text-[#991b1b] hover:text-[#7f1d1d] transition-colors uppercase"
+          >
+            [DELETE]
+          </button>
         </div>
       )
     }

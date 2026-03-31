@@ -7,6 +7,7 @@ import { BlogEditor } from '@/components/BlogEditor'
 import { BlogPreview } from '@/components/BlogPreview'
 import { EditorFooter } from '@/components/EditorFooter'
 import { useRouter } from 'next/navigation'
+import { useNotification } from '@/context/NotificationContext'
 
 interface BlogData {
   title: string
@@ -23,6 +24,7 @@ interface BlogData {
 export default function BlogEditPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = use(params)
   const router = useRouter()
+  const { showToast } = useNotification()
   const [loading, setLoading] = useState(true)
   const [blogData, setBlogData] = useState<BlogData | null>(null)
 
@@ -115,7 +117,7 @@ export default function BlogEditPage({ params }: { params: Promise<{ slug: strin
       })
 
       if (res.ok) {
-        alert('CHANGES SAVED SUCCESSFULLY')
+        showToast('Blog post saved successfully', 'success')
       }
     } catch (err) {
       console.error('Save failed', err)

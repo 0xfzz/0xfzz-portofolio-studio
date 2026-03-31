@@ -37,8 +37,13 @@ export async function GET(
     const data = await FSService.readJson(pathPart + '.json');
     return NextResponse.json(data);
   } catch (error) {
+    console.error(`[API/Content] GET Error for "${pathPart}":`, (error as Error).message);
     return NextResponse.json(
-      { error: (error as Error).message, contentRoot: FSService.contentRoot },
+      { 
+        error: (error as Error).message, 
+        pathPart,
+        contentRoot: FSService.contentRoot 
+      },
       { status: 404 }
     );
   }
@@ -68,8 +73,36 @@ export async function POST(
     await FSService.writeJson(filePath, body);
     return NextResponse.json({ success: true, path: filePath, resolvedPath });
   } catch (error) {
+    console.error(`[API/Content] POST Error for "${filePath}":`, (error as Error).message);
     return NextResponse.json(
       { error: (error as Error).message, path: filePath, resolvedPath, contentRoot: FSService.contentRoot },
+      { status: 500 }
+    );
+  }
+}
+
+/**
+ * DELETE /api/content/[...slug]
+ * Deletes content from the frontend content directory.
+ */
+export async function DELETE(
+  request: Request,
+  { params }: { params: Promise<{ slug: string[] }> }
+) {
+  const { slug } = await params;
+  const pathPart = slug.join('/');
+  const lastPart = slug[slug.length - 1];
+  const isMd = lastPart.endsWith('.md');
+  const filePath = slug.join('/') + (isMd || lastPart.endsWith('.json') ? '' : '.json');
+
+  try {
+    await FSService.deleteFile(filePath);
+    console.log(`[API/Content] DELETED: ${filePath}`);
+    return NextResponse.json({ success: true, path: filePath });
+  } catch (error) {
+    console.error(`[API/Content] DELETE Error for "${filePath}":`, (error as Error).message);
+    return NextResponse.json(
+      { error: (error as Error).message, path: filePath, contentRoot: FSService.contentRoot },
       { status: 500 }
     );
   }

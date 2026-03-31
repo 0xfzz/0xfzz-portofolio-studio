@@ -11,6 +11,7 @@ interface PageLayoutProps {
   subtitle: string
   newEntryHref?: string
   newEntryLabel?: string
+  onNewEntry?: () => void
   actions?: ReactNode
   children: ReactNode
   maxWidth?: string
@@ -21,6 +22,7 @@ export function PageLayout({
   subtitle, 
   newEntryHref, 
   newEntryLabel = 'NEW_ENTRY',
+  onNewEntry,
   actions, 
   children,
   maxWidth = 'max-w-[1440px]'
@@ -41,7 +43,15 @@ export function PageLayout({
                 {title}
               </h1>
             </div>
-            {newEntryHref && (
+            {onNewEntry && (
+              <button 
+                onClick={onNewEntry}
+                className="bg-[#2d2d2d] text-white px-5 py-2.5 text-[12px] font-mono font-normal uppercase tracking-widest hover:bg-[#1a1a1a] transition-colors rounded-none flex items-center gap-2"
+              >
+                [+ {newEntryLabel.replace('_', ' ')}]
+              </button>
+            )}
+            {newEntryHref && !onNewEntry && (
               <Link 
                 href={newEntryHref}
                 className="bg-[#2d2d2d] text-white px-5 py-2.5 text-[12px] font-mono font-normal uppercase tracking-widest hover:bg-[#1a1a1a] transition-colors rounded-none flex items-center gap-2"

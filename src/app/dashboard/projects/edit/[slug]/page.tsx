@@ -7,6 +7,7 @@ import { ProjectEditor } from '@/components/ProjectEditor'
 import { ProjectPreview } from '@/components/ProjectPreview'
 import { EditorFooter } from '@/components/EditorFooter'
 import { useRouter } from 'next/navigation'
+import { useNotification } from '@/context/NotificationContext'
 
 interface ProjectData {
   title: string
@@ -25,6 +26,7 @@ interface ProjectData {
 export default function ProjectEditPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = use(params)
   const router = useRouter()
+  const { showToast } = useNotification()
   const [loading, setLoading] = useState(true)
   const [projectData, setProjectData] = useState<ProjectData | null>(null)
 
@@ -121,7 +123,7 @@ export default function ProjectEditPage({ params }: { params: Promise<{ slug: st
       })
 
       if (res.ok) {
-        alert('CHANGES SAVED SUCCESSFULLY')
+        showToast('Project saved successfully', 'success')
       }
     } catch (err) {
       console.error('Save failed', err)
