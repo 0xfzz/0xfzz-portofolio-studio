@@ -9,7 +9,7 @@ interface BlogPreviewProps {
   data: {
     title: string
     slug: string
-    excerpt: string
+    description: string
     imageUrl: string
     tags: string[]
     content: string
@@ -45,6 +45,12 @@ export function BlogPreview({ data }: BlogPreviewProps) {
             <h1 className="text-[36px] font-sans font-extrabold text-[#1a1a1a] tracking-tight leading-tight">
               {data.title || 'Entry Title'}
             </h1>
+
+            {data.description && (
+              <div className="text-[18px] text-[#888] font-medium leading-relaxed italic border-l-2 border-gray-100 pl-6 py-2 opacity-80">
+                <MarkdownRenderer content={data.description} />
+              </div>
+            )}
 
             <div className="pt-4">
               <MarkdownRenderer content={data.content} />

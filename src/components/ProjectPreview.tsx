@@ -11,7 +11,7 @@ interface ProjectPreviewProps {
     title: string
     description: string
     imageUrl: string
-    liveUrl: string
+    liveUrl?: string
     sourceUrl: string
     technologies: string[]
     content: string
@@ -53,9 +53,9 @@ export function ProjectPreview({ data }: ProjectPreviewProps) {
             <h1 className="text-[48px] font-bold text-[#1a1a1a] tracking-tight leading-none mb-6">
               {data.title || 'Untitled Project'}
             </h1>
-            <p className="text-[18px] text-[#888] font-medium leading-relaxed max-w-[600px]">
-              {data.description || 'Project description goes here...'}
-            </p>
+            <div className="text-[18px] text-[#888] font-medium leading-relaxed max-w-[600px] prose-slate">
+              <MarkdownRenderer content={data.description || 'Project description goes here...'} />
+            </div>
           </div>
 
           <div className="flex items-center gap-6 pt-4">

@@ -22,7 +22,7 @@ export function Table<T extends { id: string | number }>({
   onRowClick 
 }: TableProps<T>) {
   return (
-    <div className="bg-white border border-gray-300 rounded-[2px] overflow-hidden shadow-[0_1px_2px_rgba(0,0,0,0.02)]">
+    <div className="bg-white border border-gray-300 rounded-[2px] overflow-hidden">
       <table className="w-full text-left border-collapse">
         <thead className="bg-[#fbfbfb]">
           <tr className="border-b border-gray-300">

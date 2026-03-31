@@ -6,18 +6,57 @@ import { DashboardHeader } from '@/components/DashboardHeader'
 import { BlogEditor } from '@/components/BlogEditor'
 import { BlogPreview } from '@/components/BlogPreview'
 import { EditorFooter } from '@/components/EditorFooter'
-
-const emptyData = {
-  title: '',
-  slug: '',
-  excerpt: '',
-  imageUrl: '',
-  tags: [],
-  content: ''
-}
+import { useRouter } from 'next/navigation'
 
 export default function BlogNewPage() {
-  const [blogData, setBlogData] = useState(emptyData)
+  const router = useRouter()
+  const [blogData, setBlogData] = useState({
+    title: '',
+    slug: '',
+    excerpt: '',
+    image: '',
+    tags: [],
+    date: new Date().toLocaleDateString('en-US', { 
+      month: 'long', 
+      day: 'numeric', 
+      year: 'numeric' 
+    }),
+    featured: false,
+    published: false,
+    content: ''
+  })
+
+  const handleSave = async () => {
+    try {
+      // Reconstruct Markdown with Frontmatter
+      const frontmatter = [
+        '---',
+        `title: "${blogData.title}"`,
+        `date: "${blogData.date}"`,
+        `excerpt: "${blogData.excerpt}"`,
+        `image: "${blogData.image}"`,
+        `tags: [${blogData.tags.map(t => `"${t}"`).join(', ')}]`,
+        `featured: ${blogData.featured}`,
+        `published: ${blogData.published}`,
+        '---'
+      ].join('\n')
+
+      const fullMarkdown = `${frontmatter}\n\n${blogData.content}`
+
+      const res = await fetch(`/api/content/blog/${blogData.slug}.md`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ content: fullMarkdown })
+      })
+
+      if (res.ok) {
+        alert('BLOG CREATED SUCCESSFULLY')
+        router.push(`/dashboard/blog/edit/${blogData.slug}`)
+      }
+    } catch (err) {
+      console.error('Create failed', err)
+    }
+  }
 
   return (
     <DashboardLayout>
@@ -32,7 +71,11 @@ export default function BlogNewPage() {
         </div>
 
         {/* Footer */}
-        <EditorFooter />
+        <EditorFooter 
+          onSave={handleSave} 
+          published={blogData.published}
+          onPublishedChange={(val) => setBlogData({ ...blogData, published: val })}
+        />
       </div>
     </DashboardLayout>
   )

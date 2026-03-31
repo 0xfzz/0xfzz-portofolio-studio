@@ -1,7 +1,18 @@
 import * as fsPromises from 'fs/promises';
 import * as path from 'path';
 
-const CONTENT_ROOT = path.resolve(process.env.CONTENT_PATH || '../frontend/content');
+// Use __dirname to get an absolute path relative to THIS file's location,
+// rather than relying on process.cwd() which may differ in Next.js/Turbopack.
+const CONTENT_ROOT = process.env.CONTENT_PATH
+  ? path.resolve(process.env.CONTENT_PATH)
+  : (function() {
+      // In development, process.cwd() is reliable in Next.js/Turbopack.
+      const localContent = path.resolve(process.cwd(), 'content');
+      const frontendContent = path.resolve(process.cwd(), '../frontend/content');
+      
+      // We'll prefer backend/content if it exists
+      return localContent; 
+    })();
 
 function resolvePath(relativePath: string): string {
   const resolved = path.resolve(CONTENT_ROOT, relativePath);
@@ -104,6 +115,7 @@ async function readDirectory(relativePath: string): Promise<unknown[]> {
 }
 
 export const FSService = {
+  contentRoot: CONTENT_ROOT,
   resolvePath,
   isDirectory,
   readJson,

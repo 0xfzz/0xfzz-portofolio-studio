@@ -34,7 +34,7 @@ export function StatusBar() {
           </MenuItems>
         </Menu>
         
-        <button className="bg-[#1a1a1a] text-white px-10 py-2.5 text-[11px] font-bold uppercase tracking-widest hover:bg-black transition-all active:scale-95 shadow-lg shadow-black/10">
+        <button className="bg-[#1a1a1a] text-white px-10 py-2.5 text-[11px] font-bold uppercase tracking-widest hover:bg-black transition-all active:scale-95">
           SAVE LOCALLY
         </button>
       </div>

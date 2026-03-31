@@ -5,7 +5,7 @@ import { Field, Label, Input, Button } from '@headlessui/react'
 export default function LoginPage() {
   return (
     <main className="min-h-screen flex items-center justify-center bg-[#fafafa] p-4 font-sans">
-      <div className="bg-white p-12 lg:p-14 border border-gray-200 w-full max-w-[420px] shadow-[0_1px_3px_rgba(0,0,0,0.02)]">
+      <div className="bg-white p-12 lg:p-14 border border-gray-200 w-full max-w-[420px]">
         {/* Logo/Title Section */}
         <div className="mb-10">
           <h1 className="font-mono text-2xl font-bold text-[#1a1a1a] tracking-tight text-center">
@@ -22,13 +22,13 @@ export default function LoginPage() {
             <Input
               type="password"
               placeholder="..........."
-              className="w-full border border-gray-300 px-4 py-3 text-[14px] placeholder:text-gray-400 focus:outline-none focus:border-gray-400 transition-colors shadow-sm"
+              className="w-full border border-gray-300 px-4 py-3 text-[14px] placeholder:text-gray-400 focus:outline-none focus:border-gray-400 transition-colors"
             />
           </Field>
 
           {/* Cloudflare Placeholder/Button */}
           <div className="pt-2">
-            <button type="button" className="w-full border border-gray-300 rounded-[6px] py-4 px-6 font-bold text-[14px] text-gray-900 hover:bg-gray-50 transition-colors cursor-pointer flex justify-center items-center shadow-sm font-sans">
+            <button type="button" className="w-full border border-gray-300 rounded-[6px] py-4 px-6 font-bold text-[14px] text-gray-900 hover:bg-gray-50 transition-colors cursor-pointer flex justify-center items-center font-sans">
               Cloudflare Captcha
             </button>
           </div>
@@ -37,7 +37,7 @@ export default function LoginPage() {
           <div className="pt-2">
             <Button
               type="submit"
-              className="w-full bg-[#2d2d2d] text-white py-3.5 px-6 font-sans font-medium text-[11px] tracking-wider uppercase hover:bg-[#1a1a1a] transition-colors cursor-pointer shadow-sm"
+              className="w-full bg-[#2d2d2d] text-white py-3.5 px-6 font-sans font-medium text-[11px] tracking-wider uppercase hover:bg-[#1a1a1a] transition-colors cursor-pointer"
             >
               ENTER
             </Button>

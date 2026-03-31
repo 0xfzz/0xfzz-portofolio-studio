@@ -8,13 +8,11 @@ import { slugify } from '@/utils/string'
 interface ProjectData {
   title: string
   slug: string
-  shortDescription: string
   description: string
-  image: string
-  role: string
-  timeline: string
+  imageUrl: string
+  date: string
   technologies: string[]
-  githubUrl: string
+  sourceUrl: string
   liveUrl?: string
   featured: boolean
   published: boolean
@@ -54,103 +52,52 @@ export function ProjectEditor({ data, onChange }: ProjectEditorProps) {
             PROJECT METADATA
           </span>
         </div>
-        <div className="flex items-center gap-6">
-          <div className="flex items-center gap-2">
-            <input 
-              type="checkbox" 
-              checked={data.featured} 
-              onChange={(e) => updateField('featured', e.target.checked)}
-              className="w-3.5 h-3.5 accent-gray-900"
-            />
-            <span className="text-[11px] font-mono font-bold text-gray-500 uppercase tracking-wider">FEATURED</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <input 
-              type="checkbox" 
-              checked={data.published} 
-              onChange={(e) => updateField('published', e.target.checked)}
-              className="w-3.5 h-3.5 accent-gray-900"
-            />
-            <span className="text-[11px] font-mono font-bold text-gray-500 uppercase tracking-wider">PUBLISHED</span>
-          </div>
-        </div>
       </div>
 
-      <div className="grid grid-cols-12 gap-8">
-        <div className="col-span-12 lg:col-span-8 space-y-8">
-          <InputField 
-            label="TITLE"
-            value={data.title}
-            onChange={(val) => updateField('title', val)}
-            className="font-semibold text-[18px] text-gray-900 tracking-tight"
-          />
+      <div className="space-y-8">
+        <InputField 
+          label="TITLE"
+          value={data.title}
+          onChange={(val) => updateField('title', val)}
+          className="font-semibold text-[18px] text-gray-900 tracking-tight"
+        />
 
+        <div className="grid grid-cols-2 gap-6">
           <InputField 
-            label="SHORT DESCRIPTION (SUMMARY)"
-            value={data.shortDescription}
-            onChange={(val) => updateField('shortDescription', val)}
-            type="textarea"
-            rows={2}
+            label="SLUG"
+            value={data.slug}
+            onChange={(val) => updateField('slug', val)}
           />
-
           <InputField 
-            label="DETAILED DESCRIPTION"
-            value={data.description}
-            onChange={(val) => updateField('description', val)}
-            type="textarea"
-            rows={4}
+            label="PUBLISHED DATE"
+            value={data.date}
+            onChange={(val) => updateField('date', val)}
+            placeholder="e.g. March 10, 2025"
           />
         </div>
 
-        <div className="col-span-12 lg:col-span-4 space-y-8">
-          <InputField 
-            label="ROLE"
-            value={data.role}
-            onChange={(val) => updateField('role', val)}
-            placeholder="e.g. Lead Developer"
-          />
-          <div className="space-y-3">
-            <label className="text-[11px] font-mono font-normal uppercase tracking-[0.05em] text-gray-500 block">TIMELINE</label>
-            <div className="flex items-center gap-4">
-              <InputField 
-                label=""
-                value={data.timeline.split(' - ')[0] || ''}
-                onChange={(v) => {
-                  const parts = data.timeline.split(' - ')
-                  updateField('timeline', `${v} - ${parts[1] || ''}`)
-                }}
-                className="flex-1"
-                placeholder="e.g. JAN 2024"
-              />
-              <span className="text-[11px] font-mono font-normal tracking-[0.05em] text-gray-500 px-1 shrink-0 uppercase">TO</span>
-              <InputField 
-                label=""
-                value={data.timeline.split(' - ')[1] || ''}
-                onChange={(v) => {
-                  const parts = data.timeline.split(' - ')
-                  updateField('timeline', `${parts[0] || ''} - ${v}`)
-                }}
-                className="flex-1"
-                placeholder="e.g. MAR 2024"
-              />
-            </div>
-          </div>
-        </div>
+        <InputField 
+          label="DESCRIPTION"
+          value={data.description}
+          onChange={(val) => updateField('description', val)}
+          type="textarea"
+          rows={4}
+        />
       </div>
 
       <div className="space-y-8 border-t border-gray-100 pt-10">
         <InputField 
           label="COVER IMAGE URL"
-          value={data.image}
-          onChange={(val) => updateField('image', val)}
+          value={data.imageUrl}
+          onChange={(val) => updateField('imageUrl', val)}
           placeholder="https://..."
         />
 
         <div className="grid grid-cols-2 gap-6">
           <InputField 
-            label="GITHUB REPOSITORY URL"
-            value={data.githubUrl}
-            onChange={(val) => updateField('githubUrl', val)}
+            label="SOURCE CODE URL"
+            value={data.sourceUrl}
+            onChange={(val) => updateField('sourceUrl', val)}
           />
           <InputField 
             label="LIVE DEMO URL (OPTIONAL)"
@@ -195,7 +142,6 @@ export function ProjectEditor({ data, onChange }: ProjectEditorProps) {
           onChange={(val) => updateField('content', val)}
           type="textarea"
           rows={20}
-          className="font-mono text-[13px] leading-relaxed"
         />
       </div>
     </div>

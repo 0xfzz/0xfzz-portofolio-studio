@@ -29,7 +29,7 @@ export function PageLayout({
     <DashboardLayout>
       <DashboardHeader />
       
-      <main className="flex-1 p-10 lg:p-12 overflow-y-auto font-sans scrollbar-hide bg-white">
+      <main className="flex-1 p-10 lg:p-12 font-sans scrollbar-hide bg-white">
         <div className="w-full">
           {/* Page Header */}
           <div className="flex items-end justify-between mb-10 pb-8 border-b border-gray-200">

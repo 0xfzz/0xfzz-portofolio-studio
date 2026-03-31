@@ -8,8 +8,8 @@ import { slugify } from '@/utils/string'
 interface BlogData {
   title: string
   slug: string
-  excerpt: string
-  image: string
+  description: string
+  imageUrl: string
   tags: string[]
   date: string
   featured: boolean
@@ -50,26 +50,6 @@ export function BlogEditor({ data, onChange }: BlogEditorProps) {
             BLOG ENTRY METADATA
           </span>
         </div>
-        <div className="flex items-center gap-6">
-          <div className="flex items-center gap-2">
-            <input 
-              type="checkbox" 
-              checked={data.featured} 
-              onChange={(e) => updateField('featured', e.target.checked)}
-              className="w-3.5 h-3.5 accent-gray-900"
-            />
-            <span className="text-[11px] font-mono font-bold text-gray-500 uppercase tracking-wider">FEATURED</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <input 
-              type="checkbox" 
-              checked={data.published} 
-              onChange={(e) => updateField('published', e.target.checked)}
-              className="w-3.5 h-3.5 accent-gray-900"
-            />
-            <span className="text-[11px] font-mono font-bold text-gray-500 uppercase tracking-wider">PUBLISHED</span>
-          </div>
-        </div>
       </div>
 
       <div className="space-y-8">
@@ -95,22 +75,22 @@ export function BlogEditor({ data, onChange }: BlogEditorProps) {
         </div>
 
         <InputField 
-          label="EXCERPT / SUMMARY"
-          value={data.excerpt}
-          onChange={(val) => updateField('excerpt', val)}
+          label="DESCRIPTION"
+          value={data.description}
+          onChange={(val) => updateField('description', val)}
           type="textarea"
           rows={3}
         />
 
         <InputField 
           label="COVER IMAGE URL"
-          value={data.image}
-          onChange={(val) => updateField('image', val)}
+          value={data.imageUrl}
+          onChange={(val) => updateField('imageUrl', val)}
           placeholder="https://..."
         />
 
         <div className="space-y-3">
-          <label className="text-[11px] font-mono font-normal uppercase tracking-[0.05em] text-gray-500 block">TAGS</label>
+          <label className="text-[11px] font-mono font-normal uppercase tracking-[0.05em] text-gray-500 block">TAGS / CATEGORIES</label>
           <div className="flex flex-wrap gap-2">
             {data.tags.map((tag) => (
               <Badge key={tag} variant="tag" className="flex items-center gap-2 pr-1">
@@ -145,7 +125,6 @@ export function BlogEditor({ data, onChange }: BlogEditorProps) {
           onChange={(val) => updateField('content', val)}
           type="textarea"
           rows={20}
-          className="font-mono text-[13px] leading-relaxed"
         />
       </div>
     </div>

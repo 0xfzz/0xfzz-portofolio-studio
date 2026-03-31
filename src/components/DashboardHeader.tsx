@@ -5,7 +5,7 @@ import { RefreshCw, GitBranch, AlertCircle, CheckCircle } from 'lucide-react'
 import { useDashboard } from '@/context/DashboardContext'
 
 export function DashboardHeader() {
-  const { gitStatus, refreshStatus, isDiffOpen, setIsDiffOpen } = useDashboard()
+  const { gitStatus, refreshStatus, isDiffOpen, setIsDiffOpen, diffCount } = useDashboard()
 
   return (
     <header className="flex justify-end items-center px-6 h-[52px] bg-white border-b border-gray-300 shrink-0">
@@ -17,7 +17,7 @@ export function DashboardHeader() {
           DIFF
         </span>
         <span className="bg-gray-900 text-white text-[11px] font-mono font-normal px-2 rounded-[19px] h-[17px] min-w-[30px] flex items-center justify-center leading-none">
-          12
+          {diffCount}
         </span>
       </button>
     </header>

@@ -122,7 +122,7 @@ export function GitIntegrationManager() {
         <SectionHeader icon={GitBranch} title="SYNC STATUS" />
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
           <div className="flex items-center gap-5">
-            <div className="p-3 bg-white border border-gray-200 rounded-[2px] shadow-sm">
+            <div className="p-3 bg-white border border-gray-200 rounded-[2px]">
               <GitBranch className="w-6 h-6 text-[#111]" />
             </div>
             <div className="space-y-1.5">
@@ -140,7 +140,7 @@ export function GitIntegrationManager() {
 
           <div className="flex flex-col items-end gap-2 shrink-0">
               <span className="text-[10px] font-mono font-bold uppercase tracking-widest text-gray-400">TARGET BRANCH</span>
-              <div className="flex items-center gap-2 bg-white px-3 py-1.5 rounded-[2px] border border-gray-200 shadow-sm">
+              <div className="flex items-center gap-2 bg-white px-3 py-1.5 rounded-[2px] border border-gray-200">
                   <MonitorPlay className="w-3.5 h-3.5 text-gray-400" />
                   <span className="font-mono text-[12px] font-medium text-gray-900">{branch || 'main'}</span>
               </div>
@@ -248,7 +248,7 @@ export function GitIntegrationManager() {
       </div>
 
       {/* FLOATING ACTION BAR */}
-      <div className={`fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 py-6 px-10 lg:px-12 z-30 flex justify-center shadow-[0_-4px_20px_rgba(0,0,0,0.03)] transition-all duration-300 ${isDiffOpen ? 'blur-sm grayscale-[0.5] opacity-80 pointer-events-none' : ''}`}>
+      <div className={`fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 py-6 px-10 lg:px-12 z-30 flex justify-center transition-all duration-300 ${isDiffOpen ? 'blur-sm grayscale-[0.5] opacity-80 pointer-events-none' : ''}`}>
         <div className="w-full flex items-center justify-between pl-[240px]">
             
             <div className="flex items-center gap-3">
@@ -291,7 +291,7 @@ export function GitIntegrationManager() {
               className="w-[207px] h-[42px] bg-gray-800 text-white text-[12px] font-mono font-bold tracking-widest hover:bg-black transition-colors rounded-none shadow-none flex items-center justify-center gap-3 disabled:opacity-50"
             >
                 {saving && <RefreshCw className="w-3.5 h-3.5 animate-spin" />}
-                {saving ? 'SAVING...' : 'COMMIT CHANGES'}
+                {saving ? 'SAVING...' : 'SAVE LOCALLY'}
             </button>
             </div>
 

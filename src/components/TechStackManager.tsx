@@ -188,7 +188,7 @@ export function TechStackManager() {
       {/* Floating Action Bar */}
       <div className="fixed bottom-12 right-12 flex items-center gap-4 z-50">
         {status === 'success' && (
-          <div className="bg-gray-900 text-white px-6 py-3 border border-gray-800 text-[11px] font-mono font-bold uppercase tracking-[0.2em] shadow-lg rounded-[2px] animate-in fade-in slide-in-from-bottom-2">
+          <div className="bg-gray-900 text-white px-6 py-3 border border-gray-800 text-[11px] font-mono font-bold uppercase tracking-[0.2em] rounded-[2px] animate-in fade-in slide-in-from-bottom-2">
             CHANGES SAVED LOCALLY
           </div>
         )}
@@ -204,7 +204,7 @@ export function TechStackManager() {
           className="w-[207px] h-[42px] bg-[#333235] text-[#FCF8F9] rounded-none text-[12px] font-mono font-bold tracking-widest hover:bg-gray-800 transition-all flex items-center justify-center shadow-none disabled:opacity-50"
         >
           {saving ? <RefreshCw className="w-4 h-4 animate-spin mr-3" /> : null}
-          {saving ? 'SAVING...' : 'COMMIT CHANGES'}
+          {saving ? 'SAVING...' : 'SAVE LOCALLY'}
         </button>
       </div>
     </div>
