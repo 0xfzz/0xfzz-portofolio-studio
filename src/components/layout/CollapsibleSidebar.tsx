@@ -23,7 +23,7 @@ export function CollapsibleSidebar({
   return (
     <div
       className={cn(
-        "relative flex flex-col h-full bg-[#fafafa] border-r border-gray-200 transition-all duration-300 ease-in-out",
+        "relative flex flex-col h-full bg-[#fafafa] border-r border-gray-200 transition-all duration-300 ease-in-out shrink-0",
         isCollapsed ? "w-12" : "w-[400px]",
         className
       )}

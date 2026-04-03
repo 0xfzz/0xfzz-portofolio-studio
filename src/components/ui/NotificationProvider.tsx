@@ -19,7 +19,7 @@ export function NotificationProviderUI() {
   return (
     <>
       {/* Toast Container */}
-      <div className="fixed top-6 right-6 z-[9999] flex flex-col gap-4 pointer-events-none w-full max-w-sm font-sans">
+      <div className="fixed top-8 left-1/2 -translate-x-1/2 z-[9999] flex flex-col gap-3 pointer-events-none w-full max-w-sm font-sans items-center">
         {toasts.map((toast) => (
           <ToastItem key={toast.id} toast={toast} onRemove={removeToast} />
         ))}
@@ -95,33 +95,33 @@ export function NotificationProviderUI() {
 
 function ToastItem({ toast, onRemove }: { toast: ToastType; onRemove: (id: string) => void }) {
   const icons = {
-    success: <CheckCircle className="w-5 h-5 text-green-600" />,
-    error: <AlertCircle className="w-5 h-5 text-[#991b1b]" />,
-    warning: <AlertTriangle className="w-5 h-5 text-amber-600" />,
-    info: <Info className="w-5 h-5 text-gray-900" />,
+    success: <CheckCircle className="w-5 h-5 text-white/90" />,
+    error: <AlertCircle className="w-5 h-5 text-white/90" />,
+    warning: <AlertTriangle className="w-5 h-5 text-white/90" />,
+    info: <Info className="w-5 h-5 text-white/90" />,
   }
 
-  const borderStyles = {
-    success: 'border-l-[4px] border-l-green-600',
-    error: 'border-l-[4px] border-l-[#991b1b]',
-    warning: 'border-l-[4px] border-l-amber-600',
-    info: 'border-l-[4px] border-l-gray-900',
+  const backgroundStyles = {
+    success: 'bg-emerald-600 border-emerald-700 shadow-emerald-900/10',
+    error: 'bg-rose-600 border-rose-700 shadow-rose-900/10',
+    warning: 'bg-amber-500 border-amber-600 shadow-amber-900/10',
+    info: 'bg-sky-600 border-sky-700 shadow-sky-900/10',
   }
 
   return (
-    <div className={`pointer-events-auto flex items-center gap-4 w-full px-6 py-5 rounded-none border border-gray-200 bg-white shadow-xl ${borderStyles[toast.type]} transition-all animate-in slide-in-from-right duration-300`}>
+    <div className={`pointer-events-auto flex items-center gap-4 w-full px-5 py-4 rounded-none border shadow-2xl ${backgroundStyles[toast.type]} transition-all animate-in slide-in-from-top-full duration-300`}>
       <div className="flex-shrink-0">{icons[toast.type]}</div>
       <div className="flex-1 min-w-0">
-        <div className="text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1">{toast.type}</div>
-        <p className="text-[11px] font-bold text-gray-900 leading-tight tracking-[0.05em] uppercase font-sans">
+        <div className="text-[10px] font-bold text-white/60 lowercase tracking-wider mb-0.5 leading-none opacity-80">{toast.type}</div>
+        <p className="text-[13px] font-medium text-white leading-tight transition-all font-sans">
           {toast.message}
         </p>
       </div>
       <button
         onClick={() => onRemove(toast.id)}
-        className="flex-shrink-0 p-1 hover:bg-gray-100 transition-colors"
+        className="flex-shrink-0 p-1.5 hover:bg-white/10 transition-colors rounded-none"
       >
-        <X className="w-4 h-4 text-gray-400" />
+        <X className="w-4 h-4 text-white/70" />
       </button>
     </div>
   )

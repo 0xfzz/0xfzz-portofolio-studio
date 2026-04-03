@@ -40,7 +40,7 @@ export default function DashboardRootLayout({
       <DashboardProvider>
         <div className="flex min-h-screen bg-white font-sans text-[#1a1a1a]">
           <Sidebar />
-          <div className="flex-1 flex flex-col relative">
+          <div className="flex-1 flex flex-col relative min-w-0 overflow-hidden">
             {children}
           </div>
         </div>
