@@ -1,9 +1,19 @@
 'use client'
 
 import React, { useState, useEffect } from 'react'
-import { Plus, Trash2, Cpu, Users, Wrench, RefreshCw, AlertCircle } from 'lucide-react'
-import { InputField } from './ui/InputField'
-import { Badge } from './ui/Badge'
+import { 
+  Plus, Trash2, Cpu, Users, Wrench, RefreshCw, AlertCircle, 
+  Layers, Database, Cloud, Shield, Gauge, BarChart, Code2, 
+  Terminal, Globe, Server, HardDrive, Smartphone, Layout, 
+  Palette, Search, Lock, Zap, Settings, Activity, Infinity
+} from 'lucide-react'
+import { InputField } from '@/components/ui/InputField'
+import { Badge } from '@/components/ui/Badge'
+
+interface Expertise {
+  title: string
+  icon: string
+}
 
 interface TechStack {
   title: string
@@ -13,6 +23,7 @@ interface TechStack {
     soft: string[]
     tools: string[]
   }
+  expertise: Expertise[]
 }
 
 const EMPTY_TECH_STACK: TechStack = {
@@ -22,8 +33,33 @@ const EMPTY_TECH_STACK: TechStack = {
     hard: [],
     soft: [],
     tools: []
-  }
+  },
+  expertise: []
 }
+
+const ICON_OPTIONS = [
+  { name: 'Layers', Icon: Layers },
+  { name: 'Database', Icon: Database },
+  { name: 'Cloud', Icon: Cloud },
+  { name: 'Shield', Icon: Shield },
+  { name: 'Gauge', Icon: Gauge },
+  { name: 'BarChart', Icon: BarChart },
+  { name: 'Code2', Icon: Code2 },
+  { name: 'Terminal', Icon: Terminal },
+  { name: 'Cpu', Icon: Cpu },
+  { name: 'Globe', Icon: Globe },
+  { name: 'Server', Icon: Server },
+  { name: 'HardDrive', Icon: HardDrive },
+  { name: 'Smartphone', Icon: Smartphone },
+  { name: 'Layout', Icon: Layout },
+  { name: 'Palette', Icon: Palette },
+  { name: 'Search', Icon: Search },
+  { name: 'Lock', Icon: Lock },
+  { name: 'Zap', Icon: Zap },
+  { name: 'Settings', Icon: Settings },
+  { name: 'Activity', Icon: Activity },
+  { name: 'Infinity', Icon: Infinity },
+]
 
 export function TechStackManager() {
   const [loading, setLoading] = useState(true)
@@ -49,7 +85,8 @@ export function TechStackManager() {
           hard: Array.isArray(data.skills?.hard) ? data.skills.hard : [],
           soft: Array.isArray(data.skills?.soft) ? data.skills.soft : [],
           tools: Array.isArray(data.skills?.tools) ? data.skills.tools : []
-        }
+        },
+        expertise: Array.isArray(data.expertise) ? data.expertise : []
       })
     } catch (err) {
       console.warn('Failed to fetch tech stack, using empty state', err)
@@ -103,6 +140,28 @@ export function TechStackManager() {
         [category]: newList
       }
     })
+  }
+
+  const addExpertise = () => {
+    if (!config) return
+    setConfig({
+      ...config,
+      expertise: [...config.expertise, { title: '', icon: 'Layers' }]
+    })
+  }
+
+  const updateExpertise = (index: number, field: keyof Expertise, value: string) => {
+    if (!config) return
+    const newExpertise = [...config.expertise]
+    newExpertise[index] = { ...newExpertise[index], [field]: value }
+    setConfig({ ...config, expertise: newExpertise })
+  }
+
+  const removeExpertise = (index: number) => {
+    if (!config) return
+    const newExpertise = [...config.expertise]
+    newExpertise.splice(index, 1)
+    setConfig({ ...config, expertise: newExpertise })
   }
 
   if (loading) return (
@@ -183,6 +242,80 @@ export function TechStackManager() {
             </div>
           </div>
         ))}
+      </div>
+
+      {/* Expertise Section */}
+      <div className="bg-[#fafafa] border border-gray-200 p-8 lg:p-10 space-y-8">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <Layers className="w-4 h-4 text-gray-400" />
+            <span className="text-[14px] font-sans font-semibold text-gray-900 uppercase tracking-widest">
+              CORE EXPERTISE
+            </span>
+          </div>
+          <button 
+            onClick={addExpertise}
+            className="flex items-center gap-2 text-[11px] font-mono font-bold uppercase tracking-widest text-gray-400 hover:text-gray-900 transition-colors"
+          >
+            <Plus className="w-3.5 h-3.5" />
+            Add Expertise
+          </button>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-6">
+          {config.expertise.map((item, idx) => (
+            <div key={idx} className="bg-white border border-gray-200 p-6 space-y-6 relative group">
+              <button 
+                onClick={() => removeExpertise(idx)}
+                className="absolute top-4 right-4 text-gray-300 hover:text-red-500 transition-colors opacity-0 group-hover:opacity-100"
+              >
+                <Trash2 className="w-3.5 h-3.5" />
+              </button>
+
+              <InputField 
+                label="EXPERTISE TITLE"
+                value={item.title}
+                onChange={(v) => updateExpertise(idx, 'title', v)}
+                placeholder="e.g. Microservices"
+              />
+
+              <div className="space-y-3">
+                <label className="text-[11px] font-mono font-normal uppercase tracking-[0.05em] text-gray-500">
+                  SELECT ICON
+                </label>
+                <div className="grid grid-cols-7 gap-2">
+                  {ICON_OPTIONS.map(({ name, Icon }) => (
+                    <button
+                      key={name}
+                      onClick={() => updateExpertise(idx, 'icon', name)}
+                      className={`flex items-center justify-center p-2 border transition-all ${
+                        item.icon === name 
+                          ? 'border-gray-900 bg-gray-900 text-white shadow-sm' 
+                          : 'border-gray-100 hover:border-gray-300 text-gray-400'
+                      }`}
+                      title={name}
+                    >
+                      <Icon className="w-4 h-4" />
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </div>
+          ))}
+
+          {config.expertise.length === 0 && (
+            <div className="col-span-full py-12 border border-dashed border-gray-200 flex flex-col items-center justify-center text-gray-400">
+              <Layers className="w-8 h-8 mb-3 opacity-20" />
+              <span className="text-[11px] font-mono font-semibold uppercase tracking-[0.2em]">No expertise defined</span>
+              <button 
+                onClick={addExpertise}
+                className="mt-4 text-[10px] bg-gray-900 text-white px-4 py-2 font-mono font-bold uppercase tracking-widest hover:bg-gray-800 transition-colors"
+              >
+                Add first item
+              </button>
+            </div>
+          )}
+        </div>
       </div>
 
       {/* Floating Action Bar */}

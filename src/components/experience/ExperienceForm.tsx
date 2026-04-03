@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Trash2, Plus, GripVertical } from 'lucide-react'
-import { InputField } from './ui/InputField'
-import { Badge } from './ui/Badge'
+import { InputField } from '@/components/ui/InputField'
+import { Badge } from '@/components/ui/Badge'
 import {
   DndContext,
   closestCenter,
@@ -24,6 +24,7 @@ interface ExperienceData {
   company: string
   role: string
   period: string
+  location: string
   description: string[]
   tags: string[]
 }
@@ -195,6 +196,13 @@ export function ExperienceForm({ data, onChange }: ExperienceFormProps) {
             />
           </div>
         </div>
+        <InputField
+          label="LOCATION"
+          value={data.location || ''}
+          onChange={(v) => updateField('location', v)}
+          horizontal
+          placeholder="e.g. Yogyakarta, Indonesia"
+        />
       </div>
 
       {/* Tags */}

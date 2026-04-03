@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
-import { DataTable } from './ui/DataTable'
-import { Badge } from './ui/Badge'
-import { Button } from './ui/Button'
+import { DataTable } from '@/components/ui/DataTable'
+import { Badge } from '@/components/ui/Badge'
+import { Button } from '@/components/ui/Button'
 import { useNotification } from '@/context/NotificationContext'
 import Link from 'next/link'
 

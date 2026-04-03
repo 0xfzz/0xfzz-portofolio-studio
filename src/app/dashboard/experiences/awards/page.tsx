@@ -1,9 +1,9 @@
 'use client'
 
 import React, { useState, useEffect } from 'react'
-import { ExperienceLayout } from '@/components/ExperienceLayout'
-import { AwardForm } from '@/components/AwardForm'
-import { AwardList } from '@/components/AwardList'
+import { ExperienceLayout } from '@/components/experience/ExperienceLayout'
+import { AwardForm } from '@/components/experience/AwardForm'
+import { AwardList } from '@/components/experience/AwardList'
 import { RefreshCw } from 'lucide-react'
 import { useNotification } from '@/context/NotificationContext'
 

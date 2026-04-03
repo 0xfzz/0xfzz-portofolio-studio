@@ -1,11 +1,11 @@
 'use client'
 
 import React, { useState, useEffect, use } from 'react'
-import { DashboardLayout } from '@/components/DashboardLayout'
-import { DashboardHeader } from '@/components/DashboardHeader'
-import { ProjectEditor } from '@/components/ProjectEditor'
-import { ProjectPreview } from '@/components/ProjectPreview'
-import { EditorFooter } from '@/components/EditorFooter'
+import { DashboardLayout } from '@/components/layout/DashboardLayout'
+import { DashboardHeader } from '@/components/layout/DashboardHeader'
+import { ProjectEditor } from '@/components/projects/ProjectEditor'
+import { ProjectPreview } from '@/components/projects/ProjectPreview'
+import { EditorFooter } from '@/components/editor/EditorFooter'
 import { useRouter } from 'next/navigation'
 import { useNotification } from '@/context/NotificationContext'
 
@@ -28,6 +28,8 @@ export default function ProjectEditPage({ params }: { params: Promise<{ slug: st
   const router = useRouter()
   const { showToast } = useNotification()
   const [loading, setLoading] = useState(true)
+  const [saving, setSaving] = useState(false)
+  const [lastSaved, setLastSaved] = useState<string>('Never saved')
   const [projectData, setProjectData] = useState<ProjectData | null>(null)
 
   useEffect(() => {
@@ -99,6 +101,7 @@ export default function ProjectEditPage({ params }: { params: Promise<{ slug: st
   const handleSave = async () => {
     if (!projectData) return
     try {
+      setSaving(true)
       // Reconstruct Markdown with Frontmatter
       const frontmatter = [
         '---',
@@ -124,9 +127,14 @@ export default function ProjectEditPage({ params }: { params: Promise<{ slug: st
 
       if (res.ok) {
         showToast('Project saved successfully', 'success')
+        const now = new Date();
+        setLastSaved(now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' }) + ' ' + (now.getMonth() + 1) + '/' + now.getDate())
       }
     } catch (err) {
       console.error('Save failed', err)
+      showToast('failed to save project', 'error')
+    } finally {
+      setSaving(false)
     }
   }
 
@@ -156,6 +164,9 @@ export default function ProjectEditPage({ params }: { params: Promise<{ slug: st
         {/* Footer */}
         <EditorFooter 
           onSave={handleSave} 
+          saving={saving}
+          lastSaved={lastSaved}
+          wordCount={projectData.content.split(/\s+/).filter(Boolean).length}
           published={projectData.published}
           onPublishedChange={(val) => setProjectData({ ...projectData, published: val })}
         />

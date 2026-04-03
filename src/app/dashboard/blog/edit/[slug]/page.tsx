@@ -1,11 +1,11 @@
 'use client'
 
 import React, { useState, useEffect, use } from 'react'
-import { DashboardLayout } from '@/components/DashboardLayout'
-import { DashboardHeader } from '@/components/DashboardHeader'
-import { BlogEditor } from '@/components/BlogEditor'
-import { BlogPreview } from '@/components/BlogPreview'
-import { EditorFooter } from '@/components/EditorFooter'
+import { DashboardLayout } from '@/components/layout/DashboardLayout'
+import { DashboardHeader } from '@/components/layout/DashboardHeader'
+import { BlogEditor } from '@/components/blog/BlogEditor'
+import { BlogPreview } from '@/components/blog/BlogPreview'
+import { EditorFooter } from '@/components/editor/EditorFooter'
 import { useRouter } from 'next/navigation'
 import { useNotification } from '@/context/NotificationContext'
 
@@ -26,6 +26,8 @@ export default function BlogEditPage({ params }: { params: Promise<{ slug: strin
   const router = useRouter()
   const { showToast } = useNotification()
   const [loading, setLoading] = useState(true)
+  const [saving, setSaving] = useState(false)
+  const [lastSaved, setLastSaved] = useState<string>('Never saved')
   const [blogData, setBlogData] = useState<BlogData | null>(null)
 
   useEffect(() => {
@@ -95,6 +97,7 @@ export default function BlogEditPage({ params }: { params: Promise<{ slug: strin
   const handleSave = async () => {
     if (!blogData) return
     try {
+      setSaving(true)
       // Reconstruct Markdown with Frontmatter
       const frontmatter = [
         '---',
@@ -118,9 +121,14 @@ export default function BlogEditPage({ params }: { params: Promise<{ slug: strin
 
       if (res.ok) {
         showToast('Blog post saved successfully', 'success')
+        const now = new Date();
+        setLastSaved(now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' }) + ' ' + (now.getMonth() + 1) + '/' + now.getDate())
       }
     } catch (err) {
       console.error('Save failed', err)
+      showToast('failed to save changes', 'error')
+    } finally {
+      setSaving(false)
     }
   }
 
@@ -150,6 +158,9 @@ export default function BlogEditPage({ params }: { params: Promise<{ slug: strin
         {/* Footer */}
         <EditorFooter 
           onSave={handleSave} 
+          saving={saving}
+          lastSaved={lastSaved}
+          wordCount={blogData.content.split(/\s+/).filter(Boolean).length}
           published={blogData.published}
           onPublishedChange={(val) => setBlogData({ ...blogData, published: val })}
         />

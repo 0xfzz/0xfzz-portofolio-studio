@@ -15,7 +15,7 @@ interface EditorFooterProps {
 export function EditorFooter({ 
   onSave, 
   saving = false, 
-  lastSaved = '2024-05-24 14:22:01 UTC',
+  lastSaved = 'Never saved',
   wordCount = 0,
   published = false,
   onPublishedChange

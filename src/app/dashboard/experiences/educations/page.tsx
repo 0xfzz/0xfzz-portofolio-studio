@@ -1,9 +1,9 @@
 'use client'
 
 import React, { useState, useEffect } from 'react'
-import { ExperienceLayout } from '@/components/ExperienceLayout'
-import { EducationForm } from '@/components/EducationForm'
-import { EducationList } from '@/components/EducationList'
+import { ExperienceLayout } from '@/components/experience/ExperienceLayout'
+import { EducationForm } from '@/components/experience/EducationForm'
+import { EducationList } from '@/components/experience/EducationList'
 import { RefreshCw } from 'lucide-react'
 import { useNotification } from '@/context/NotificationContext'
 

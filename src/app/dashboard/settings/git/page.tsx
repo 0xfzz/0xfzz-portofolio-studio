@@ -1,5 +1,5 @@
 import { PageLayout } from '@/components/ui/PageLayout'
-import { GitIntegrationManager } from '@/components/GitIntegrationManager'
+import { GitIntegrationManager } from '@/components/git/GitIntegrationManager'
 
 export default function GitIntegrationPage() {
   return (

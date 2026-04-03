@@ -1,11 +1,12 @@
 import React, { useState } from 'react'
-import { InputField } from './ui/InputField'
+import { InputField } from '@/components/ui/InputField'
 
 interface EducationData {
   institution: string
   degree: string
   period: string
   location: string
+  description?: string
 }
 
 interface EducationFormProps {
@@ -83,6 +84,16 @@ export function EducationForm({ data, onChange }: EducationFormProps) {
           onChange={(v) => updateField('location', v)}
           horizontal
           placeholder="e.g. Yogyakarta, Indonesia"
+        />
+
+        <InputField 
+          label="DESCRIPTION"
+          value={data.description || ''}
+          onChange={(v) => updateField('description', v)}
+          type="textarea"
+          rows={3}
+          horizontal
+          placeholder="e.g. GPA: 3.9/4.0. Focused on Cybersecurity..."
         />
       </div>
     </div>

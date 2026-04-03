@@ -1,7 +1,7 @@
 'use client'
 
 import React from 'react'
-import { TechStackManager } from '@/components/TechStackManager'
+import { TechStackManager } from '@/components/tech-stack/TechStackManager'
 import { PageLayout } from '@/components/ui/PageLayout'
 
 export default function TechStackPage() {

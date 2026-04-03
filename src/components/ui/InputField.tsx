@@ -7,7 +7,7 @@ interface InputFieldProps {
   label: string
   value: string
   onChange: (value: string) => void
-  type?: 'text' | 'textarea' | 'password'
+  type?: 'text' | 'textarea' | 'password' | 'number'
   rows?: number
   className?: string
   placeholder?: string

@@ -1,9 +1,9 @@
 'use client'
 
 import React, { useState, useEffect } from 'react'
-import { Box, Eye, Layers, FileText, Briefcase, RefreshCw, CheckCircle, AlertCircle } from 'lucide-react'
-import { InputField } from './ui/InputField'
-import { Switch } from './ui/Switch'
+import { Box, Eye, Layers, FileText, Briefcase, RefreshCw, CheckCircle, AlertCircle, Home, MessageSquare, Image, Settings } from 'lucide-react'
+import { InputField } from '@/components/ui/InputField'
+import { Switch } from '@/components/ui/Switch'
 
 export function SiteConfigManager() {
   const [loading, setLoading] = useState(true)
@@ -14,7 +14,19 @@ export function SiteConfigManager() {
     metadata: { title: '', name: '', description: '' },
     summary: '',
     visibility: { projects: true, experiences: true, blog: true, contact: true, techStack: true },
-    hero: { title: '', subtitle: '' },
+    navigation: {
+      home: 'Home',
+      projects: 'Projects',
+      experiences: 'Experiences',
+      blog: 'Blog',
+      contact: 'Contact'
+    },
+    hero: { title: '', subtitle: '', image: '' },
+    footer: {
+      copyright: '',
+      tagline: '',
+      contactCount: 0
+    },
     pages: {
       projects: { title: '', subtitle: '' },
       blog: { title: '', subtitle: '' },
@@ -41,7 +53,9 @@ export function SiteConfigManager() {
         ...data,
         metadata: { ...EMPTY_CONFIG.metadata, ...data.metadata },
         visibility: { ...EMPTY_CONFIG.visibility, ...data.visibility },
+        navigation: { ...EMPTY_CONFIG.navigation, ...data.navigation },
         hero: { ...EMPTY_CONFIG.hero, ...data.hero },
+        footer: { ...EMPTY_CONFIG.footer, ...data.footer },
         pages: {
           ...EMPTY_CONFIG.pages,
           ...data.pages,
@@ -102,6 +116,20 @@ export function SiteConfigManager() {
           [field]: value
         }
       }
+    }))
+  }
+
+  const updateNavigation = (field: string, value: string) => {
+    setConfig((prev: any) => ({
+      ...prev,
+      navigation: { ...prev.navigation, [field]: value }
+    }))
+  }
+
+  const updateFooter = (field: string, value: string | number) => {
+    setConfig((prev: any) => ({
+      ...prev,
+      footer: { ...prev.footer, [field]: value }
     }))
   }
 
@@ -206,6 +234,46 @@ export function SiteConfigManager() {
           <InputField label="SUBTITLE (Tagline)" value={config.hero?.subtitle || ''} onChange={(v) => {
             setConfig((prev: any) => ({ ...prev, hero: { ...prev.hero, subtitle: v } }))
           }} />
+          <InputField label="HERO IMAGE URL" value={config.hero?.image || ''} onChange={(v) => {
+            setConfig((prev: any) => ({ ...prev, hero: { ...prev.hero, image: v } }))
+          }} placeholder="https://..." />
+        </div>
+      </div>
+
+      {/* Navigation Section */}
+      <div className="bg-[#fafafa] border border-gray-200 p-8 lg:p-10 space-y-8">
+        <div className="flex items-center gap-3">
+          <Settings className="w-4 h-4 text-gray-400" />
+          <span className="text-[14px] font-sans font-semibold text-gray-900 uppercase tracking-widest">
+            NAVIGATION LABELS
+          </span>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
+          <InputField label="HOME" value={config.navigation?.home || ''} onChange={(v) => updateNavigation('home', v)} />
+          <InputField label="PROJECTS" value={config.navigation?.projects || ''} onChange={(v) => updateNavigation('projects', v)} />
+          <InputField label="EXPERIENCES" value={config.navigation?.experiences || ''} onChange={(v) => updateNavigation('experiences', v)} />
+          <InputField label="BLOG" value={config.navigation?.blog || ''} onChange={(v) => updateNavigation('blog', v)} />
+          <InputField label="CONTACT" value={config.navigation?.contact || ''} onChange={(v) => updateNavigation('contact', v)} />
+        </div>
+      </div>
+
+      {/* Footer Section */}
+      <div className="bg-[#fafafa] border border-gray-200 p-8 lg:p-10 space-y-8">
+        <div className="flex items-center gap-3">
+          <Box className="w-4 h-4 text-gray-400" />
+          <span className="text-[14px] font-sans font-semibold text-gray-900 uppercase tracking-widest">
+            FOOTER CONFIGURATION
+          </span>
+        </div>
+        <div className="space-y-6">
+          <InputField label="COPYRIGHT TEXT" value={config.footer?.copyright || ''} onChange={(v) => updateFooter('copyright', v)} />
+          <InputField label="TAGLINE" value={config.footer?.tagline || ''} onChange={(v) => updateFooter('tagline', v)} />
+          <InputField 
+            label="CONTACT COUNT" 
+            value={config.footer?.contactCount?.toString() || '0'} 
+            onChange={(v) => updateFooter('contactCount', parseInt(v) || 0)} 
+            type="number"
+          />
         </div>
       </div>
 

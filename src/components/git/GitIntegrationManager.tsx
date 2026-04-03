@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react'
 import { GitBranch, MonitorPlay, Eye, EyeOff, Info, Layers, User, AlertCircle, RefreshCw } from 'lucide-react'
-import { InputField } from './ui/InputField'
+import { InputField } from '@/components/ui/InputField'
 import { useDashboard } from '@/context/DashboardContext'
 import { useNotification } from '@/context/NotificationContext'
 

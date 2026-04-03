@@ -3,8 +3,8 @@
 import React, { ReactNode } from 'react'
 import { Plus } from 'lucide-react'
 import Link from 'next/link'
-import { DashboardLayout } from '@/components/DashboardLayout'
-import { DashboardHeader } from '@/components/DashboardHeader'
+import { DashboardLayout } from '@/components/layout/DashboardLayout'
+import { DashboardHeader } from '@/components/layout/DashboardHeader'
 
 interface PageLayoutProps {
   title: string
@@ -17,20 +17,20 @@ interface PageLayoutProps {
   maxWidth?: string
 }
 
-export function PageLayout({ 
-  title, 
-  subtitle, 
-  newEntryHref, 
+export function PageLayout({
+  title,
+  subtitle,
+  newEntryHref,
   newEntryLabel = 'NEW_ENTRY',
   onNewEntry,
-  actions, 
+  actions,
   children,
   maxWidth = 'max-w-[1440px]'
 }: PageLayoutProps) {
   return (
     <DashboardLayout>
       <DashboardHeader />
-      
+
       <main className="flex-1 p-10 lg:p-12 font-sans scrollbar-hide bg-white">
         <div className="w-full">
           {/* Page Header */}
@@ -44,7 +44,7 @@ export function PageLayout({
               </h1>
             </div>
             {onNewEntry && (
-              <button 
+              <button
                 onClick={onNewEntry}
                 className="bg-[#2d2d2d] text-white px-5 py-2.5 text-[12px] font-mono font-normal uppercase tracking-widest hover:bg-[#1a1a1a] transition-colors rounded-none flex items-center gap-2"
               >
@@ -52,7 +52,7 @@ export function PageLayout({
               </button>
             )}
             {newEntryHref && !onNewEntry && (
-              <Link 
+              <Link
                 href={newEntryHref}
                 className="bg-[#2d2d2d] text-white px-5 py-2.5 text-[12px] font-mono font-normal uppercase tracking-widest hover:bg-[#1a1a1a] transition-colors rounded-none flex items-center gap-2"
               >

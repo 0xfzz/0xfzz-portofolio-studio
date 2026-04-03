@@ -2,10 +2,8 @@
 
 import React, { ReactNode } from 'react'
 import { Plus } from 'lucide-react'
-import { DashboardLayout } from './DashboardLayout'
-import { DashboardHeader } from './DashboardHeader'
-import { ActionsCard } from './ActionsCard'
-import { PageLayout } from './ui/PageLayout'
+import { ActionsCard } from '@/components/shared/ActionsCard'
+import { PageLayout } from '@/components/ui/PageLayout'
 
 interface ExperienceLayoutProps {
   title: string

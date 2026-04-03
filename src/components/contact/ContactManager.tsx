@@ -2,8 +2,8 @@
 
 import React, { useState, useEffect } from 'react'
 import { Plus, Trash2, GripVertical, History, Box } from 'lucide-react'
-import { InputField } from './ui/InputField'
-import { Button } from './ui/Button'
+import { InputField } from '@/components/ui/InputField'
+import { Button } from '@/components/ui/Button'
 import {
   DndContext,
   closestCenter,

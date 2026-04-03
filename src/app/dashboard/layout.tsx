@@ -1,12 +1,12 @@
 'use client'
 
 import React from 'react'
-import { Sidebar } from '@/components/Sidebar'
+import { Sidebar } from '@/components/layout/Sidebar'
 import { DashboardProvider, useDashboard } from '@/context/DashboardContext'
 import { NotificationProvider } from '@/context/NotificationContext'
 import { NotificationProviderUI } from '@/components/ui/NotificationProvider'
 import { Dialog, DialogPanel, DialogBackdrop } from '@headlessui/react'
-import { DiffViewer } from '@/components/DiffViewer'
+import { DiffViewer } from '@/components/editor/DiffViewer'
 
 /**
  * Global Diff Modal for the dashboard

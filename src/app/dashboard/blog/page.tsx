@@ -2,7 +2,7 @@
 
 import React from 'react'
 import { PageLayout } from '@/components/ui/PageLayout'
-import { BlogTable } from '@/components/BlogTable'
+import { BlogTable } from '@/components/blog/BlogTable'
 
 export default function BlogPage() {
   return (

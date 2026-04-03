@@ -1,11 +1,11 @@
 'use client'
 
 import React from 'react'
-import { DashboardLayout } from '@/components/DashboardLayout'
-import { DashboardHeader } from '@/components/DashboardHeader'
-import { ActionsCard } from '@/components/ActionsCard'
-import { StatusBar } from '@/components/StatusBar'
-import { DiffViewer } from '@/components/DiffViewer'
+import { DashboardLayout } from '@/components/layout/DashboardLayout'
+import { DashboardHeader } from '@/components/layout/DashboardHeader'
+import { ActionsCard } from '@/components/shared/ActionsCard'
+import { StatusBar } from '@/components/shared/StatusBar'
+import { DiffViewer } from '@/components/editor/DiffViewer'
 
 export default function DashboardPage() {
   return (

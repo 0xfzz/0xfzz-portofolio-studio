@@ -2,9 +2,9 @@
 
 import React from 'react'
 import { Monitor, Tablet, Smartphone, ExternalLink, Code } from 'lucide-react'
-import { MarkdownRenderer } from './MarkdownRenderer'
-import { Badge } from './ui/Badge'
-import { Button } from './ui/Button'
+import { MarkdownRenderer } from '@/components/editor/MarkdownRenderer'
+import { Badge } from '@/components/ui/Badge'
+import { Button } from '@/components/ui/Button'
 
 interface ProjectPreviewProps {
   data: {

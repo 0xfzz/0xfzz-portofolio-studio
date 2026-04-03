@@ -1,6 +1,6 @@
 import React from 'react'
 import { PageLayout } from '@/components/ui/PageLayout'
-import { SiteConfigManager } from '@/components/SiteConfigManager'
+import { SiteConfigManager } from '@/components/site-config/SiteConfigManager'
 
 export default function SiteConfigPage() {
   return (

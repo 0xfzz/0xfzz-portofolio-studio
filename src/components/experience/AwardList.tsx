@@ -1,9 +1,9 @@
 'use client'
 
 import React from 'react'
-import { SortableList, SortableListItem } from './SortableList'
+import { SortableList, SortableListItem } from '@/components/editor/SortableList'
 
-interface EducationListProps {
+interface AwardListProps {
   items: any[]
   activeIndex: number
   onEdit: (index: number) => void
@@ -12,18 +12,18 @@ interface EducationListProps {
   onReorder: (newItems: any[]) => void
 }
 
-export function EducationList({
+export function AwardList({
   items,
   activeIndex,
   onEdit,
   onDelete,
   onAdd,
   onReorder,
-}: EducationListProps) {
+}: AwardListProps) {
   const listItems: SortableListItem[] = items.map((node, idx) => ({
-    id: String(idx) + '_' + (node.institution || ''),
-    primary: node.institution || 'Untitled Institution',
-    secondary: `${node.degree || ''} | ${node.period || ''}`,
+    id: String(idx) + '_' + (node.title || ''),
+    primary: node.title || 'Untitled Award',
+    secondary: `${node.date || ''} — ${node.issuer || ''}`,
   }))
 
   const handleSelect = (id: string) => {
@@ -48,7 +48,7 @@ export function EducationList({
 
   return (
     <SortableList
-      label="EDUCATIONS"
+      label="AWARDS"
       items={listItems}
       activeId={activeId}
       onSelect={handleSelect}

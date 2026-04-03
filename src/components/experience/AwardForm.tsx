@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { InputField } from './ui/InputField'
+import { InputField } from '@/components/ui/InputField'
 
 interface AwardData {
   title: string

@@ -2,7 +2,7 @@
 
 import React from 'react'
 import { PageLayout } from '@/components/ui/PageLayout'
-import { ProjectTable } from '@/components/ProjectTable'
+import { ProjectTable } from '@/components/projects/ProjectTable'
 
 export default function ProjectsPage() {
   return (

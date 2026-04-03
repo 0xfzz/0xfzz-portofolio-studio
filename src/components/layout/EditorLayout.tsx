@@ -1,8 +1,8 @@
 'use client'
 
 import React from 'react'
-import { DashboardHeader } from '@/components/DashboardHeader'
-import { EditorFooter } from '@/components/EditorFooter'
+import { DashboardHeader } from '@/components/layout/DashboardHeader'
+import { EditorFooter } from '@/components/editor/EditorFooter'
 
 interface EditorLayoutProps {
   children: React.ReactNode

@@ -1,31 +1,29 @@
 import React from 'react'
 import { Plus } from 'lucide-react'
-import { InputField } from './ui/InputField'
-import { Button } from './ui/Button'
-import { Badge } from './ui/Badge'
+import { InputField } from '@/components/ui/InputField'
+import { Button } from '@/components/ui/Button'
+import { Badge } from '@/components/ui/Badge'
 import { slugify } from '@/utils/string'
 
-interface ProjectData {
+interface BlogData {
   title: string
   slug: string
   description: string
   imageUrl: string
+  tags: string[]
   date: string
-  technologies: string[]
-  sourceUrl: string
-  liveUrl?: string
   featured: boolean
   published: boolean
   content: string
 }
 
-interface ProjectEditorProps {
-  data: ProjectData
-  onChange: (newData: ProjectData) => void
+interface BlogEditorProps {
+  data: BlogData
+  onChange: (newData: BlogData) => void
 }
 
-export function ProjectEditor({ data, onChange }: ProjectEditorProps) {
-  const updateField = (field: keyof ProjectData, value: any) => {
+export function BlogEditor({ data, onChange }: BlogEditorProps) {
+  const updateField = (field: keyof BlogData, value: any) => {
     const newData = { ...data, [field]: value }
     if (field === 'title') {
       newData.slug = slugify(value)
@@ -33,7 +31,7 @@ export function ProjectEditor({ data, onChange }: ProjectEditorProps) {
     onChange(newData)
   }
 
-  const toggleArrayItem = (category: 'technologies', item: string) => {
+  const toggleArrayItem = (category: 'tags', item: string) => {
     const list = [...data[category]]
     const index = list.indexOf(item)
     if (index > -1) list.splice(index, 1)
@@ -49,7 +47,7 @@ export function ProjectEditor({ data, onChange }: ProjectEditorProps) {
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
           </svg>
           <span className="text-[14px] font-sans font-semibold text-gray-900 uppercase tracking-widest">
-            PROJECT METADATA
+            BLOG ENTRY METADATA
           </span>
         </div>
       </div>
@@ -81,11 +79,9 @@ export function ProjectEditor({ data, onChange }: ProjectEditorProps) {
           value={data.description}
           onChange={(val) => updateField('description', val)}
           type="textarea"
-          rows={4}
+          rows={3}
         />
-      </div>
 
-      <div className="space-y-8 border-t border-gray-100 pt-10">
         <InputField 
           label="COVER IMAGE URL"
           value={data.imageUrl}
@@ -93,26 +89,13 @@ export function ProjectEditor({ data, onChange }: ProjectEditorProps) {
           placeholder="https://..."
         />
 
-        <div className="grid grid-cols-2 gap-6">
-          <InputField 
-            label="SOURCE CODE URL"
-            value={data.sourceUrl}
-            onChange={(val) => updateField('sourceUrl', val)}
-          />
-          <InputField 
-            label="LIVE DEMO URL (OPTIONAL)"
-            value={data.liveUrl || ''}
-            onChange={(val) => updateField('liveUrl', val)}
-          />
-        </div>
-
         <div className="space-y-3">
-          <label className="text-[11px] font-mono font-normal uppercase tracking-[0.05em] text-gray-500 block">TECHNOLOGIES</label>
+          <label className="text-[11px] font-mono font-normal uppercase tracking-[0.05em] text-gray-500 block">TAGS / CATEGORIES</label>
           <div className="flex flex-wrap gap-2">
-            {data.technologies.map((tech) => (
-              <Badge key={tech} variant="tag" className="flex items-center gap-2 pr-1">
-                {tech}
-                <button onClick={() => toggleArrayItem('technologies', tech)} className="hover:text-red-500">
+            {data.tags.map((tag) => (
+              <Badge key={tag} variant="tag" className="flex items-center gap-2 pr-1">
+                {tag}
+                <button onClick={() => toggleArrayItem('tags', tag)} className="hover:text-red-500">
                   <Plus className="w-3 h-3 rotate-45" />
                 </button>
               </Badge>
@@ -120,13 +103,13 @@ export function ProjectEditor({ data, onChange }: ProjectEditorProps) {
             <div className="flex gap-2 items-center min-w-[200px]">
                <input 
                  type="text" 
-                 placeholder="Add tech..." 
+                 placeholder="Add tag..." 
                  className="flex-1 bg-transparent border-b border-gray-200 focus:border-gray-900 outline-none text-[12px] font-mono py-1"
                  onKeyDown={(e) => {
                    if (e.key === 'Enter') {
                      const val = (e.currentTarget as HTMLInputElement).value.trim()
                      if (val) {
-                       toggleArrayItem('technologies', val);
+                       toggleArrayItem('tags', val);
                        (e.currentTarget as HTMLInputElement).value = ''
                      }
                    }
