@@ -6,6 +6,7 @@ import { DashboardHeader } from '@/components/layout/DashboardHeader'
 import { BlogEditor } from '@/components/blog/BlogEditor'
 import { BlogPreview } from '@/components/blog/BlogPreview'
 import { EditorFooter } from '@/components/editor/EditorFooter'
+import { CollapsibleSidebar } from '@/components/layout/CollapsibleSidebar'
 import { useRouter } from 'next/navigation'
 import { useNotification } from '@/context/NotificationContext'
 
@@ -31,6 +32,10 @@ export default function BlogNewPage() {
   })
 
   const handleSave = async () => {
+    if (!blogData.slug) {
+      showToast('Please provide a slug', 'error')
+      return
+    }
     try {
       setSaving(true)
       // Reconstruct Markdown with Frontmatter
@@ -70,14 +75,22 @@ export default function BlogNewPage() {
 
   return (
     <DashboardLayout>
-      <div className="flex flex-col h-screen overflow-hidden">
+      <div className="flex flex-col h-screen overflow-hidden bg-white">
         <DashboardHeader />
         <div className="flex flex-1 overflow-hidden">
-          {/* Editor Side */}
-          <BlogEditor data={blogData} onChange={setBlogData} />
+          {/* Metadata Sidebar */}
+          <CollapsibleSidebar title="BLOG METADATA">
+            <BlogEditor 
+              data={blogData} 
+              onChange={(newData: any) => setBlogData(newData)} 
+            />
+          </CollapsibleSidebar>
           
-          {/* Preview Side */}
-          <BlogPreview data={blogData} />
+          {/* Rich Editor Area */}
+          <BlogPreview 
+            data={blogData} 
+            onContentChange={(content) => setBlogData({ ...blogData, content })}
+          />
         </div>
 
         {/* Footer */}

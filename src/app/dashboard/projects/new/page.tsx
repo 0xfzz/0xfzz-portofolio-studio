@@ -6,6 +6,7 @@ import { DashboardHeader } from '@/components/layout/DashboardHeader'
 import { ProjectEditor } from '@/components/projects/ProjectEditor'
 import { ProjectPreview } from '@/components/projects/ProjectPreview'
 import { EditorFooter } from '@/components/editor/EditorFooter'
+import { CollapsibleSidebar } from '@/components/layout/CollapsibleSidebar'
 import { useRouter } from 'next/navigation'
 import { useNotification } from '@/context/NotificationContext'
 
@@ -79,17 +80,22 @@ export default function ProjectNewPage() {
 
   return (
     <DashboardLayout>
-      <div className="flex flex-col h-screen overflow-hidden">
+      <div className="flex flex-col h-screen overflow-hidden bg-white">
         <DashboardHeader />
         <div className="flex flex-1 overflow-hidden">
-          {/* Editor Side */}
-          <ProjectEditor 
-            data={projectData} 
-            onChange={(newData: any) => setProjectData(newData)} 
-          />
+          {/* Metadata Sidebar */}
+          <CollapsibleSidebar title="PROJECT METADATA">
+            <ProjectEditor 
+              data={projectData} 
+              onChange={(newData: any) => setProjectData(newData)} 
+            />
+          </CollapsibleSidebar>
           
-          {/* Preview Side */}
-          <ProjectPreview data={projectData} />
+          {/* Rich Editor Area */}
+          <ProjectPreview 
+            data={projectData} 
+            onContentChange={(content) => setProjectData({ ...projectData, content })}
+          />
         </div>
 
         {/* Footer */}

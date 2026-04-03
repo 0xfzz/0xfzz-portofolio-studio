@@ -6,6 +6,7 @@ import { DashboardHeader } from '@/components/layout/DashboardHeader'
 import { BlogEditor } from '@/components/blog/BlogEditor'
 import { BlogPreview } from '@/components/blog/BlogPreview'
 import { EditorFooter } from '@/components/editor/EditorFooter'
+import { CollapsibleSidebar } from '@/components/layout/CollapsibleSidebar'
 import { useRouter } from 'next/navigation'
 import { useNotification } from '@/context/NotificationContext'
 
@@ -80,7 +81,7 @@ export default function BlogEditPage({ params }: { params: Promise<{ slug: strin
         slug: slug,
         description: metadata.description || metadata.excerpt || '',
         imageUrl: metadata.image || '',
-        tags: Array.isArray(metadata.tags) ? metadata.tags : (Array.isArray(metadata.technologies) ? metadata.technologies : []),
+        tags: Array.isArray(metadata.tags) ? metadata.tags : [],
         date: metadata.date || today,
         featured: !!metadata.featured,
         published: !!metadata.published,
@@ -142,17 +143,24 @@ export default function BlogEditPage({ params }: { params: Promise<{ slug: strin
 
   return (
     <DashboardLayout>
-      <div className="flex flex-col h-screen overflow-hidden">
+      <div className="flex flex-col h-screen overflow-hidden bg-white">
         <DashboardHeader />
         <div className="flex flex-1 overflow-hidden">
-          {/* Editor Side */}
-          <BlogEditor 
-            data={blogData} 
-            onChange={(newData) => setBlogData(newData)} 
-          />
+          {/* Metadata Sidebar */}
+          <CollapsibleSidebar title="BLOG METADATA">
+            <BlogEditor 
+              data={blogData} 
+              onChange={(newData) => setBlogData(newData)} 
+            />
+          </CollapsibleSidebar>
           
-          {/* Preview Side */}
-          <BlogPreview data={blogData} />
+          {/* Rich Editor Area */}
+          <BlogPreview 
+            key={blogData.slug}
+            data={blogData} 
+            onContentChange={(content) => setBlogData({ ...blogData, content })}
+          />
+
         </div>
 
         {/* Footer */}

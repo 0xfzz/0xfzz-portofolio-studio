@@ -36,3 +36,133 @@ body {
   --color-sand-100: #F5F3F0;
   --color-surface: #FAFAFA;
 }
+
+/* MDXEditor Original Styles Restoration */
+.refined-markdown-content {
+  color: #444;
+  line-height: 1.7;
+}
+
+.refined-markdown-content h1 {
+  @apply text-3xl font-bold tracking-tight leading-tight mt-10 mb-6 first:mt-0;
+  color: #111;
+}
+
+.refined-markdown-content h2 {
+  @apply text-xl font-semibold tracking-tight mt-10 mb-4 border-t border-[#e8e8e8] pt-8 first:mt-0 first:pt-0 first:border-0 font-sans;
+  color: #111;
+}
+
+.refined-markdown-content h3 {
+  @apply text-base font-semibold mt-8 mb-3 font-sans;
+  color: #222;
+}
+
+.refined-markdown-content h4 {
+  @apply text-sm font-semibold tracking-wide mt-6 mb-2 font-sans;
+  color: #333;
+}
+
+.refined-markdown-content p {
+  @apply text-base mb-5 leading-relaxed last:mb-0;
+  color: #444;
+}
+
+/* Lists and Bullets */
+.refined-markdown-content ul, 
+.refined-markdown-content ol {
+  @apply my-6 space-y-3 pl-0;
+}
+
+.refined-markdown-content ul {
+  @apply list-none;
+}
+
+.refined-markdown-content ol {
+  @apply list-decimal pl-6;
+}
+
+.refined-markdown-content li {
+  @apply text-base leading-relaxed relative;
+}
+
+/* Custom Bullet Point matching original design */
+.refined-markdown-content ul li {
+  @apply pl-6;
+}
+
+.refined-markdown-content ul li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.65em;
+  @apply w-1.5 h-1.5 rounded-full bg-[#999];
+}
+
+
+.refined-markdown-content blockquote {
+  @apply border-l-4 border-[#ddd] pl-6 my-8 italic;
+  color: #666;
+}
+
+.refined-markdown-content hr {
+  @apply my-10 border-t border-[#eee];
+}
+
+.refined-markdown-content strong {
+  @apply font-semibold;
+  color: #111;
+}
+
+/* Inline Elements */
+.refined-markdown-content a {
+  @apply text-[#0366d6] underline decoration-[#0366d6]/30 underline-offset-4 hover:decoration-[#0366d6] transition-colors font-medium;
+}
+
+.refined-markdown-content code:not(pre code) {
+  @apply px-1.5 py-0.5 rounded text-[13px] font-mono mx-0.5 align-middle border border-[#ece0e3];
+  color: #c7254e;
+  background-color: #f9f2f4;
+}
+
+/* Table Restoration */
+.refined-markdown-content table {
+  @apply w-full border-collapse text-left text-sm my-8 border border-[#e8e8e8] rounded-md overflow-hidden;
+}
+
+.refined-markdown-content thead {
+  @apply bg-[#f8f8f8] border-b border-[#e8e8e8];
+}
+
+.refined-markdown-content th {
+  @apply px-5 py-4 text-[11px] font-bold uppercase tracking-wider font-sans;
+  color: #555;
+}
+
+.refined-markdown-content td {
+  @apply px-5 py-4 text-sm border-b border-[#f0f0f0] last:border-0 leading-relaxed;
+  color: #444;
+}
+
+.refined-markdown-content tr {
+  @apply hover:bg-[#fafafa] transition-colors;
+}
+
+/* Editor Specific Overrides */
+.mdx-editor-wrapper {
+  background-color: transparent !important;
+}
+
+/* Hide MDXEditor internal paddings so our container handles it */
+.mdx-editor-wrapper [class*="_contentEditable_"] {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+.mdx-editor-wrapper [role="toolbar"] {
+  @apply sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-gray-100 flex items-center gap-1 shadow-sm mb-10;
+}
+
+

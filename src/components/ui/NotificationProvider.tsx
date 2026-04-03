@@ -57,7 +57,7 @@ export function NotificationProviderUI() {
                       {confirmState?.variant === 'destructive' ? <AlertTriangle className="w-8 h-8" /> : <Info className="w-8 h-8" />}
                     </div>
                     <div>
-                      <div className="text-[11px] font-mono font-bold text-gray-400 uppercase tracking-[0.2em] mb-2 block">CONFIRMATION</div>
+                      <div className="text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-2 block">CONFIRMATION</div>
                       <Dialog.Title as="h3" className="text-[20px] font-bold leading-tight text-gray-900 mb-3 tracking-tight">
                         {confirmState?.title}
                       </Dialog.Title>
@@ -112,7 +112,7 @@ function ToastItem({ toast, onRemove }: { toast: ToastType; onRemove: (id: strin
     <div className={`pointer-events-auto flex items-center gap-4 w-full px-6 py-5 rounded-none border border-gray-200 bg-white shadow-xl ${borderStyles[toast.type]} transition-all animate-in slide-in-from-right duration-300`}>
       <div className="flex-shrink-0">{icons[toast.type]}</div>
       <div className="flex-1 min-w-0">
-        <div className="text-[9px] font-mono font-bold text-gray-400 uppercase tracking-[0.2em] mb-1">{toast.type}</div>
+        <div className="text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1">{toast.type}</div>
         <p className="text-[11px] font-bold text-gray-900 leading-tight tracking-[0.05em] uppercase font-sans">
           {toast.message}
         </p>

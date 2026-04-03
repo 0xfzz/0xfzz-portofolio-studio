@@ -41,19 +41,8 @@ export function BlogEditor({ data, onChange }: BlogEditorProps) {
 
   return (
     <div className="flex-1 overflow-y-auto p-10 space-y-10 font-sans scrollbar-hide border-r border-[#e5e7eb] bg-[#fafafa]">
-      <div className="flex items-center justify-between mb-8">
-        <div className="flex items-center gap-3">
-          <svg className="w-4 h-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
-          </svg>
-          <span className="text-[14px] font-sans font-semibold text-gray-900 uppercase tracking-widest">
-            BLOG ENTRY METADATA
-          </span>
-        </div>
-      </div>
-
       <div className="space-y-8">
-        <InputField 
+        <InputField
           label="TITLE"
           value={data.title}
           onChange={(val) => updateField('title', val)}
@@ -61,12 +50,12 @@ export function BlogEditor({ data, onChange }: BlogEditorProps) {
         />
 
         <div className="grid grid-cols-2 gap-6">
-          <InputField 
+          <InputField
             label="SLUG"
             value={data.slug}
             onChange={(val) => updateField('slug', val)}
           />
-          <InputField 
+          <InputField
             label="PUBLISHED DATE"
             value={data.date}
             onChange={(val) => updateField('date', val)}
@@ -74,7 +63,7 @@ export function BlogEditor({ data, onChange }: BlogEditorProps) {
           />
         </div>
 
-        <InputField 
+        <InputField
           label="DESCRIPTION"
           value={data.description}
           onChange={(val) => updateField('description', val)}
@@ -82,7 +71,7 @@ export function BlogEditor({ data, onChange }: BlogEditorProps) {
           rows={3}
         />
 
-        <InputField 
+        <InputField
           label="COVER IMAGE URL"
           value={data.imageUrl}
           onChange={(val) => updateField('imageUrl', val)}
@@ -101,32 +90,26 @@ export function BlogEditor({ data, onChange }: BlogEditorProps) {
               </Badge>
             ))}
             <div className="flex gap-2 items-center min-w-[200px]">
-               <input 
-                 type="text" 
-                 placeholder="Add tag..." 
-                 className="flex-1 bg-transparent border-b border-gray-200 focus:border-gray-900 outline-none text-[12px] font-mono py-1"
-                 onKeyDown={(e) => {
-                   if (e.key === 'Enter') {
-                     const val = (e.currentTarget as HTMLInputElement).value.trim()
-                     if (val) {
-                       toggleArrayItem('tags', val);
-                       (e.currentTarget as HTMLInputElement).value = ''
-                     }
-                   }
-                 }}
-               />
+              <input
+                type="text"
+                placeholder="Add tag..."
+                className="flex-1 bg-transparent border-b border-gray-200 focus:border-gray-900 outline-none text-[12px] font-mono py-1"
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter') {
+                    const val = (e.currentTarget as HTMLInputElement).value.trim()
+                    if (val) {
+                      toggleArrayItem('tags', val);
+                      (e.currentTarget as HTMLInputElement).value = ''
+                    }
+                  }
+                }}
+              />
             </div>
           </div>
         </div>
 
-        <InputField 
-          label="MARKDOWN CONTENT (MAIN BODY)"
-          value={data.content}
-          onChange={(val) => updateField('content', val)}
-          type="textarea"
-          rows={20}
-        />
       </div>
     </div>
   )
 }
+

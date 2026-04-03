@@ -1,10 +1,8 @@
-'use client'
-
-import React from 'react'
-import { Monitor, Tablet, Smartphone, ExternalLink, Code } from 'lucide-react'
-import { MarkdownRenderer } from '@/components/editor/MarkdownRenderer'
 import { Badge } from '@/components/ui/Badge'
 import { Button } from '@/components/ui/Button'
+import RefinedEditor from '@/components/editor/RefinedEditor'
+import { PreviewWorkspace } from '@/components/editor/PreviewWorkspace'
+import { ExternalLink, Code } from 'lucide-react'
 
 interface ProjectPreviewProps {
   data: {
@@ -16,66 +14,61 @@ interface ProjectPreviewProps {
     technologies: string[]
     content: string
   }
+  onContentChange: (content: string) => void
 }
 
-export function ProjectPreview({ data }: ProjectPreviewProps) {
+export function ProjectPreview({ data, onContentChange }: ProjectPreviewProps) {
   return (
-    <div className="flex-1 overflow-y-auto bg-[#fafafa] flex flex-col scrollbar-hide">
-      {/* Preview Header */}
-      <div className="h-[60px] border-b border-[#f0f0f0] px-10 flex items-center justify-between bg-white shrink-0">
-        <span className="text-[12px] font-bold text-[#a0a0a0] uppercase tracking-wider">Preview</span>
-        <div className="flex items-center gap-4 text-[#a0a0a0]">
-          <Monitor className="w-4 h-4 cursor-pointer hover:text-[#1a1a1a]" />
-          <Tablet className="w-4 h-4 cursor-pointer hover:text-[#1a1a1a]" />
-          <Smartphone className="w-4 h-4 cursor-pointer hover:text-[#1a1a1a]" />
-        </div>
+    <PreviewWorkspace title="Live Editor">
+      {/* Project Hero */}
+      <div className="aspect-video bg-gray-900 rounded-lg overflow-hidden flex items-center justify-center relative border border-gray-100 shadow-2xl">
+        {data.imageUrl ? (
+          <img src={data.imageUrl} className="w-full h-full object-cover" alt="Preview" />
+        ) : (
+          <div className="text-white opacity-20 font-mono text-[12px] uppercase tracking-wider">Project Cover Image</div>
+        )}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
       </div>
 
-      {/* Preview Content */}
-      <div className="p-16 max-w-[800px] mx-auto w-full space-y-12 flex-1 pb-32">
-        {/* Project Hero */}
-        <div className="aspect-video bg-[#1a1a1a] rounded-sm overflow-hidden flex items-center justify-center relative border border-[#f0f0f0]">
-          {data.imageUrl ? (
-            <img src={data.imageUrl} className="w-full h-full object-cover" alt="Preview" />
-          ) : (
-             <div className="text-[#1a1a1a] opacity-20 font-mono text-[12px] uppercase tracking-wider">Image Preview Area</div>
-          )}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
+      <div className="space-y-10">
+        <div>
+          <div className="flex flex-wrap items-center gap-2 mb-6">
+            {data.technologies.map(tech => (
+              <Badge key={tech} variant="tag" className="bg-gray-100 text-gray-600 border-none px-3 py-1">{tech}</Badge>
+            ))}
+          </div>
+          <h1 className="text-[56px] font-sans font-black text-gray-900 tracking-tight leading-[1.1] mb-8">
+            {data.title || 'Project Title'}
+          </h1>
+          <div className="text-[20px] text-gray-500 font-medium leading-relaxed max-w-[700px]">
+            {data.description || 'Edit the description in the sidebar...'}
+          </div>
         </div>
 
-        <div className="space-y-10">
-          <div>
-            <div className="flex items-center gap-2 mb-4">
-               {data.technologies.map(tech => (
-                 <Badge key={tech} variant="tag">{tech}</Badge>
-               ))}
-            </div>
-            <h1 className="text-[48px] font-bold text-[#1a1a1a] tracking-tight leading-none mb-6">
-              {data.title || 'Untitled Project'}
-            </h1>
-            <div className="text-[18px] text-[#888] font-medium leading-relaxed max-w-[600px] prose-slate">
-              <MarkdownRenderer content={data.description || 'Project description goes here...'} />
-            </div>
-          </div>
+        <div className="flex items-center gap-4 pt-4">
+          <a href={data.liveUrl || '#'} target="_blank" rel="noopener noreferrer">
+            <Button variant="primary" className="h-12 px-8 rounded-full">
+              <ExternalLink className="w-4 h-4 mr-2" /> Live Demo
+            </Button>
+          </a>
+          <a href={data.sourceUrl || '#'} target="_blank" rel="noopener noreferrer">
+            <Button variant="outline" className="h-12 px-8 rounded-full border-gray-200">
+              <Code className="w-4 h-4 mr-2" /> Source Code
+            </Button>
+          </a>
+        </div>
 
-          <div className="flex items-center gap-6 pt-4">
-            <a href={data.liveUrl || '#'}>
-              <Button variant="primary">
-                <ExternalLink className="w-4 h-4" /> Live Demo
-              </Button>
-            </a>
-            <a href={data.sourceUrl || '#'}>
-              <Button variant="outline">
-                <Code className="w-4 h-4" /> Source Code
-              </Button>
-            </a>
+        <div className="pt-20 border-t border-gray-100">
+          <div className="mb-8">
+            <span className="text-[13px] font-bold text-gray-400">Project Content</span>
           </div>
-
-          <div className="space-y-12 pt-16 border-t border-[#eee]">
-            <MarkdownRenderer content={data.content} />
-          </div>
+          <RefinedEditor
+            markdown={data.content}
+            onChange={onContentChange}
+          />
         </div>
       </div>
-    </div>
+    </PreviewWorkspace>
   )
 }
+

@@ -5,7 +5,7 @@ import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
 import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism'
-import { Mermaid } from './Mermaid'
+import { InteractiveMermaid } from './InteractiveMermaid'
 
 interface MarkdownRendererProps {
   content: string
@@ -78,7 +78,7 @@ export function MarkdownRenderer({ content, placeholder = '*Start writing to see
           const codeContent = String(children).replace(/\n$/, '')
 
           if (language === 'mermaid') {
-            return <Mermaid chart={codeContent} />
+            return <InteractiveMermaid chart={codeContent} minHeight="400px" />
           }
 
           if (!inline && codeContent.includes('\n')) {

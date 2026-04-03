@@ -18,7 +18,7 @@ export function ActionsCard({
 }: ActionsCardProps) {
   return (
     <div className="bg-white border border-gray-200 p-8 rounded-[2px] transition-all">
-      <span className="text-[11px] font-mono uppercase tracking-[0.2em] text-gray-400 font-semibold block mb-6">
+      <span className="text-[10px] font-bold text-gray-400 uppercase tracking-wider block mb-6">
         ACTIONS
       </span>
       
