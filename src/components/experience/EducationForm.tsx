@@ -23,10 +23,10 @@ export function EducationForm({ data, onChange }: EducationFormProps) {
     <div className="bg-white border border-gray-200 p-10 w-full animate-in fade-in slide-in-from-bottom-4 duration-500">
       {/* Card Header */}
       <div className="mb-12">
-        <h2 className="text-[20px] font-sans font-bold text-gray-900 tracking-tight leading-none mb-3">
+        <h2 className="text-[20px] font-sans font-bold text-gray-900 leading-none mb-3">
           {data.institution || 'Untitled Institution'}
         </h2>
-        <span className="text-[12px] font-mono font-medium text-gray-500 tracking-wider block uppercase">
+        <span className="text-[12px] font-mono font-medium text-gray-500 block uppercase">
           {data.degree || 'N/A'} | {data.period || 'N/A'}
         </span>
       </div>
@@ -50,7 +50,7 @@ export function EducationForm({ data, onChange }: EducationFormProps) {
         />
 
         <div className="flex items-center gap-4">
-          <label className="text-[11px] font-mono font-normal uppercase tracking-[0.05em] text-gray-500 w-48 shrink-0">
+          <label className="text-[11px] font-mono font-normal uppercase] text-gray-500 w-48 shrink-0">
             PERIOD
           </label>
           <div className="flex items-center gap-4 w-full">
@@ -64,7 +64,7 @@ export function EducationForm({ data, onChange }: EducationFormProps) {
               className="flex-1"
               placeholder="START (e.g. 2023)"
             />
-            <span className="text-[11px] font-mono font-normal tracking-[0.05em] text-gray-500 px-2 shrink-0 uppercase">TO</span>
+            <span className="text-[11px] font-mono font-normal] text-gray-500 px-2 shrink-0 uppercase">TO</span>
             <InputField 
               label=""
               value={(data.period || '').split(' - ')[1] || ''}

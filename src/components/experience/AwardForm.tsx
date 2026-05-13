@@ -22,10 +22,10 @@ export function AwardForm({ data, onChange }: AwardFormProps) {
     <div className="bg-white border border-gray-200 p-10 w-full animate-in fade-in slide-in-from-bottom-4 duration-500">
       {/* Card Header */}
       <div className="mb-12">
-        <h2 className="text-[20px] font-sans font-bold text-gray-900 tracking-tight leading-none mb-3">
+        <h2 className="text-[20px] font-sans font-bold text-gray-900 leading-none mb-3">
           {data.title || 'Untitled Award'}
         </h2>
-        <span className="text-[12px] font-mono font-medium text-gray-500 tracking-wider block uppercase">
+        <span className="text-[12px] font-mono font-medium text-gray-500 block uppercase">
           {data.date || 'No Date'} — {data.issuer || 'No Issuer'}
         </span>
       </div>

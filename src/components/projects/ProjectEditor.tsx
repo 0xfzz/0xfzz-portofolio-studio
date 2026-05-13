@@ -49,7 +49,7 @@ export function ProjectEditor({ data, onChange }: ProjectEditorProps) {
           label="TITLE"
           value={data.title}
           onChange={(val) => updateField('title', val)}
-          className="font-semibold text-[18px] text-gray-900 tracking-tight"
+          className="font-semibold text-[18px] text-gray-900"
         />
 
         <div className="grid grid-cols-2 gap-6">
@@ -97,7 +97,7 @@ export function ProjectEditor({ data, onChange }: ProjectEditorProps) {
         </div>
 
         <div className="space-y-3">
-          <label className="text-[11px] font-mono font-normal uppercase tracking-[0.05em] text-gray-500 block">TECHNOLOGIES</label>
+          <label className="text-[11px] font-mono font-normal uppercase] text-gray-500 block">TECHNOLOGIES</label>
           <div className="flex flex-wrap gap-2">
             {data.technologies.map((tech) => (
               <Badge key={tech} variant="tag" className="flex items-center gap-2 pr-1">

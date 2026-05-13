@@ -24,7 +24,7 @@ export function EditorFooter({
 
   return (
     <div className="h-[60px] bg-[#fafafa] border-t border-gray-200 px-10 flex items-center justify-between shrink-0 text-gray-500 z-50">
-      <div className="flex items-center gap-12 text-[11px] font-mono tracking-widest uppercase">
+      <div className="flex items-center gap-12 text-[11px] font-mono uppercase">
         <div className="flex items-center gap-2">
           <span className="text-gray-400">LAST SAVED:</span>
           <span className="font-semibold text-gray-600">{lastSaved}</span>
@@ -42,7 +42,7 @@ export function EditorFooter({
             onClick={() => setShowStatusMenu(!showStatusMenu)}
             className="h-[32px] bg-white border border-gray-300 px-4 flex items-center justify-between gap-6 group hover:border-gray-400 transition-colors rounded-[2px] min-w-[120px]"
           >
-            <span className={`text-[11px] font-sans font-bold uppercase tracking-widest ${published ? 'text-green-600' : 'text-gray-600'}`}>
+            <span className={`text-[11px] font-sans font-bold uppercase ${published ? 'text-green-600' : 'text-gray-600'}`}>
               {published ? 'PUBLISHED' : 'DRAFT'}
             </span>
             <ChevronDown className="w-3.5 h-3.5 text-gray-400 group-hover:text-gray-600 transition-colors" />
@@ -57,7 +57,7 @@ export function EditorFooter({
                 }}
                 className="w-full text-left px-4 py-3 hover:bg-gray-50 flex items-center justify-between group transition-colors"
               >
-                <span className="text-[11px] font-mono font-bold text-gray-500 uppercase tracking-widest group-hover:text-gray-900">DRAFT</span>
+                <span className="text-[11px] font-mono font-bold text-gray-500 uppercase group-hover:text-gray-900">DRAFT</span>
                 {!published && <Check className="w-3.5 h-3.5 text-gray-900" />}
               </button>
               <button 
@@ -67,7 +67,7 @@ export function EditorFooter({
                 }}
                 className="w-full text-left px-4 py-3 hover:bg-gray-50 flex items-center justify-between group transition-colors border-t border-gray-50"
               >
-                <span className="text-[11px] font-mono font-bold text-green-600 uppercase tracking-widest group-hover:text-green-700">PUBLISHED</span>
+                <span className="text-[11px] font-mono font-bold text-green-600 uppercase group-hover:text-green-700">PUBLISHED</span>
                 {published && <Check className="w-3.5 h-3.5 text-green-600" />}
               </button>
             </div>
@@ -82,7 +82,7 @@ export function EditorFooter({
         <button 
           onClick={onSave}
           disabled={saving || !onSave}
-          className="h-[32px] bg-[#2d2d2d] text-white px-8 text-[11px] font-sans font-medium uppercase tracking-wider hover:bg-[#1a1a1a] transition-colors rounded-[2px] flex items-center gap-2 disabled:opacity-50"
+          className="h-[32px] bg-[#2d2d2d] text-white px-8 text-[11px] font-sans font-medium uppercase hover:bg-[#1a1a1a] transition-colors rounded-[2px] flex items-center gap-2 disabled:opacity-50"
         >
           {saving ? <RefreshCw className="w-3 h-3 animate-spin" /> : null}
           {saving ? 'SAVING...' : 'SAVE CHANGES'}

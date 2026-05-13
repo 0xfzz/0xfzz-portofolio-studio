@@ -142,14 +142,14 @@ export function ExperienceForm({ data, onChange }: ExperienceFormProps) {
       {/* Card Header */}
       <div className="flex items-start justify-between mb-12">
         <div>
-          <h2 className="text-[20px] font-sans font-bold text-gray-900 tracking-tight leading-none mb-3">
+          <h2 className="text-[20px] font-sans font-bold text-gray-900 leading-none mb-3">
             {data.role || 'Untitled Role'} @ {data.company || 'Unknown Company'}
           </h2>
-          <span className="text-[12px] font-mono font-medium text-gray-500 tracking-wider block uppercase">
+          <span className="text-[12px] font-mono font-medium text-gray-500 block uppercase">
             {data.period || 'Period Not Specified'}
           </span>
         </div>
-        <Badge variant="success" className="px-2 py-0.5 text-[11px] font-mono font-bold tracking-widest">ENTRY ENABLED</Badge>
+        <Badge variant="success" className="px-2 py-0.5 text-[11px] font-mono font-bold">ENTRY ENABLED</Badge>
       </div>
 
       {/* Form Fields */}
@@ -169,7 +169,7 @@ export function ExperienceForm({ data, onChange }: ExperienceFormProps) {
           placeholder="e.g. Software Engineer"
         />
         <div className="flex items-center gap-4">
-          <label className="text-[11px] font-mono font-normal uppercase tracking-[0.05em] text-gray-500 w-48 shrink-0">
+          <label className="text-[11px] font-mono font-normal uppercase] text-gray-500 w-48 shrink-0">
             PERIOD
           </label>
           <div className="flex items-center gap-4 w-full">
@@ -183,7 +183,7 @@ export function ExperienceForm({ data, onChange }: ExperienceFormProps) {
               className="flex-1"
               placeholder="START (e.g. JUN 2023)"
             />
-            <span className="text-[11px] font-mono font-normal tracking-[0.05em] text-gray-500 px-2 shrink-0 uppercase">TO</span>
+            <span className="text-[11px] font-mono font-normal] text-gray-500 px-2 shrink-0 uppercase">TO</span>
             <InputField
               label=""
               value={(data.period || '').split(' - ')[1] || ''}
@@ -207,7 +207,7 @@ export function ExperienceForm({ data, onChange }: ExperienceFormProps) {
 
       {/* Tags */}
       <div className="mb-14">
-        <label className="text-[11px] font-mono font-normal uppercase tracking-[0.05em] text-gray-500 block mb-4">
+        <label className="text-[11px] font-mono font-normal uppercase] text-gray-500 block mb-4">
           TECHNOLOGIES & TAGS
         </label>
         <div className="flex flex-wrap gap-2">
@@ -239,10 +239,10 @@ export function ExperienceForm({ data, onChange }: ExperienceFormProps) {
       {/* Achievements & Responsibilities — DnD */}
       <div className="mt-14">
         <div className="flex items-center justify-between mb-5">
-          <span className="text-[11px] font-mono font-normal uppercase tracking-[0.05em] text-gray-500">
+          <span className="text-[11px] font-mono font-normal uppercase] text-gray-500">
             ACHIEVEMENTS & RESPONSIBILITIES
           </span>
-          <span className="text-[11px] font-mono font-normal text-gray-400 uppercase tracking-widest flex items-center gap-2">
+          <span className="text-[11px] font-mono font-normal text-gray-400 uppercase flex items-center gap-2">
             <GripVertical className="w-3 h-3" /> drag to reorder · [{descItems.length} items]
           </span>
         </div>
@@ -265,7 +265,7 @@ export function ExperienceForm({ data, onChange }: ExperienceFormProps) {
 
         <button
           onClick={addDescription}
-          className="w-full border border-dashed border-gray-300 text-gray-500 hover:text-gray-700 hover:border-gray-400 py-4 flex items-center justify-center gap-2 font-mono text-[11px] font-normal tracking-[0.1em] uppercase transition-all rounded-none bg-[#fafafa]"
+          className="w-full border border-dashed border-gray-300 text-gray-500 hover:text-gray-700 hover:border-gray-400 py-4 flex items-center justify-center gap-2 font-mono text-[11px] font-normal] uppercase transition-all rounded-none bg-[#fafafa]"
         >
           <Plus className="w-4 h-4" />
           ADD DESCRIPTION LINE

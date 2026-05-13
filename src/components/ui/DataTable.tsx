@@ -105,7 +105,7 @@ export function DataTable<T extends { id: string | number }>({
             <select
               value={activeFilters[filter.key] || 'ALL'}
               onChange={(e) => handleFilterChange(filter.key, e.target.value)}
-              className="w-full appearance-none bg-transparent border-none outline-none text-[11px] font-mono font-semibold uppercase tracking-widest text-gray-500 group-hover:text-gray-900 transition-colors cursor-pointer pr-8"
+              className="w-full appearance-none bg-transparent border-none outline-none text-[11px] font-mono font-semibold uppercase text-gray-500 group-hover:text-gray-900 transition-colors cursor-pointer pr-8"
             >
               <option value="ALL">ALL {filter.label}</option>
               {filter.options.map(opt => (
@@ -122,7 +122,7 @@ export function DataTable<T extends { id: string | number }>({
 
       {/* Pagination Footer */}
       <div className="flex items-center justify-between pt-6 border-t border-gray-200 mt-2">
-        <div className="text-[11px] font-mono font-semibold text-gray-400 uppercase tracking-widest">
+        <div className="text-[11px] font-mono font-semibold text-gray-400 uppercase">
           SHOWING {(currentPage - 1) * pageSize + 1}-{Math.min(currentPage * pageSize, filteredData.length)} OF {filteredData.length} ENTRIES | SYS_LOG: OK
         </div>
         

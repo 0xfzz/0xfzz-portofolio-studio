@@ -61,7 +61,7 @@ export function BlogTable() {
       render: (blog: any) => (
         <div className="flex items-center gap-3">
           <div className="w-1.5 h-1.5 rounded-full bg-gray-500" />
-          <span className="text-[14px] font-bold text-gray-900 tracking-tight truncate">{blog.title || 'Untitled'}</span>
+          <span className="text-[14px] font-bold text-gray-900 truncate">{blog.title || 'Untitled'}</span>
         </div>
       )
     },
@@ -81,7 +81,7 @@ export function BlogTable() {
       header: 'DATE',
       key: 'date',
       width: '15%',
-      render: (blog: any) => <span className="text-[11px] font-medium text-gray-400 font-mono tracking-widest uppercase">{blog.date || 'No Date'}</span>
+      render: (blog: any) => <span className="text-[11px] font-medium text-gray-400 font-mono uppercase">{blog.date || 'No Date'}</span>
     },
     {
       header: 'STATUS',
@@ -99,7 +99,7 @@ export function BlogTable() {
       width: '15%',
       className: 'text-right',
       render: (blog: any) => (
-        <div className="flex items-center justify-end gap-2.5 font-mono text-[11px] tracking-widest text-gray-600">
+        <div className="flex items-center justify-end gap-2.5 font-mono text-[11px] text-gray-600">
           <Link href={`/dashboard/blog/edit/${blog._slug}`} className="hover:text-gray-900 transition-colors uppercase">[EDIT]</Link>
           <button 
             onClick={() => handleDelete(blog)}

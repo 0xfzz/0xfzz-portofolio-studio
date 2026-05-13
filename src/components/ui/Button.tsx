@@ -14,7 +14,7 @@ export function Button({
   className = '', 
   ...props 
 }: ButtonProps) {
-  const baseStyles = 'font-sans font-medium uppercase tracking-wider transition-all flex items-center justify-center gap-2 rounded-sm'
+  const baseStyles = 'font-sans font-medium uppercase transition-all flex items-center justify-center gap-2 rounded-sm'
   
   const variants = {
     primary: 'bg-[#2d2d2d] text-white hover:bg-[#1a1a1a] border border-[#2d2d2d]',

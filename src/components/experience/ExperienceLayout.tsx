@@ -56,8 +56,8 @@ export function ExperienceLayout({
       <div className="pt-8 border-t border-gray-100 mb-20">
         <div className="flex items-center justify-between mb-8">
            <div className="flex flex-col gap-1">
-             <span className="text-[11px] font-mono text-gray-400 uppercase tracking-widest">Historical Data</span>
-             <h3 className="text-[18px] font-sans font-semibold text-gray-900 tracking-tight">HISTORY / ENTRIES</h3>
+             <span className="text-[11px] font-mono text-gray-400 uppercase">Historical Data</span>
+             <h3 className="text-[18px] font-sans font-semibold text-gray-900">HISTORY / ENTRIES</h3>
            </div>
         </div>
         {list}

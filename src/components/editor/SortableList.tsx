@@ -76,11 +76,11 @@ function ListRow({
       {/* Content */}
       <div className="flex-1 flex items-center justify-between p-5 px-4 cursor-pointer">
         <div className="flex-1 min-w-0">
-          <h3 className="text-[14px] font-sans font-bold tracking-tight text-gray-900 truncate">
+          <h3 className="text-[14px] font-sans font-bold text-gray-900 truncate">
             {item.primary}
           </h3>
           {item.secondary && (
-            <span className="text-[11px] font-mono font-medium text-gray-400 uppercase tracking-widest mt-0.5 block truncate">
+            <span className="text-[11px] font-mono font-medium text-gray-400 uppercase mt-0.5 block truncate">
               {item.secondary}
             </span>
           )}
@@ -88,7 +88,7 @@ function ListRow({
         <div className="flex items-center gap-4 opacity-0 group-hover:opacity-100 transition-opacity shrink-0 ml-3">
           <button
             onClick={(e) => { e.stopPropagation(); onDelete(); }}
-            className="text-[11px] font-mono font-semibold uppercase tracking-widest text-red-500 hover:underline"
+            className="text-[11px] font-mono font-semibold uppercase text-red-500 hover:underline"
           >
             DELETE
           </button>
@@ -167,12 +167,12 @@ export function SortableList({
   return (
     <div className="w-full pb-16 pt-8">
       <div className="flex items-center justify-between mb-4">
-        <span className="text-[11px] font-mono font-normal uppercase tracking-[0.05em] text-gray-500">
+        <span className="text-[11px] font-mono font-normal uppercase] text-gray-500">
           {label} [{items.length}]
         </span>
         <button
           onClick={onAdd}
-          className="flex items-center gap-2 text-[11px] font-mono font-bold text-gray-900 hover:text-gray-600 transition-colors uppercase tracking-widest"
+          className="flex items-center gap-2 text-[11px] font-mono font-bold text-gray-900 hover:text-gray-600 transition-colors uppercase"
         >
           <Plus className="w-3.5 h-3.5" /> ADD NEW
         </button>
@@ -181,7 +181,7 @@ export function SortableList({
       <div className="bg-white border border-gray-200 divide-y divide-gray-200 overflow-hidden">
         {items.length === 0 ? (
           <div className="p-10 text-center border border-dashed border-gray-200 bg-gray-50/30">
-            <span className="text-[12px] font-mono text-gray-400 uppercase tracking-widest">
+            <span className="text-[12px] font-mono text-gray-400 uppercase">
               No entries found. Click "Add New" to start.
             </span>
           </div>

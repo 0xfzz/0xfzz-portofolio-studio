@@ -8,7 +8,7 @@ export function MermaidCodeEditor({ code, language }: CodeBlockEditorProps) {
   return (
     <div className="flex flex-col gap-4 p-6 bg-gray-50/50 rounded-lg border border-gray-100 shadow-sm my-6">
       <div className="flex items-center justify-between">
-        <span className="text-[13px] font-bold text-gray-400 uppercase tracking-wider">Mermaid Diagram Code</span>
+        <span className="text-[13px] font-bold text-gray-400 uppercase">Mermaid Diagram Code</span>
         <div className="flex gap-1.5">
           <div className="w-2.5 h-2.5 rounded-full bg-red-400/20" />
           <div className="w-2.5 h-2.5 rounded-full bg-yellow-400/20" />
@@ -25,7 +25,7 @@ export function MermaidCodeEditor({ code, language }: CodeBlockEditorProps) {
 
       <div className="mt-8 border-t border-gray-100 pt-8">
         <div className="mb-6 flex items-center gap-3">
-          <span className="text-[13px] font-bold text-gray-400 uppercase tracking-wider">Live Diagram Preview</span>
+          <span className="text-[13px] font-bold text-gray-400 uppercase">Live Diagram Preview</span>
           <div className="h-px flex-1 bg-gray-50" />
         </div>
         

@@ -57,8 +57,8 @@ export function NotificationProviderUI() {
                       {confirmState?.variant === 'destructive' ? <AlertTriangle className="w-8 h-8" /> : <Info className="w-8 h-8" />}
                     </div>
                     <div>
-                      <div className="text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-2 block">CONFIRMATION</div>
-                      <Dialog.Title as="h3" className="text-[20px] font-bold leading-tight text-gray-900 mb-3 tracking-tight">
+                      <div className="text-[10px] font-bold text-gray-400 uppercase mb-2 block">CONFIRMATION</div>
+                      <Dialog.Title as="h3" className="text-[20px] font-bold leading-tight text-gray-900 mb-3">
                         {confirmState?.title}
                       </Dialog.Title>
                       <p className="text-[14px] text-gray-500 leading-relaxed font-medium">
@@ -71,14 +71,14 @@ export function NotificationProviderUI() {
                     <Button
                       variant="secondary"
                       onClick={() => handleConfirm(false)}
-                      className="px-8 h-12 text-[11px] font-sans font-bold uppercase tracking-widest border-2 border-gray-200"
+                      className="px-8 h-12 text-[11px] font-sans font-bold uppercase border-2 border-gray-200"
                     >
                       {confirmState?.cancelText || 'Cancel'}
                     </Button>
                     <Button
                       variant={confirmState?.variant === 'destructive' ? 'destructive' : 'primary'}
                       onClick={() => handleConfirm(true)}
-                      className={`px-10 h-12 text-[11px] font-sans font-bold uppercase tracking-widest ${confirmState?.variant === 'destructive' ? 'bg-[#991b1b]' : 'bg-gray-900'} text-white shadow-[4px_4px_0px_rgba(0,0,0,0.1)] hover:translate-y-[-2px] active:translate-y-[0px] transition-all`}
+                      className={`px-10 h-12 text-[11px] font-sans font-bold uppercase ${confirmState?.variant === 'destructive' ? 'bg-[#991b1b]' : 'bg-gray-900'} text-white shadow-[4px_4px_0px_rgba(0,0,0,0.1)] hover:translate-y-[-2px] active:translate-y-[0px] transition-all`}
                     >
                       {confirmState?.confirmText || 'Confirm'}
                     </Button>
@@ -112,7 +112,7 @@ function ToastItem({ toast, onRemove }: { toast: ToastType; onRemove: (id: strin
     <div className={`pointer-events-auto flex items-center gap-4 w-full px-5 py-4 rounded-none border shadow-2xl ${backgroundStyles[toast.type]} transition-all animate-in slide-in-from-top-full duration-300`}>
       <div className="flex-shrink-0">{icons[toast.type]}</div>
       <div className="flex-1 min-w-0">
-        <div className="text-[10px] font-bold text-white/60 lowercase tracking-wider mb-0.5 leading-none opacity-80">{toast.type}</div>
+        <div className="text-[10px] font-bold text-white/60 lowercase mb-0.5 leading-none opacity-80">{toast.type}</div>
         <p className="text-[13px] font-medium text-white leading-tight transition-all font-sans">
           {toast.message}
         </p>

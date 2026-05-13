@@ -136,7 +136,7 @@ export function DiffViewer() {
       {/* Top Header */}
       <div className="flex items-center justify-between px-6 py-4 border-b border-gray-200 bg-[#FAFAFA]">
         <div className="flex items-center gap-4">
-          <span className="font-semibold tracking-[0.2em] text-[#333] uppercase text-[11px]">Source Explorer</span>
+          <span className="font-semibold] text-[#333] uppercase text-[11px]">Source Explorer</span>
           <div className="flex items-center gap-3">
              <span className="bg-olive-500 text-white text-[9px] font-mono font-bold px-2 py-0.5 rounded-[1px] flex items-center justify-center min-w-[32px]">
                {localFiles.length} DRAFT
@@ -163,7 +163,7 @@ export function DiffViewer() {
           <div className="px-5 py-3 bg-white border-b border-gray-100 sticky top-0 z-10 flex items-center justify-between">
              <div className="flex items-center gap-2">
                 <Terminal className="w-3 h-3 text-gray-400" />
-                <span className="text-[10px] font-bold text-gray-800 uppercase tracking-widest">(LOCAL)</span>
+                <span className="text-[10px] font-bold text-gray-800 uppercase">(LOCAL)</span>
              </div>
              {localFiles.length === 0 && <span className="text-[9px] text-gray-300">CLEAN</span>}
           </div>
@@ -186,7 +186,7 @@ export function DiffViewer() {
             <>
               <div className="px-5 py-3 bg-white border-b border-gray-100 sticky top-0 z-10 mt-4 flex items-center gap-2">
                 <GitCommit className="w-3.5 h-3.5 text-gray-400" />
-                <span className="text-[10px] font-bold text-gray-800 uppercase tracking-widest">(LOCAL COMMIT)</span>
+                <span className="text-[10px] font-bold text-gray-800 uppercase">(LOCAL COMMIT)</span>
               </div>
               {unpushedFiles.map(file => (
                 <button
@@ -208,7 +208,7 @@ export function DiffViewer() {
 
           <div className="px-5 py-3 bg-white border-b border-gray-100 sticky top-0 z-10 mt-4 flex items-center gap-2">
             <Cloud className="w-3.5 h-3.5 text-gray-400" />
-            <span className="text-[10px] font-bold text-gray-800 uppercase tracking-widest">(SYNCED)</span>
+            <span className="text-[10px] font-bold text-gray-800 uppercase">(SYNCED)</span>
           </div>
           {syncedCommits.map(commit => (
             <div key={commit.hash} className="w-full px-5 py-3 border-b border-gray-100 flex flex-col gap-1.5 opacity-60 hover:opacity-100 transition-opacity">
@@ -225,7 +225,7 @@ export function DiffViewer() {
         <div className="flex-1 flex flex-col overflow-hidden bg-white">
           <div className="flex-1 overflow-y-auto p-0 font-mono text-[12px] leading-relaxed custom-scrollbar bg-[#f8f9fa]">
             {!activeFile ? (
-               <div className="h-full flex items-center justify-center text-gray-400 uppercase tracking-[0.2em] text-[10px] italic">No active file selected</div>
+               <div className="h-full flex items-center justify-center text-gray-400 uppercase] text-[10px] italic">No active file selected</div>
             ) : (
               <div className="divide-y divide-gray-100/50 bg-white min-h-full">
                 {diffLines.length === 0 ? (
@@ -254,7 +254,7 @@ export function DiffViewer() {
         
         <div className="flex items-center gap-6">
           <div className="flex-1">
-            <div className="text-[9px] font-mono text-gray-400 uppercase mb-1.5 font-bold tracking-widest pl-1">COMMIT MESSAGE</div>
+            <div className="text-[9px] font-mono text-gray-400 uppercase mb-1.5 font-bold pl-1">COMMIT MESSAGE</div>
             <input 
               type="text"
               value={message}
@@ -268,7 +268,7 @@ export function DiffViewer() {
               <button 
                 onClick={() => setShowDiscardMenu(!showDiscardMenu)}
                 disabled={resetting || (localFiles.length === 0 && unpushedFiles.length === 0)}
-                className="px-6 py-2.5 border border-gray-300 text-[11px] font-sans font-bold hover:bg-red-50 hover:text-red-600 uppercase tracking-widest text-gray-500 transition-all rounded-none flex items-center gap-2 disabled:opacity-30"
+                className="px-6 py-2.5 border border-gray-300 text-[11px] font-sans font-bold hover:bg-red-50 hover:text-red-600 uppercase text-gray-500 transition-all rounded-none flex items-center gap-2 disabled:opacity-30"
               >
                 {resetting ? <RefreshCw className="w-3 h-3 animate-spin" /> : <Trash2 className="w-3.5 h-3.5" />}
                 DISCARD <ChevronDown className="w-3 h-3" />
@@ -280,7 +280,7 @@ export function DiffViewer() {
                     onClick={() => handleReset('soft')}
                     className="w-full text-left px-4 py-4 hover:bg-gray-50 flex flex-col gap-1 transition-colors"
                   >
-                    <div className="flex items-center gap-2 text-olive-600 font-bold text-[10px] uppercase tracking-widest">
+                    <div className="flex items-center gap-2 text-olive-600 font-bold text-[10px] uppercase">
                        <RotateCcw className="w-3 h-3" /> UNDO COMMITS (KEEP EDITS)
                     </div>
                     <span className="text-[9px] text-gray-400 font-sans normal-case leading-tight">Deletes local commits but keeps your draft changes in the sidebar.</span>
@@ -289,7 +289,7 @@ export function DiffViewer() {
                     onClick={() => handleReset('hard')}
                     className="w-full text-left px-4 py-4 hover:bg-red-50 flex flex-col gap-1 transition-colors"
                   >
-                    <div className="flex items-center gap-2 text-red-600 font-bold text-[10px] uppercase tracking-widest">
+                    <div className="flex items-center gap-2 text-red-600 font-bold text-[10px] uppercase">
                        <Trash2 className="w-3 h-3" /> RESET TO CLOUD (WIPE ALL)
                     </div>
                     <span className="text-[10px] text-gray-400 font-sans normal-case leading-tight">CRITICAL: Wipes out both local commits and draft changes to match remote.</span>
@@ -300,14 +300,14 @@ export function DiffViewer() {
 
             <button 
               onClick={() => setIsDiffOpen(false)}
-              className="px-8 py-2.5 border border-gray-300 text-[11px] font-sans font-bold hover:bg-gray-50 uppercase tracking-widest text-gray-600 transition-all rounded-none"
+              className="px-8 py-2.5 border border-gray-300 text-[11px] font-sans font-bold hover:bg-gray-50 uppercase text-gray-600 transition-all rounded-none"
             >
               CANCEL
             </button>
             <button 
               onClick={handlePush}
               disabled={pushing || (localFiles.length === 0 && unpushedFiles.length === 0)}
-              className="px-10 py-2.5 bg-gray-800 hover:bg-black text-white text-[11px] font-sans font-bold tracking-widest uppercase transition-all rounded-none disabled:opacity-30 flex items-center gap-3"
+              className="px-10 py-2.5 bg-gray-800 hover:bg-black text-white text-[11px] font-sans font-bold uppercase transition-all rounded-none disabled:opacity-30 flex items-center gap-3"
             >
               {pushing ? <RefreshCw className="w-3.5 h-3.5 animate-spin" /> : null}
               {pushing ? 'PUSHING DATA...' : 'PUSH CHANGES'}

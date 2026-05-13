@@ -46,7 +46,7 @@ export function BlogEditor({ data, onChange }: BlogEditorProps) {
           label="TITLE"
           value={data.title}
           onChange={(val) => updateField('title', val)}
-          className="font-semibold text-[18px] text-gray-900 tracking-tight"
+          className="font-semibold text-[18px] text-gray-900"
         />
 
         <div className="grid grid-cols-2 gap-6">
@@ -79,7 +79,7 @@ export function BlogEditor({ data, onChange }: BlogEditorProps) {
         />
 
         <div className="space-y-3">
-          <label className="text-[11px] font-mono font-normal uppercase tracking-[0.05em] text-gray-500 block">TAGS / CATEGORIES</label>
+          <label className="text-[11px] font-mono font-normal uppercase] text-gray-500 block">TAGS / CATEGORIES</label>
           <div className="flex flex-wrap gap-2">
             {data.tags.map((tag) => (
               <Badge key={tag} variant="tag" className="flex items-center gap-2 pr-1">

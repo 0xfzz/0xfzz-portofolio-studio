@@ -25,7 +25,7 @@ export function ProjectPreview({ data, onContentChange }: ProjectPreviewProps) {
         {data.imageUrl ? (
           <img src={data.imageUrl} className="w-full h-full object-cover" alt="Preview" />
         ) : (
-          <div className="text-white opacity-20 font-mono text-[12px] uppercase tracking-wider">Project Cover Image</div>
+          <div className="text-white opacity-20 font-mono text-[12px] uppercase">Project Cover Image</div>
         )}
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
       </div>
@@ -37,7 +37,7 @@ export function ProjectPreview({ data, onContentChange }: ProjectPreviewProps) {
               <Badge key={tech} variant="tag" className="bg-gray-100 text-gray-600 border-none px-3 py-1">{tech}</Badge>
             ))}
           </div>
-          <h1 className="text-[56px] font-sans font-black text-gray-900 tracking-tight leading-[1.1] mb-8">
+          <h1 className="text-[56px] font-sans font-black text-gray-900 leading-[1.1] mb-8">
             {data.title || 'Project Title'}
           </h1>
           <div className="text-[20px] text-gray-500 font-medium leading-relaxed max-w-[700px]">

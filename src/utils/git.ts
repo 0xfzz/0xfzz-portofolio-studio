@@ -37,12 +37,13 @@ export const GitService = {
   /**
    * Executes a git command in the content directory.
    */
-  async exec(args: string[]) {
+  async exec(args: string[], allowedExitCodes: number[] = [0]) {
     this.ensureDir();
     try {
-      const { stdout } = await execa('git', ['-c', 'credential.helper=', ...args], { 
+      const { stdout, exitCode } = await execa('git', ['-c', 'credential.helper=', ...args], { 
         cwd: CONTENT_ROOT,
         timeout: 45000,
+        reject: false,
         env: {
           ...process.env,
           GIT_ASKPASS: 'true',
@@ -50,6 +51,10 @@ export const GitService = {
           GH_TOKEN: ''
         }
       });
+
+      if (!allowedExitCodes.includes(exitCode ?? 0)) {
+        throw new Error(`Command failed with exit code ${exitCode}`);
+      }
       return stdout;
     } catch (error) {
       console.error(`Git command failed: git ${args.join(' ')}`, error);
@@ -248,18 +253,19 @@ Please use your GitHub no-reply email in the Identity settings.`);
   async getFileDiff(file: string, branch: string = 'main', category: string = 'LOCAL') {
     try {
       if (category === 'LOCAL') {
-        const diff = await this.exec(['diff', 'HEAD', '--', file]);
+        const diff = await this.exec(['diff', 'HEAD', '--', file], [0, 1]);
         if (!diff) {
           // If empty, it might be untracked (??)
           try {
-            return await this.exec(['diff', '--no-index', '/dev/null', file]);
+            const nullDevice = process.platform === 'win32' ? 'NUL' : '/dev/null';
+            return await this.exec(['diff', '--no-index', nullDevice, file], [0, 1]);
           } catch {
             return '';
           }
         }
         return diff;
       } else {
-        return await this.exec(['diff', `origin/${branch}`, 'HEAD', '--', file]);
+        return await this.exec(['diff', `origin/${branch}`, 'HEAD', '--', file], [0, 1]);
       }
     } catch {
       return '';

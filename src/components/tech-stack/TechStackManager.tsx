@@ -176,7 +176,7 @@ export function TechStackManager() {
       <div className="bg-[#fafafa] border border-gray-200 p-8 lg:p-10 space-y-8">
         <div className="flex items-center gap-3">
           <Cpu className="w-4 h-4 text-gray-400" />
-          <span className="text-[14px] font-sans font-semibold text-gray-900 uppercase tracking-widest">
+          <span className="text-[14px] font-sans font-semibold text-gray-900 uppercase">
             TECH STACK HEADER
           </span>
         </div>
@@ -185,7 +185,7 @@ export function TechStackManager() {
             label="TITLE" 
             value={config.title} 
             onChange={(v) => setConfig({ ...config, title: v })}
-            className="font-semibold text-[18px] text-gray-900 tracking-tight"
+            className="font-semibold text-[18px] text-gray-900"
           />
           <InputField 
             label="SUBTITLE" 
@@ -205,7 +205,7 @@ export function TechStackManager() {
               {category === 'hard' && <Cpu className="w-4 h-4 text-gray-400" />}
               {category === 'soft' && <Users className="w-4 h-4 text-gray-400" />}
               {category === 'tools' && <Wrench className="w-4 h-4 text-gray-400" />}
-              <span className="text-[12px] font-sans font-semibold text-gray-900 uppercase tracking-widest">
+              <span className="text-[12px] font-sans font-semibold text-gray-900 uppercase">
                 {category} SKILLS
               </span>
             </div>
@@ -249,13 +249,13 @@ export function TechStackManager() {
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
             <Layers className="w-4 h-4 text-gray-400" />
-            <span className="text-[14px] font-sans font-semibold text-gray-900 uppercase tracking-widest">
+            <span className="text-[14px] font-sans font-semibold text-gray-900 uppercase">
               CORE EXPERTISE
             </span>
           </div>
           <button 
             onClick={addExpertise}
-            className="flex items-center gap-2 text-[11px] font-mono font-bold uppercase tracking-widest text-gray-400 hover:text-gray-900 transition-colors"
+            className="flex items-center gap-2 text-[11px] font-mono font-bold uppercase text-gray-400 hover:text-gray-900 transition-colors"
           >
             <Plus className="w-3.5 h-3.5" />
             Add Expertise
@@ -280,7 +280,7 @@ export function TechStackManager() {
               />
 
               <div className="space-y-3">
-                <label className="text-[11px] font-mono font-normal uppercase tracking-[0.05em] text-gray-500">
+                <label className="text-[11px] font-mono font-normal uppercase] text-gray-500">
                   SELECT ICON
                 </label>
                 <div className="grid grid-cols-7 gap-2">
@@ -306,10 +306,10 @@ export function TechStackManager() {
           {config.expertise.length === 0 && (
             <div className="col-span-full py-12 border border-dashed border-gray-200 flex flex-col items-center justify-center text-gray-400">
               <Layers className="w-8 h-8 mb-3 opacity-20" />
-              <span className="text-[11px] font-mono font-semibold uppercase tracking-[0.2em]">No expertise defined</span>
+              <span className="text-[11px] font-mono font-semibold uppercase]">No expertise defined</span>
               <button 
                 onClick={addExpertise}
-                className="mt-4 text-[10px] bg-gray-900 text-white px-4 py-2 font-mono font-bold uppercase tracking-widest hover:bg-gray-800 transition-colors"
+                className="mt-4 text-[10px] bg-gray-900 text-white px-4 py-2 font-mono font-bold uppercase hover:bg-gray-800 transition-colors"
               >
                 Add first item
               </button>
@@ -321,20 +321,20 @@ export function TechStackManager() {
       {/* Floating Action Bar */}
       <div className="fixed bottom-12 right-12 flex items-center gap-4 z-50">
         {status === 'success' && (
-          <div className="bg-gray-900 text-white px-6 py-3 border border-gray-800 text-[11px] font-mono font-bold uppercase tracking-[0.2em] rounded-[2px] animate-in fade-in slide-in-from-bottom-2">
+          <div className="bg-gray-900 text-white px-6 py-3 border border-gray-800 text-[11px] font-mono font-bold uppercase] rounded-[2px] animate-in fade-in slide-in-from-bottom-2">
             CHANGES SAVED LOCALLY
           </div>
         )}
         <button 
           onClick={fetchTechStack}
-          className="w-[92px] h-[42px] bg-[#FCF8F9] border border-[#333235] text-[#333235] rounded-none text-[12px] font-mono font-bold tracking-widest hover:bg-gray-100 transition-colors shadow-none flex items-center justify-center"
+          className="w-[92px] h-[42px] bg-[#FCF8F9] border border-[#333235] text-[#333235] rounded-none text-[12px] font-mono font-bold hover:bg-gray-100 transition-colors shadow-none flex items-center justify-center"
         >
           RESET
         </button>
         <button 
           onClick={handleSave}
           disabled={saving}
-          className="w-[207px] h-[42px] bg-[#333235] text-[#FCF8F9] rounded-none text-[12px] font-mono font-bold tracking-widest hover:bg-gray-800 transition-all flex items-center justify-center shadow-none disabled:opacity-50"
+          className="w-[207px] h-[42px] bg-[#333235] text-[#FCF8F9] rounded-none text-[12px] font-mono font-bold hover:bg-gray-800 transition-all flex items-center justify-center shadow-none disabled:opacity-50"
         >
           {saving ? <RefreshCw className="w-4 h-4 animate-spin mr-3" /> : null}
           {saving ? 'SAVING...' : 'SAVE LOCALLY'}

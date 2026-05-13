@@ -62,7 +62,7 @@ export function ProjectTable() {
       render: (project: any) => (
         <div className="flex items-center gap-3">
           <div className="w-1.5 h-1.5 rounded-full bg-gray-500" />
-          <span className="text-[14px] font-bold text-gray-900 tracking-tight truncate">{project.title || 'Untitled'}</span>
+          <span className="text-[14px] font-bold text-gray-900 truncate">{project.title || 'Untitled'}</span>
         </div>
       )
     },
@@ -80,7 +80,7 @@ export function ProjectTable() {
     {
       header: 'DATE / TIMELINE',
       key: 'timeline',
-      render: (project: any) => <span className="text-[11px] font-medium text-gray-400 font-mono tracking-widest uppercase">{project.timeline || 'No Date'}</span>
+      render: (project: any) => <span className="text-[11px] font-medium text-gray-400 font-mono uppercase">{project.timeline || 'No Date'}</span>
     },
     {
       header: 'STATUS',
@@ -96,7 +96,7 @@ export function ProjectTable() {
       key: 'actions',
       className: 'text-right',
       render: (project: any) => (
-        <div className="flex items-center justify-end gap-2.5 font-mono text-[11px] tracking-widest text-gray-600">
+        <div className="flex items-center justify-end gap-2.5 font-mono text-[11px] text-gray-600">
           <Link href={`/dashboard/projects/edit/${project._slug}`} className="hover:text-gray-900 transition-colors uppercase">[EDIT]</Link>
           <button 
             onClick={() => handleDelete(project)}

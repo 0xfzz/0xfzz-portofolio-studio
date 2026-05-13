@@ -158,7 +158,7 @@ export function SiteConfigManager() {
   if (!config) return (
     <div className="flex items-center justify-center h-64 border border-dashed border-red-100 bg-red-50/30">
       <AlertCircle className="w-6 h-6 text-red-400 mr-2" />
-      <span className="text-[12px] font-bold text-red-400 uppercase tracking-wider">Failed to load content configuration</span>
+      <span className="text-[12px] font-bold text-red-400 uppercase">Failed to load content configuration</span>
     </div>
   )
 
@@ -172,7 +172,7 @@ export function SiteConfigManager() {
             <svg className="w-4 h-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 10h16M4 14h16M4 18h16" />
             </svg>
-            <span className="text-[14px] font-sans font-semibold text-gray-900 uppercase tracking-widest">
+            <span className="text-[14px] font-sans font-semibold text-gray-900 uppercase">
               GLOBAL METADATA
             </span>
           </div>
@@ -187,7 +187,7 @@ export function SiteConfigManager() {
         <div className="col-span-12 lg:col-span-5 bg-[#fafafa] border border-gray-200 p-8 lg:p-10 space-y-8">
           <div className="flex items-center gap-3">
             <Eye className="w-4 h-4 text-gray-400" />
-            <span className="text-[14px] font-sans font-semibold text-gray-900 uppercase tracking-widest">
+            <span className="text-[14px] font-sans font-semibold text-gray-900 uppercase">
               VISIBILITY TOGGLES
             </span>
           </div>
@@ -205,7 +205,7 @@ export function SiteConfigManager() {
       <div className="bg-[#fafafa] border border-gray-200 p-8 lg:p-10 space-y-8">
         <div className="flex items-center gap-3">
            <FileText className="w-4 h-4 text-gray-400" />
-           <span className="text-[14px] font-sans font-semibold text-gray-900 uppercase tracking-widest">
+           <span className="text-[14px] font-sans font-semibold text-gray-900 uppercase">
              PROFESSIONAL SUMMARY
            </span>
         </div>
@@ -223,14 +223,14 @@ export function SiteConfigManager() {
       <div className="bg-[#fafafa] border border-gray-200 p-8 lg:p-10 space-y-8">
         <div className="flex items-center gap-3">
           <Layers className="w-4 h-4 text-gray-400" />
-          <span className="text-[14px] font-sans font-semibold text-gray-900 uppercase tracking-widest">
+          <span className="text-[14px] font-sans font-semibold text-gray-900 uppercase">
             HERO SECTION
           </span>
         </div>
         <div className="space-y-6">
           <InputField label="TITLE" value={config.hero?.title || ''} onChange={(v) => {
             setConfig((prev: any) => ({ ...prev, hero: { ...prev.hero, title: v } }))
-          }} className="font-semibold text-[18px] text-gray-900 tracking-tight" />
+          }} className="font-semibold text-[18px] text-gray-900" />
           <InputField label="SUBTITLE (Tagline)" value={config.hero?.subtitle || ''} onChange={(v) => {
             setConfig((prev: any) => ({ ...prev, hero: { ...prev.hero, subtitle: v } }))
           }} />
@@ -244,7 +244,7 @@ export function SiteConfigManager() {
       <div className="bg-[#fafafa] border border-gray-200 p-8 lg:p-10 space-y-8">
         <div className="flex items-center gap-3">
           <Settings className="w-4 h-4 text-gray-400" />
-          <span className="text-[14px] font-sans font-semibold text-gray-900 uppercase tracking-widest">
+          <span className="text-[14px] font-sans font-semibold text-gray-900 uppercase">
             NAVIGATION LABELS
           </span>
         </div>
@@ -261,7 +261,7 @@ export function SiteConfigManager() {
       <div className="bg-[#fafafa] border border-gray-200 p-8 lg:p-10 space-y-8">
         <div className="flex items-center gap-3">
           <Box className="w-4 h-4 text-gray-400" />
-          <span className="text-[14px] font-sans font-semibold text-gray-900 uppercase tracking-widest">
+          <span className="text-[14px] font-sans font-semibold text-gray-900 uppercase">
             FOOTER CONFIGURATION
           </span>
         </div>
@@ -281,12 +281,12 @@ export function SiteConfigManager() {
       <div className="bg-[#fafafa] border border-gray-200 p-8 lg:p-10 space-y-8">
         <div className="flex items-center gap-3">
           <Briefcase className="w-4 h-4 text-gray-400" />
-          <span className="text-[14px] font-sans font-semibold text-gray-900 uppercase tracking-widest">
+          <span className="text-[14px] font-sans font-semibold text-gray-900 uppercase">
             PROJECTS PAGE
           </span>
         </div>
         <div className="space-y-6">
-          <InputField label="TITLE" value={config.pages?.projects?.title || ''} onChange={(v) => updatePage('projects', 'title', v)} className="font-semibold text-[18px] text-gray-900 tracking-tight" />
+          <InputField label="TITLE" value={config.pages?.projects?.title || ''} onChange={(v) => updatePage('projects', 'title', v)} className="font-semibold text-[18px] text-gray-900" />
           <InputField label="SUBTITLE" value={config.pages?.projects?.subtitle || ''} onChange={(v) => updatePage('projects', 'subtitle', v)} />
         </div>
       </div>
@@ -295,12 +295,12 @@ export function SiteConfigManager() {
       <div className="bg-[#fafafa] border border-gray-200 p-8 lg:p-10 space-y-8">
         <div className="flex items-center gap-3">
           <FileText className="w-4 h-4 text-gray-400" />
-          <span className="text-[14px] font-sans font-semibold text-gray-900 uppercase tracking-widest">
+          <span className="text-[14px] font-sans font-semibold text-gray-900 uppercase">
             BLOGS PAGE
           </span>
         </div>
         <div className="space-y-6">
-          <InputField label="TITLE" value={config.pages?.blog?.title || ''} onChange={(v) => updatePage('blog', 'title', v)} className="font-semibold text-[18px] text-gray-900 tracking-tight" />
+          <InputField label="TITLE" value={config.pages?.blog?.title || ''} onChange={(v) => updatePage('blog', 'title', v)} className="font-semibold text-[18px] text-gray-900" />
           <InputField label="SUBTITLE" value={config.pages?.blog?.subtitle || ''} onChange={(v) => updatePage('blog', 'subtitle', v)} />
         </div>
       </div>
@@ -309,12 +309,12 @@ export function SiteConfigManager() {
       <div className="bg-[#fafafa] border border-gray-200 p-8 lg:p-10 space-y-8">
         <div className="flex items-center gap-3">
           <Briefcase className="w-4 h-4 text-gray-400" />
-          <span className="text-[14px] font-sans font-semibold text-gray-900 uppercase tracking-widest">
+          <span className="text-[14px] font-sans font-semibold text-gray-900 uppercase">
             EXPERIENCES PAGE
           </span>
         </div>
         <div className="space-y-6">
-          <InputField label="TITLE" value={config.pages?.experiences?.title || ''} onChange={(v) => updatePage('experiences', 'title', v)} className="font-semibold text-[18px] text-gray-900 tracking-tight" />
+          <InputField label="TITLE" value={config.pages?.experiences?.title || ''} onChange={(v) => updatePage('experiences', 'title', v)} className="font-semibold text-[18px] text-gray-900" />
           <InputField label="SUBTITLE" value={config.pages?.experiences?.subtitle || ''} onChange={(v) => updatePage('experiences', 'subtitle', v)} />
         </div>
       </div>
@@ -323,7 +323,7 @@ export function SiteConfigManager() {
       <div className="bg-[#fafafa] border border-gray-200 p-8 lg:p-10 space-y-8">
         <div className="flex items-center gap-3">
           <Layers className="w-4 h-4 text-gray-400" />
-          <span className="text-[14px] font-sans font-semibold text-gray-900 uppercase tracking-widest">
+          <span className="text-[14px] font-sans font-semibold text-gray-900 uppercase">
             EXPERIENCE SECTIONS
           </span>
         </div>
@@ -338,25 +338,25 @@ export function SiteConfigManager() {
       {/* Floating Action Bar */}
       <div className="fixed bottom-12 right-12 flex items-center gap-4 z-50">
         {status === 'success' && (
-          <div className="bg-gray-900 text-white px-6 py-3 border border-gray-800 text-[11px] font-mono font-bold uppercase tracking-[0.2em] rounded-[2px] animate-in fade-in slide-in-from-bottom-2">
+          <div className="bg-gray-900 text-white px-6 py-3 border border-gray-800 text-[11px] font-mono font-bold uppercase] rounded-[2px] animate-in fade-in slide-in-from-bottom-2">
             CHANGES SAVED LOCALLY
           </div>
         )}
         {status === 'error' && (
-          <div className="bg-red-500 text-white px-6 py-3 rounded-[2px] text-[11px] font-mono font-bold uppercase tracking-[0.2em] animate-in fade-in slide-in-from-bottom-2">
+          <div className="bg-red-500 text-white px-6 py-3 rounded-[2px] text-[11px] font-mono font-bold uppercase] animate-in fade-in slide-in-from-bottom-2">
             SAVE FAILED
           </div>
         )}
         <button
           onClick={fetchConfig}
-          className="w-[92px] h-[42px] bg-[#FCF8F9] border border-[#333235] rounded-none text-[12px] font-mono font-bold tracking-widest text-[#333235] hover:bg-gray-100 transition-colors shadow-none"
+          className="w-[92px] h-[42px] bg-[#FCF8F9] border border-[#333235] rounded-none text-[12px] font-mono font-bold text-[#333235] hover:bg-gray-100 transition-colors shadow-none"
         >
           RESET
         </button>
         <button
           onClick={handleSave}
           disabled={saving}
-          className="w-[207px] h-[42px] bg-[#333235] text-[#FCF8F9] rounded-none text-[12px] font-mono font-bold tracking-widest hover:bg-gray-800 transition-all flex items-center justify-center shadow-none disabled:opacity-50"
+          className="w-[207px] h-[42px] bg-[#333235] text-[#FCF8F9] rounded-none text-[12px] font-mono font-bold hover:bg-gray-800 transition-all flex items-center justify-center shadow-none disabled:opacity-50"
         >
           {saving ? <RefreshCw className="w-4 h-4 animate-spin mr-3" /> : null}
           {saving ? 'SAVING...' : 'SAVE LOCALLY'}

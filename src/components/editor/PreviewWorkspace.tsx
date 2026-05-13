@@ -21,7 +21,7 @@ export function PreviewWorkspace({
     <div className={cn("flex-1 overflow-y-auto bg-white flex flex-col scrollbar-hide", className)}>
       {/* Shared Preview Header */}
       <div className="h-[60px] border-b border-gray-100 px-10 flex items-center justify-between bg-white shrink-0 sticky top-0 z-20">
-        <span className="text-[13px] font-bold text-gray-400 uppercase tracking-wider">
+        <span className="text-[13px] font-bold text-gray-400 uppercase">
           {title}
         </span>
       </div>

@@ -49,7 +49,7 @@ export function CollapsibleSidebar({
         {!isCollapsed && (
           <div className="flex items-center gap-3">
             <LayoutPanelLeft className="w-4 h-4 text-gray-400" />
-            <span className="text-[13px] font-bold text-gray-500 uppercase tracking-wider">
+            <span className="text-[13px] font-bold text-gray-500 uppercase">
               {title}
             </span>
           </div>

@@ -1,22 +1,30 @@
 'use client'
 
 import { Field, Label, Input, Button } from '@headlessui/react'
+import { useRouter } from 'next/navigation'
 
 export default function LoginPage() {
+  const router = useRouter()
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    router.push('/dashboard')
+  }
+
   return (
     <main className="min-h-screen flex items-center justify-center bg-[#fafafa] p-4 font-sans">
       <div className="bg-white p-12 lg:p-14 border border-gray-200 w-full max-w-[420px]">
         {/* Logo/Title Section */}
         <div className="mb-10">
-          <h1 className="font-mono text-2xl font-bold text-[#1a1a1a] tracking-tight text-center">
+          <h1 className="font-mono text-2xl font-bold text-[#1a1a1a] text-center">
             0xfzz
           </h1>
         </div>
 
-        <form className="space-y-6">
+        <form className="space-y-6" onSubmit={handleSubmit}>
           {/* Password Field */}
           <Field className="flex flex-col gap-2">
-            <Label className="text-[10px] font-mono font-semibold uppercase tracking-[0.2em] text-gray-400 text-center">
+            <Label className="text-[10px] font-mono font-semibold uppercase] text-gray-400 text-center">
               PASSWORD
             </Label>
             <Input
@@ -37,7 +45,7 @@ export default function LoginPage() {
           <div className="pt-2">
             <Button
               type="submit"
-              className="w-full bg-[#2d2d2d] text-white py-3.5 px-6 font-sans font-medium text-[11px] tracking-wider uppercase hover:bg-[#1a1a1a] transition-colors cursor-pointer"
+              className="w-full bg-[#2d2d2d] text-white py-3.5 px-6 font-sans font-medium text-[11px] uppercase hover:bg-[#1a1a1a] transition-colors cursor-pointer"
             >
               ENTER
             </Button>

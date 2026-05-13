@@ -260,7 +260,7 @@ export function ContactManager() {
           <svg className="w-4 h-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
           </svg>
-          <span className="text-[14px] font-sans font-semibold text-gray-900 uppercase tracking-widest">
+          <span className="text-[14px] font-sans font-semibold text-gray-900 uppercase">
             EDIT CONTACT DISPLAY
           </span>
         </div>
@@ -270,7 +270,7 @@ export function ContactManager() {
             label="DISPLAY TITLE" 
             value={heroTitle} 
             onChange={setHeroTitle}
-            className="font-semibold text-[18px] text-gray-900 tracking-tight"
+            className="font-semibold text-[18px] text-gray-900"
           />
           <InputField 
             label="DISPLAY SUBTITLE" 
@@ -288,7 +288,7 @@ export function ContactManager() {
             <svg className="w-4 h-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 10h16M4 14h16M4 18h16" />
             </svg>
-            <span className="text-[14px] font-sans font-semibold text-gray-900 uppercase tracking-widest">
+            <span className="text-[14px] font-sans font-semibold text-gray-900 uppercase">
               2. METHODS LIST
             </span>
           </div>
@@ -337,7 +337,7 @@ export function ContactManager() {
 
           {methods.length === 0 && (
             <div className="p-16 border border-dashed border-gray-300 text-center bg-gray-50/50">
-              <span className="text-[11px] font-mono font-semibold text-gray-400 uppercase tracking-[0.2em]">No contact methods configured.</span>
+              <span className="text-[11px] font-mono font-semibold text-gray-400 uppercase]">No contact methods configured.</span>
             </div>
           )}
         </div>
@@ -345,20 +345,20 @@ export function ContactManager() {
 
       <div className="fixed bottom-12 right-12 flex items-center gap-4 z-[100]">
         {status === 'success' && (
-          <div className="bg-gray-900 text-white px-6 py-3 border border-gray-800 text-[11px] font-mono font-bold uppercase tracking-[0.2em] rounded-[2px] animate-in fade-in slide-in-from-bottom-2">
+          <div className="bg-gray-900 text-white px-6 py-3 border border-gray-800 text-[11px] font-mono font-bold uppercase] rounded-[2px] animate-in fade-in slide-in-from-bottom-2">
             CHANGES SAVED LOCALLY
           </div>
         )}
         <button 
           onClick={fetchContact}
-          className="w-[92px] h-[42px] bg-[#FCF8F9] border border-[#333235] text-[#333235] rounded-none text-[12px] font-mono font-bold tracking-widest hover:bg-gray-100 transition-colors shadow-none flex items-center justify-center"
+          className="w-[92px] h-[42px] bg-[#FCF8F9] border border-[#333235] text-[#333235] rounded-none text-[12px] font-mono font-bold hover:bg-gray-100 transition-colors shadow-none flex items-center justify-center"
         >
           RESET
         </button>
         <button 
           onClick={handleSave}
           disabled={saving}
-          className="w-[207px] h-[42px] bg-[#333235] text-[#FCF8F9] rounded-none text-[12px] font-mono font-bold tracking-widest hover:bg-gray-800 transition-all flex items-center justify-center shadow-none disabled:opacity-50"
+          className="w-[207px] h-[42px] bg-[#333235] text-[#FCF8F9] rounded-none text-[12px] font-mono font-bold hover:bg-gray-800 transition-all flex items-center justify-center shadow-none disabled:opacity-50"
         >
           {saving ? 'SAVING...' : 'SAVE LOCALLY'}
         </button>

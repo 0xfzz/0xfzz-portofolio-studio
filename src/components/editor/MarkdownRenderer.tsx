@@ -18,12 +18,12 @@ export function MarkdownRenderer({ content, placeholder = '*Start writing to see
       remarkPlugins={[remarkGfm]}
       components={{
         h1: ({ children }) => (
-          <h1 className="text-3xl font-bold text-[#111] tracking-tight leading-tight mt-10 mb-4 first:mt-0">
+          <h1 className="text-3xl font-bold text-[#111] leading-tight mt-10 mb-4 first:mt-0">
             {children}
           </h1>
         ),
         h2: ({ children }) => (
-          <h2 className="text-xl font-semibold text-[#111] tracking-tight mt-8 mb-3 border-t border-[#e8e8e8] pt-6 first:mt-0 first:pt-0 first:border-0">
+          <h2 className="text-xl font-semibold text-[#111] mt-8 mb-3 border-t border-[#e8e8e8] pt-6 first:mt-0 first:pt-0 first:border-0">
             {children}
           </h2>
         ),
@@ -33,7 +33,7 @@ export function MarkdownRenderer({ content, placeholder = '*Start writing to see
           </h3>
         ),
         h4: ({ children }) => (
-          <h4 className="text-sm font-semibold text-[#333] tracking-wide mt-5 mb-2">
+          <h4 className="text-sm font-semibold text-[#333] mt-5 mb-2">
             {children}
           </h4>
         ),
@@ -85,7 +85,7 @@ export function MarkdownRenderer({ content, placeholder = '*Start writing to see
             return (
               <div className="my-6 rounded-md overflow-hidden border border-[#e8e8e8] shadow-sm">
                 <div className="bg-[#2d2d2d] px-4 py-2.5 flex items-center justify-between border-b border-[#3d3d3d]">
-                  <span className="text-[11px] font-mono font-bold text-[#888] uppercase tracking-wider">
+                  <span className="text-[11px] font-mono font-bold text-[#888] uppercase">
                     {language || 'plaintext'}
                   </span>
                   <div className="flex gap-1.5">
@@ -135,7 +135,7 @@ export function MarkdownRenderer({ content, placeholder = '*Start writing to see
           <thead className="bg-[#f8f8f8] border-b border-[#e8e8e8]">{children}</thead>
         ),
         th: ({ children }) => (
-          <th className="px-5 py-3 text-[11px] font-bold uppercase tracking-wider text-[#555]">
+          <th className="px-5 py-3 text-[11px] font-bold uppercase text-[#555]">
             {children}
           </th>
         ),

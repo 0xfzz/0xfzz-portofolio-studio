@@ -22,7 +22,7 @@ export function BlogPreview({ data, onContentChange }: BlogPreviewProps) {
         {data.imageUrl ? (
           <img src={data.imageUrl} className="w-full h-full object-cover" alt="Preview" />
         ) : (
-          <div className="text-white opacity-20 font-mono text-[12px] uppercase tracking-wider">Blog Cover Image</div>
+          <div className="text-white opacity-20 font-mono text-[12px] uppercase">Blog Cover Image</div>
         )}
       </div>
 
@@ -33,7 +33,7 @@ export function BlogPreview({ data, onContentChange }: BlogPreviewProps) {
           ))}
         </div>
 
-        <h1 className="text-[48px] font-sans font-black text-gray-900 tracking-tight leading-tight">
+        <h1 className="text-[48px] font-sans font-black text-gray-900 leading-tight">
           {data.title || 'Entry Title'}
         </h1>
 
